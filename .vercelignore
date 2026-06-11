@@ -1,0 +1,10 @@
+# Ignore these files/folders
+*.log
+.DS_Store
+node_modules/
+*.local
+.env*.local
+.next/
+out/
+public/
+# Add any other files you see causing the "extra file" warning

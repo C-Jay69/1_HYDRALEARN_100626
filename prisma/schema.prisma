@@ -1,0 +1,201 @@
+// This is the Master Schema for HydraLearn - Designed for Bootstrapping
+// Supports Learn, Manage, and Protect domains
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  STUDENT
+  TEACHER
+  ADMIN
+  PARENT
+}
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  name          String?
+  password      String?   // For custom auth
+  role          UserRole  @default(STUDENT)
+
+  // Gamification Fields
+  xp            Int       @default(0)
+  level            Int       @default(1)
+
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Relations
+  managedClasses Class[]    @relation("TeacherClasses")
+  enrollments    Enrollment[]
+  lessonPlans    LessonPlan[]
+  submissions    Submission[]
+  wellnessLogs   WellnessCheckin[]
+  safetyReports  SafetyReport[]
+  forumPosts     ForumPost[]
+  marketplaceItems MarketplaceItem[]
+  badges         UserBadge[]
+}
+
+model School {
+  id        String   @id @default(cuid())
+  name      String
+  location  String?
+  classes   Class[]
+  createdAt DateTime @default(now())
+}
+
+model Class {
+  id          String       @id @default(cuid())
+  name        String
+  subject     String
+  teacherId   String
+  teacher     User         @relation("TeacherClasses", fields: [teacherId], references: [id])
+  schoolId    String?
+  school      School?      @relation(fields: [schoolId], references: [id])
+  enrollments Enrollment[]
+  lessons     LessonPlan[]
+  createdAt   DateTime     @default(now())
+}
+
+model Enrollment {
+  id        String   @id @default(cuid())
+  studentId String
+  student   User     @relation(fields: [studentId], references: [id])
+  classId   String
+  class     Class    @relation(fields: [classId], references: [id])
+  joinedAt  DateTime @default(now())
+
+  @@unique([studentId, classId])
+}
+
+model LessonPlan {
+  id                 String   @id @default(cuid())
+  title              String
+  content            String   // Markdown content of the plan
+  pedagogicalStrategy String   // e.g., "Constructivist - Piaget"
+  gradeLevel         String
+  subject            String
+  teacherId          String
+  teacher            User     @relation(fields: [teacherId], references: [id])
+  classId            String?
+  class              Class?   @relation(fields: [classId], references: [id])
+
+  // Marketplace fields
+  isPublic           Boolean  @default(false)
+  price              Float    @default(0.0)
+
+  activities         Activity[]
+  quizzes            Quiz[]
+  marketplaceItem    MarketplaceItem?
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}
+
+model Activity {
+  id           String     @id @default(cuid())
+  type         String     // e.g., "game", "slide", "flashcard"
+  content      String     // JSON or Markdown
+  lessonPlanId String
+  lessonPlan   LessonPlan @relation(fields: [lessonPlanId], references: [id], onDelete: Cascade)
+  createdAt    DateTime   @default(now())
+}
+
+model Quiz {
+  id           String     @id @default(cuid())
+  title        String
+  lessonPlanId String
+  lessonPlan   LessonPlan @relation(fields: [lessonPlanId], references: [id], onDelete: Cascade)
+  questions    Question[]
+  submissions  Submission[]
+  createdAt    DateTime   @default(now())
+}
+
+model Question {
+  id       String @id @default(cuid())
+  quizId   String
+  quiz     Quiz   @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  text     String
+  type     String // MCQ, FillBlank, Matching, ShortAnswer
+  options  String // JSON string of options
+  answer   String // Correct answer
+  points   Int    @default(1)
+}
+
+model Submission {
+  id        String   @id @default(cuid())
+  studentId String
+  student   User     @relation(fields: [studentId], references: [id])
+  quizId    String
+  quiz      Quiz     @relation(fields: [quizId], references: [id])
+  score     Float
+  answers   String   // JSON string of student answers
+  feedback  String?  // AI generated feedback
+  createdAt DateTime @default(now())
+}
+
+model MarketplaceItem {
+  id           String     @id @default(cuid())
+  lessonPlanId String     @unique
+  lessonPlan   LessonPlan @relation(fields: [lessonPlanId], references: [id])
+  sellerId     String
+  seller       User       @relation(fields: [sellerId], references: [id])
+  price        Float
+  reviews      Float      @default(0.0)
+  createdAt    DateTime   @default(now())
+}
+
+model ForumPost {
+  id        String   @id @default(cuid())
+  authorId  String
+  author    User     @relation(fields: [authorId], references: [id])
+  content   String
+  parentId  String?  // For threaded replies
+  isFlagged Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model WellnessCheckin {
+  id        String   @id @default(cuid())
+  studentId String
+  student   User     @relation(fields: [studentId], references: [id])
+  mood      String   // e.g., "Happy", "Anxious", "Tired"
+  note      String?
+  createdAt DateTime @default(now())
+}
+
+model SafetyReport {
+  id           String   @id @default(cuid())
+  reporterId   String?
+  reporter     User?    @relation(fields: [reporterId], references: [id])
+  targetId     String?  // The user being reported
+  description  String
+  status       String   @default("OPEN") // OPEN, INVESTIGATING, RESOLVED
+  createdAt    DateTime @default(now())
+}
+
+model Badge {
+  id          String     @id @default(cuid())
+  name        String     @unique
+  description String
+  icon        String     // URL or Icon name
+  criteria    String     // Description of how to earn it
+  users       UserBadge[]
+}
+
+model UserBadge {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  badgeId   String
+  badge     Badge    @relation(fields: [badgeId], references: [id])
+  earnedAt  DateTime @default(now())
+
+  @@unique([userId, badgeId])
+}
