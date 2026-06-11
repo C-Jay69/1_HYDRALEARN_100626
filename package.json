@@ -16,6 +16,7 @@
     "@dnd-kit/core": "^6.3.1",
     "@dnd-kit/sortable": "^10.0.0",
     "@dnd-kit/utilities": "^3.2.2",
+    "@genkit-ai/googleai": "^1.28.0",
     "@hookform/resolvers": "^5.1.1",
     "@mdxeditor/editor": "^3.39.1",
     "@prisma/client": "^6.11.1",
@@ -55,6 +56,7 @@
     "date-fns": "^4.1.0",
     "embla-carousel-react": "^8.6.0",
     "framer-motion": "^12.23.2",
+    "genkit": "^1.36.0",
     "input-otp": "^1.4.2",
     "lucide-react": "^0.525.0",
     "next": "^16.1.1",
@@ -90,5 +92,17 @@
     "tailwindcss": "^4",
     "tw-animate-css": "^1.3.5",
     "typescript": "^5"
+  },
+  "allowScripts": {
+    "@parcel/watcher": true,
+    "@prisma/client": true,
+    "@prisma/engines": true,
+    "@swc/core": true,
+    "es5-ext": true,
+    "prisma": true,
+    "sharp": true,
+    "unrs-resolver": true,
+    "@firebase/util@1.15.1": true,
+    "protobufjs@7.6.3": true
   }
 }
