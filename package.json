@@ -104,5 +104,13 @@
     "unrs-resolver": true,
     "@firebase/util@1.15.1": true,
     "protobufjs@7.6.3": true
-  }
+  },
+  "trustedDependencies": [
+    "@firebase/util",
+    "@parcel/watcher",
+    "@swc/core",
+    "es5-ext",
+    "protobufjs",
+    "unrs-resolver"
+  ]
 }

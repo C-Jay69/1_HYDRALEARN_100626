@@ -37,7 +37,7 @@ export default function Home() {
           Generate lesson plans, assessments, and learning materials grounded in pedagogical theory.
         </p>
         <Link href="/dashboard">
-          <a style={{
+          <div style={{
             display: 'inline-flex',
             alignItems: 'center',
             padding: '0.75rem 1.5rem',
@@ -45,10 +45,11 @@ export default function Home() {
             color: 'white',
             borderRadius: '0.5rem',
             fontWeight: 'medium',
-            textDecoration: 'none'
+            textDecoration: 'none',
+            cursor: 'pointer'
           }}>
             Go to Dashboard
-          </a>
+          </div>
         </Link>
       </div>
     </div>
