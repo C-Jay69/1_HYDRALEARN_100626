@@ -180,6 +180,17 @@ model SafetyReport {
   createdAt    DateTime @default(now())
 }
 
+model ScheduleEvent {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  date        DateTime
+  eventType   String   // e.g., "lesson", "exam", "assignment", "event"
+  color       String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
 model Badge {
   id          String     @id @default(cuid())
   name        String     @unique

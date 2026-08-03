@@ -117,10 +117,11 @@ export default function SchedulePage() {
         });
 
         if (response.ok) {
+          const updatedEvent = await response.json();
           toast({ title: 'Event updated successfully!' });
           setEvents(
             events.map((e) =>
-              e.id === editingEvent.id ? { ...response.json(), ...data } : e
+              e.id === editingEvent.id ? { ...e, ...updatedEvent } : e
             )
           );
         }

@@ -7,7 +7,6 @@
 
 import {ai} from '@/ai/genkit';
 import {z} from 'genkit';
-import { QuizQuestionSchema } from '@/ai/schemas/quiz-schema';
 import { getPedagogicalStrategy } from './pedagogical-router';
 
 const CreateAutomaticAssessmentInputSchema = z.object({
@@ -39,7 +38,7 @@ const CreateAutomaticAssessmentOutputSchema = z.object({
       'The content of the assessment, including questions, instructions, evaluation criteria, and a separate answer key.'
     ),
   feedback: z.string().describe('AI-generated feedback for the assessment.'),
-  quiz: z.array(QuizQuestionSchema).optional().describe('An array of multi-format quiz questions.'),
+  quiz: z.array(z.any()).optional().describe('An array of multi-format quiz questions.'),
 });
 
 export type CreateAutomaticAssessmentOutput = z.infer<
@@ -54,10 +53,10 @@ export async function createAutomaticAssessment(
 
 const prompt = ai.definePrompt({
   name: 'createAutomaticAssessmentPrompt',
-  input: z.object({
+  input: { schema: z.object({
     input: CreateAutomaticAssessmentInputSchema,
     strategy: z.any(), // PedagogicalRouterOutput
-  }),
+  }) },
   output: {schema: CreateAutomaticAssessmentOutputSchema},
   prompt: `You are an expert teacher creating an automatic assessment based on the following pedagogical blueprint:
 

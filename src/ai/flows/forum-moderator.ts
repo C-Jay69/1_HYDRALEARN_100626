@@ -27,9 +27,9 @@ export type ModerationResult = z.infer<typeof ModerationResultSchema>;
  */
 const moderationPrompt = ai.definePrompt({
   name: 'forumModerationPrompt',
-  input: z.object({
+  input: { schema: z.object({
     content: z.string().describe('The text of the forum post or reply to be moderated.'),
-  }),
+  }) },
   output: { schema: ModerationResultSchema },
   prompt: `You are the HydraLearn Safety Guard. Your primary mission is to keep the HydraForum a supportive and safe environment for students.
 

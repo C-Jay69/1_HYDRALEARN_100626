@@ -7,7 +7,7 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     console.log('Request body:', JSON.stringify(body, null, 2));
 
-    const { studentNeeds, curriculum, objectives, gradeLevel, subject } = body;
+    const { studentNeeds, curriculum, objectives, gradeLevel, subject, topic, tone } = body;
 
     console.log('Validating individual fields...');
     console.log(`- studentNeeds: ${!!studentNeeds} (${studentNeeds?.length || 0} chars)`);
@@ -15,6 +15,7 @@ export async function POST(req: NextRequest) {
     console.log(`- objectives: ${!!objectives}`);
     console.log(`- gradeLevel: ${!!gradeLevel}`);
     console.log(`- subject: ${!!subject}`);
+    console.log(`- topic: ${!!topic} (${topic?.length || 0} chars)`);
 
     if (!studentNeeds || !curriculum || !objectives || !gradeLevel || !subject) {
       console.error('Missing required fields in request body');
@@ -42,6 +43,8 @@ export async function POST(req: NextRequest) {
       objectives,
       gradeLevel,
       subject,
+      topic: topic || subject,
+      tone: tone || 'Academic',
     });
     console.log('Lesson plan generated successfully');
 

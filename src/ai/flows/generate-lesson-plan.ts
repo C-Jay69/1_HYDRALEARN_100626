@@ -48,10 +48,10 @@ export async function generateLessonPlan(input: GenerateLessonPlanInput): Promis
  */
 const generateLessonPlanPrompt = ai.definePrompt({
   name: 'generateLessonPlanPrompt',
-  input: z.object({
+  input: { schema: z.object({
     input: GenerateLessonPlanInputSchema,
     strategy: z.any(), // PedagogicalRouterOutput
-  }),
+  }) },
   output: {schema: GenerateLessonPlanOutputSchema},
   prompt: `You are an expert teacher. You are generating a lesson plan based on the following pedagogical blueprint:
 

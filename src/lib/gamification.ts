@@ -62,7 +62,7 @@ export async function awardXP(userId: string, points: number, reason: string = '
  * Evaluates if a user has met the criteria for any specific badges.
  */
 async function checkAndAwardBadges(userId: string, totalXp: number, level: number): Promise<string[]> {
-  const earnedBadges = [];
+  const earnedBadges: string[] = [];
 
   // Define badge criteria logic here
   const criteria = [

@@ -14,24 +14,24 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Z.ai Code Scaffold - AI-Powered Development",
-  description: "Modern Next.js scaffold optimized for AI-powered development with Z.ai. Built with TypeScript, Tailwind CSS, and shadcn/ui.",
-  keywords: ["Z.ai", "Next.js", "TypeScript", "Tailwind CSS", "shadcn/ui", "AI development", "React"],
-  authors: [{ name: "Z.ai Team" }],
+  title: "HydraLearn - AI-Powered Educational Platform",
+  description: "HydraLearn is an AI-powered educational platform under the Lifejacket AI brand. Generate pedagogically sound lesson plans, assessments, and learning materials for students, teachers, and administrators.",
+  keywords: ["HydraLearn", "Lifejacket AI", "Education", "AI", "Lesson Plans", "Assessment", "Next.js", "TypeScript", "Tailwind CSS", "shadcn/ui", "Genkit", "Prisma"],
+  authors: [{ name: "Lifejacket AI" }],
   icons: {
-    icon: "https://z-cdn.chatglm.cn/z-ai/static/logo.svg",
+    icon: "/favicon.ico",
   },
   openGraph: {
-    title: "Z.ai Code Scaffold",
-    description: "AI-powered development with modern React stack",
-    url: "https://chat.z.ai",
-    siteName: "Z.ai",
+    title: "HydraLearn - AI-Powered Education",
+    description: "Generate lesson plans, assessments, and learning materials powered by AI pedagogical theory.",
+    url: "https://hydralearn.com",
+    siteName: "HydraLearn",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Z.ai Code Scaffold",
-    description: "AI-powered development with modern React stack",
+    title: "HydraLearn - AI-Powered Education",
+    description: "Generate lesson plans, assessments, and learning materials powered by AI pedagogical theory.",
   },
 };
 

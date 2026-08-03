@@ -42,10 +42,10 @@ export async function generateLearningMaterial(
 
 const prompt = ai.definePrompt({
   name: 'generateLearningMaterialPrompt',
-  input: z.object({
+  input: { schema: z.object({
     input: GenerateLearningMaterialInputSchema,
     strategy: z.any(), // PedagogicalRouterOutput
-  }),
+  }) },
   output: {schema: GenerateLearningMaterialOutputSchema},
   prompt: `You are an expert curriculum designer and teacher's assistant.
 

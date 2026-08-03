@@ -5,7 +5,7 @@ export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
     
-    const { materialType, topic, gradeLevel, instructions } = body;
+    const { materialType, topic, gradeLevel, instructions, subject, tone } = body;
     
     if (!materialType || !topic || !gradeLevel) {
       return NextResponse.json(
@@ -17,7 +17,9 @@ export async function POST(req: NextRequest) {
     const result = await generateLearningMaterial({
       materialType,
       topic,
+      subject: subject || 'General',
       gradeLevel,
+      tone: tone || 'Academic',
       instructions,
     });
     

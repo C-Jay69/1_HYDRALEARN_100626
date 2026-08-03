@@ -41,6 +41,7 @@ import { useToast } from '@/hooks/use-toast';
 import { InteractiveQuiz } from './interactive-quiz';
 
 const formSchema = z.object({
+  subject: z.string().min(2, 'Subject is required.'),
   topic: z.string().min(2, 'Topic is required.'),
   gradeLevel: z.string().min(1, 'Grade level is required.'),
   assessmentType: z.enum(['quiz', 'game', 'jeopardy', 'millionaire', 'family-feud', 'countdown', 'weakest-link', 'puzzles', 'escape-room']),
@@ -60,6 +61,7 @@ export function NewChallengeDialog() {
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
+      subject: 'Mathematics',
       topic: 'Fractions',
       gradeLevel: '4th Grade',
       assessmentType: 'game',
@@ -72,7 +74,7 @@ export function NewChallengeDialog() {
     setIsLoading(true);
     setResult(null);
     try {
-      const response = await createAutomaticAssessment({ ...data });
+      const response = await createAutomaticAssessment({ ...data, tone: 'Academic' });
       if (!response.quiz || response.quiz.length === 0) {
         toast({
           variant: 'destructive',
@@ -113,8 +115,21 @@ export function NewChallengeDialog() {
               Create a new educational game for your students. The AI will generate the content.
             </DialogDescription>
           </DialogHeader>
-          <Form {...form}>
+            <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+              <FormField
+                control={form.control}
+                name="subject"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Subject</FormLabel>
+                    <FormControl>
+                      <Input placeholder="e.g., Mathematics" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
               <FormField
                 control={form.control}
                 name="topic"

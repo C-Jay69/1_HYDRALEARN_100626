@@ -29,6 +29,7 @@ interface GenerateLearningMaterialResponse {
 
 const formSchema = z.object({
   materialType: z.string().min(3, 'Please describe material type.'),
+  subject: z.string().min(2, 'Subject is required.'),
   topic: z.string().min(3, 'A topic is required.'),
   gradeLevel: z.string().min(1, 'Grade level is required.'),
   instructions: z.string().optional(),
@@ -47,20 +48,22 @@ export function StudioForm() {
     resolver: zodResolver(formSchema),
     defaultValues: {
       materialType: searchParams.get('materialType') || 'Flashcards',
+      subject: searchParams.get('subject') || 'Science',
       topic: searchParams.get('topic') || 'The Water Cycle',
       gradeLevel: searchParams.get('gradeLevel') || '4th Grade',
       instructions: searchParams.get('instructions') || 'Create 10 flashcards. One side should have a term, other side a simple definition.',
     },
   });
 
-  useEffect(() => {
+    useEffect(() => {
     form.reset({
-        materialType: searchParams.get('materialType') || 'Flashcards',
+        materialType: searchParams.get('materialType') || '',
+        subject: searchParams.get('subject') || '',
         topic: searchParams.get('topic') || '',
         gradeLevel: searchParams.get('gradeLevel') || '',
         instructions: searchParams.get('instructions') || '',
     })
-  }, [searchParams, form]);
+}, [searchParams, form]);
 
   // ✅ Fixed: Use fetch API to call the route
   async function onSubmit(data: FormData) {
@@ -98,7 +101,7 @@ export function StudioForm() {
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-          <FormField
+            <FormField
             control={form.control}
             name="materialType"
             render={({ field }) => (
@@ -108,7 +111,24 @@ export function StudioForm() {
                   <Input placeholder="e.g., Flashcards, Worksheet, Chart" {...field} />
                 </FormControl>
                  <FormDescription>
-                  What kind of material do you need?
+                   What kind of material do you need?
+                 </FormDescription>
+                 <FormMessage />
+              </FormItem>
+            )}
+          />
+           
+           <FormField
+            control={form.control}
+            name="subject"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Subject</FormLabel>
+                <FormControl>
+                  <Input placeholder="e.g., Biology, History, Mathematics" {...field} />
+                </FormControl>
+                <FormDescription>
+                  The subject area for this material.
                 </FormDescription>
                 <FormMessage />
               </FormItem>

@@ -7,7 +7,7 @@ export async function POST(req: NextRequest) {
         const body = await req.json();
         console.log('Request body:', JSON.stringify(body, null, 2));
 
-        const { topic, gradeLevel, students } = body;
+        const { topic, gradeLevel, students, subject, tone } = body;
 
         if (!topic || !gradeLevel || !students) {
             console.error('Missing required fields in differentiated activities request');
@@ -20,8 +20,10 @@ export async function POST(req: NextRequest) {
         console.log(`Calling flow for topic: ${topic}, students count: ${students.length}`);
         const result = await generateDifferentiatedActivities({
             topic,
+            subject: subject || 'General',
             gradeLevel,
             students,
+            tone: tone || 'Academic',
         });
         console.log('Differentiated activities generated successfully');
 

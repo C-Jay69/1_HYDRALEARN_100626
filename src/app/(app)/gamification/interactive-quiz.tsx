@@ -123,7 +123,7 @@ export function InteractiveQuiz({ isOpen, onOpenChange, topic, questions }: Inte
                 <CardTitle className="text-lg">{currentQuestion.question}</CardTitle>
             </CardHeader>
             <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {currentQuestion.options.map((option, index) => {
+                {currentQuestion.options?.map((option, index) => {
                     const isCorrect = option === currentQuestion.answer;
                     const isSelected = option === selectedAnswer;
 

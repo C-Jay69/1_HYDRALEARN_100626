@@ -4,7 +4,7 @@ import { createAutomaticAssessment } from '@/ai/flows/create-automatic-assessmen
 export async function POST(req: NextRequest) {
     try {
         const body = await req.json();
-        const { topic, gradeLevel, assessmentType, learningObjectives, curriculum } = body;
+        const { topic, gradeLevel, assessmentType, learningObjectives, curriculum, subject, tone } = body;
 
         if (!topic || !gradeLevel || !assessmentType || !learningObjectives || !curriculum) {
             return NextResponse.json(
@@ -15,10 +15,12 @@ export async function POST(req: NextRequest) {
 
         const result = await createAutomaticAssessment({
             topic,
+            subject: subject || 'General',
             gradeLevel,
             assessmentType,
             learningObjectives,
             curriculum,
+            tone: tone || 'Academic',
         });
 
         return NextResponse.json(result);

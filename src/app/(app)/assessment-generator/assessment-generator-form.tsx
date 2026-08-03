@@ -34,6 +34,7 @@ import { useToast } from '@/hooks/use-toast';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 const formSchema = z.object({
+  subject: z.string().min(2, 'Subject is required.'),
   topic: z.string().min(2, 'Topic is required.'),
   gradeLevel: z.string().min(1, 'Grade level is required.'),
   assessmentType: z.enum(['quiz', 'game', 'project', 'essay', 'jeopardy', 'millionaire', 'family-feud', 'countdown', 'weakest-link', 'puzzles', 'escape-room']),
@@ -51,6 +52,7 @@ export function AssessmentGeneratorForm() {
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
+      subject: 'American History',
       topic: 'The American Revolution',
       gradeLevel: '8th Grade',
       assessmentType: 'quiz',
@@ -63,7 +65,7 @@ export function AssessmentGeneratorForm() {
     setIsLoading(true);
     setResult(null);
     try {
-      const response = await createAutomaticAssessment(data);
+      const response = await createAutomaticAssessment({ ...data, tone: 'Academic' });
       setResult(response);
     } catch (error) {
       console.error(error);
@@ -81,6 +83,20 @@ export function AssessmentGeneratorForm() {
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+          <FormField
+            control={form.control}
+            name="subject"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Subject</FormLabel>
+                <FormControl>
+                  <Input placeholder="e.g., Biology, History, Mathematics" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
           <FormField
             control={form.control}
             name="topic"

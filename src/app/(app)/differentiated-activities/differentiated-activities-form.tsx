@@ -34,6 +34,7 @@ const studentProfileSchema = z.object({
 });
 
 const formSchema = z.object({
+  subject: z.string().min(2, 'Subject is required.'),
   topic: z.string().min(2, 'Topic is required.'),
   gradeLevel: z.string().min(1, 'Grade level is required.'),
   students: z.array(studentProfileSchema).min(1, 'At least one student is required.'),
@@ -49,6 +50,7 @@ export function DifferentiatedActivitiesForm() {
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
+      subject: 'Science',
       topic: 'Ecosystems',
       gradeLevel: '4th Grade',
       students: [
@@ -67,7 +69,7 @@ export function DifferentiatedActivitiesForm() {
     setIsLoading(true);
     setResult(null);
     try {
-      const response = await generateDifferentiatedActivities(data);
+      const response = await generateDifferentiatedActivities({ ...data, tone: 'Academic' });
       setResult(response);
     } catch (error) {
       console.error(error);
@@ -86,6 +88,19 @@ export function DifferentiatedActivitiesForm() {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <FormField
+              control={form.control}
+              name="subject"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Subject</FormLabel>
+                  <FormControl>
+                    <Input placeholder="e.g., Biology, History" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
             <FormField
               control={form.control}
               name="topic"

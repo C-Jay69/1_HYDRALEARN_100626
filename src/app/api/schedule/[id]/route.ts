@@ -4,14 +4,15 @@ import { db } from '@/lib/db';
 // PATCH update event
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     const body = await request.json();
     const { title, description, date, eventType, color } = body;
 
     const event = await db.scheduleEvent.update({
-      where: { id: params.id },
+      where: { id },
       data: {
         title,
         description,
@@ -34,11 +35,12 @@ export async function PATCH(
 // DELETE event
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     await db.scheduleEvent.delete({
-      where: { id: params.id },
+      where: { id },
     });
 
     return NextResponse.json({ success: true });

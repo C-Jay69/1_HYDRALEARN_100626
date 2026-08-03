@@ -58,10 +58,10 @@ export async function generateDifferentiatedActivities(
 
 const prompt = ai.definePrompt({
   name: 'generateDifferentiatedActivitiesPrompt',
-  input: z.object({
+  input: { schema: z.object({
     input: GenerateDifferentiatedActivitiesInputSchema,
     strategy: z.any(), // PedagogicalRouterOutput
-  }),
+  }) },
   output: {schema: GenerateDifferentiatedActivitiesOutputSchema},
   prompt: `You are an experienced teacher skilled at creating differentiated learning activities.
 

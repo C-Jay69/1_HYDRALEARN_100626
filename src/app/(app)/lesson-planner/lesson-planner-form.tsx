@@ -28,6 +28,7 @@ const formSchema = z.object({
   objectives: z.string().min(10, 'Please provide more detail on lesson objectives.'),
   gradeLevel: z.string().min(1, 'Grade level is required.'),
   subject: z.string().min(2, 'Subject is required.'),
+  topic: z.string().min(1, 'Topic or subtopic is required.'),
 });
 
 type FormData = z.infer<typeof formSchema>;
@@ -51,6 +52,7 @@ export function LessonPlannerForm() {
       objectives: '',
       gradeLevel: '5th Grade',
       subject: 'Mathematics',
+      topic: '',
     },
   });
 
@@ -89,9 +91,10 @@ export function LessonPlannerForm() {
   // ✅ Changed result.lessonPlan to just result
   const createStudioLink = () => {
     if (!result) return '';
-    const { subject, gradeLevel } = form.getValues();
+    const { subject, gradeLevel, topic } = form.getValues();
     const params = new URLSearchParams({
-      topic: subject,
+      subject: subject || 'General',
+      topic: topic || subject || '',
       gradeLevel,
       instructions: `Based on the following lesson plan, generate the necessary materials (e.g., flashcards, worksheets):\n\n${result}`,
     });
@@ -102,7 +105,7 @@ export function LessonPlannerForm() {
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-          <FormField
+            <FormField
             control={form.control}
             name="subject"
             render={({ field }) => (
@@ -111,6 +114,23 @@ export function LessonPlannerForm() {
                 <FormControl>
                   <Input placeholder="e.g., American History" {...field} />
                 </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="topic"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Topic (Optional)</FormLabel>
+                <FormControl>
+                  <Input placeholder="e.g., The French Revolution" {...field} />
+                </FormControl>
+                <FormDescription>
+                  The specific topic or subtopic within the subject (e.g., "Fractions" for Mathematics).
+                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
