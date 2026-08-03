@@ -16,6 +16,11 @@ import {
   Users,
   Wand2,
   Brush,
+  Shield,
+  MessageCircle,
+  Headphones,
+  ClipboardCheck,
+  HeartPulse,
 } from 'lucide-react';
 import {
   SidebarMenu,
@@ -35,6 +40,10 @@ const links = [
   { href: '/personalization', label: 'AI Personalization', icon: Wand2 },
   { href: '/gamification', label: 'Gamification', icon: Gamepad2 },
   { href: '/schedule', label: 'Schedule', icon: CalendarDays },
+  { href: '/protect/forum', label: 'HydraForum', icon: MessageCircle },
+  { href: '/protect/hydra-ear', label: 'HydraEar Counselor', icon: Headphones },
+  { href: '/protect/safety-board', label: 'Safety Board', icon: Shield },
+  { href: '/protect/wellness', label: 'Wellness Tracker', icon: HeartPulse },
   { href: '/user-guide', label: 'User Guide', icon: LifeBuoy },
   { href: '/deployment-guide', label: 'Deployment Guide', icon: Rocket },
 ];

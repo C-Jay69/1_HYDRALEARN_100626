@@ -39,6 +39,11 @@ export default function UserGuidePage() {
               <p className="text-sm text-muted-foreground">Make learning fun with classroom challenges and badges. You can use the AI to launch new educational games for your students to compete in.</p>
             </div>
 
+            <div>
+              <h4 className="font-semibold mb-1">Safety & Wellness</h4>
+              <p className="text-sm text-muted-foreground">The "Protect" suite keeps your classroom safe: HydraForum is an AI-moderated discussion space, HydraEar is an anonymous AI counselor, the Safety Board lets students anonymously report concerns, and the Wellness Tracker helps you monitor student wellbeing.</p>
+            </div>
+
           </AccordionContent>
         </AccordionItem>
 
