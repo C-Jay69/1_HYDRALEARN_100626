@@ -4,7 +4,7 @@ export function AppLogo({ className }: { className?: string }) {
   return (
     <div className={`flex items-center gap-2 ${className ?? ''}`}>
       <Image
-        src="/logo.svg"
+        src="/logo.png"
         alt="HydraLearn Logo"
         width={36}
         height={36}
