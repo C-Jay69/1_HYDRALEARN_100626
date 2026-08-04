@@ -119,7 +119,7 @@ export default function Home() {
           <div className="relative">
             <div className="absolute inset-0 scale-100 rounded-full bg-gradient-to-r from-purple-500/20 to-cyan-500/20 blur-3xl" />
             <Image
-              src="/logo.svg"
+              src="/logo.png"
               alt="HydraLearn"
               width={420}
               height={420}
