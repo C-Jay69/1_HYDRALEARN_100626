@@ -57,7 +57,7 @@ const CreateAutomaticAssessmentOutputSchema = z.object({
     .describe(
       'The content of the assessment, including questions, instructions, evaluation criteria, and a separate answer key.'
     ),
-  feedback: z.string().describe('AI-generated feedback for the assessment.'),
+  feedback: z.string().optional().describe('AI-generated feedback for the assessment.'),
   quiz: z
     .array(z.any())
     .optional()
