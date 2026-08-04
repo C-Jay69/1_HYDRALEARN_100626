@@ -58,7 +58,10 @@ const CreateAutomaticAssessmentOutputSchema = z.object({
       'The content of the assessment, including questions, instructions, evaluation criteria, and a separate answer key.'
     ),
   feedback: z.string().describe('AI-generated feedback for the assessment.'),
-  quiz: z.array(GameQuestionSchema).optional().describe('An array of multi-format quiz questions. This MUST be populated for quiz or game-type assessments so the game can be played.'),
+  quiz: z
+    .array(z.any())
+    .optional()
+    .describe('An array of multi-format quiz questions. This MUST be populated for quiz or game-type assessments so the game can be played.'),
 });
 
 export type CreateAutomaticAssessmentOutput = z.infer<
@@ -109,6 +112,11 @@ INSTRUCTIONS:
 5. Format: The output for 'assessmentContent' MUST be plain text or Markdown.
 6. Answer Key: You MUST include a clearly labeled "Answer Key" section.
 7. The 'feedback' field must contain AI-generated feedback for the teacher on the quality of the generated assessment.
+8. CRITICAL: At the END of 'assessmentContent', on its own line, embed the SAME game questions as a machine-readable JSON array inside a markdown fenced code block tagged \`json\`, exactly like this:
+\`\`\`json
+[{"type":"MCQ","question":"...","options":["...","...","...","..."],"answer":"...","explanation":"...","memeQuery":"..."}]
+\`\`\`
+   This JSON block MUST contain every playable question (all rounds/levels) in order. Do not put anything else between the \`\`\`json fence.
 
 **Specific Instructions for Game Types (populate 'quiz' accordingly, AND write the full game into 'assessmentContent'):**
 - **Jeopardy**: Organize questions into 5 categories with 5 questions each, increasing in difficulty (e.g., 100 to 500 points). Format the 'assessmentContent' as a grid/list of clues, and put all 25 questions into the 'quiz' array as MCQ questions.
@@ -141,6 +149,59 @@ const createAutomaticAssessmentFlow = ai.defineFlow(
       strategy: strategy,
     });
 
-    return output!;
+    if (!output) {
+      throw new Error('The model returned no output.');
+    }
+
+    // Prefer the structured quiz array. Fall back to extracting questions from the
+    // ```json block embedded in assessmentContent (resilient to free models that
+    // skip structured tool-call output).
+    let quiz = normalizeQuiz(output.quiz);
+    if (quiz.length === 0) {
+      quiz = extractQuizFromContent(output.assessmentContent);
+    }
+
+    return { ...output, quiz };
   }
 );
+
+function normalizeQuiz(raw: unknown): GameQuestion[] {
+  if (!Array.isArray(raw)) return [];
+  const quiz: GameQuestion[] = [];
+  for (const item of raw) {
+    const parsed = GameQuestionSchema.safeParse(coerceQuestion(item));
+    if (parsed.success) quiz.push(parsed.data);
+  }
+  return quiz;
+}
+
+/** Extract the ```json code block from assessmentContent and parse it into valid questions. */
+function extractQuizFromContent(content: string): GameQuestion[] {
+  if (!content) return [];
+  const fenceMatch = content.match(/```json\s*([\s\S]*?)```/i);
+  if (!fenceMatch || !fenceMatch[1]) return [];
+  try {
+    const raw = JSON.parse(fenceMatch[1].trim());
+    return normalizeQuiz(raw);
+  } catch (e) {
+    console.warn('createAutomaticAssessment: failed to parse embedded JSON quiz', e);
+    return [];
+  }
+}
+
+/** Coerce a possibly-messy question object into the shape expected by GameQuestionSchema. */
+function coerceQuestion(raw: unknown): unknown {
+  if (typeof raw !== 'object' || raw === null) return raw;
+  const q = raw as Record<string, unknown>;
+  const type = typeof q.type === 'string' && (q.type as string).toUpperCase();
+  const types = ['MCQ', 'FILL_BLANK', 'MATCHING', 'TRUE_FALSE', 'SHORT_ANSWER'];
+  return {
+    ...raw,
+    type: type && types.includes(type) ? type : 'MCQ',
+    question: typeof q.question === 'string' ? q.question : '',
+    options: Array.isArray(q.options) ? q.options.filter((o) => typeof o === 'string') : undefined,
+    answer: typeof q.answer === 'string' ? q.answer : '',
+  };
+}
+
+type GameQuestion = z.infer<typeof GameQuestionSchema>;
