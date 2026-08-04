@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>HydraLearn Adventure Map</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#5b13ec",
+                        "accent-cyan": "#00f2ff",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#0a0a0c", // Deep black for superhero feel
+                        "card-dark": "#1a1a1e",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .quest-path-gradient {
+            background: linear-gradient(135deg, #5b13ec 0%, #00f2ff 100%);
+        }
+        .node-glow-active {
+            box-shadow: 0 0 20px rgba(91, 19, 236, 0.6), 0 0 40px rgba(0, 242, 255, 0.3);
+        }
+        .glass-panel {
+            background: rgba(42, 42, 42, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(91, 19, 236, 0.2);
+        }
+        .hydra-gradient {
+            background: linear-gradient(to bottom right, #5b13ec, #310a83);
+        }
+        .scanline {
+            background: linear-gradient(to bottom, transparent 50%, rgba(91, 19, 236, 0.05) 50%);
+            background-size: 100% 4px;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-white min-h-screen selection:bg-primary/40 overflow-x-hidden">
+<!-- Background Decoration -->
+<div class="fixed inset-0 z-0 opacity-20 pointer-events-none overflow-hidden">
+<div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary rounded-full blur-[120px]"></div>
+<div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-accent-cyan rounded-full blur-[120px]"></div>
+<div class="absolute inset-0 scanline"></div>
+</div>
+<div class="relative z-10 layout-container flex flex-col h-full min-h-screen">
+<!-- Navigation Header -->
+<header class="flex items-center justify-between border-b border-white/10 px-6 py-4 glass-panel sticky top-0 z-50">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-white text-2xl">shield_with_heart</span>
+</div>
+<h2 class="text-xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white to-white/70">HydraLearn</h2>
+</div>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-primary font-bold text-sm tracking-wide" href="#">ADVENTURE MAP</a>
+<a class="text-white/60 hover:text-white transition-colors text-sm font-medium" href="#">BACKPACK</a>
+<a class="text-white/60 hover:text-white transition-colors text-sm font-medium" href="#">ARMORY</a>
+<a class="text-white/60 hover:text-white transition-colors text-sm font-medium" href="#">RANKINGS</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden sm:flex items-center bg-white/5 rounded-xl px-4 py-2 border border-white/10">
+<span class="material-symbols-outlined text-primary text-xl mr-2">bolt</span>
+<span class="text-sm font-bold">LVL 42</span>
+</div>
+<div class="hidden sm:flex items-center bg-white/5 rounded-xl px-4 py-2 border border-white/10">
+<span class="material-symbols-outlined text-accent-cyan text-xl mr-2">token</span>
+<span class="text-sm font-bold text-accent-cyan">12.5k</span>
+</div>
+<div class="w-10 h-10 rounded-full border-2 border-primary/50 overflow-hidden ring-4 ring-primary/10">
+<img alt="Hero Avatar" data-alt="Stylized superhero avatar profile picture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIaSbiMuQltrXPEhSTu4Q4fmESFBvb-rinagew1hgBycMu_zhE4aJkD9AR4ReetVrpcKK_vwRoywWAFQW9ESV6pnQHKm5a_0mSS-HhMIIy6XWpIXdK01WhSHLWWLrR6Eud3Lr_vemlKhRfMgmz7fIUZvaQ2TKu8PqmWgjakTJ783Y-E8UBcJa65UFROi0IkC720IPrUIpxx4tODOlCitedQxS-liJW8i_06wpVzk-fCEiIu51Z3m3wq_UpjXa6Mfeyc3sX30dEPyzO"/>
+</div>
+</div>
+</header>
+<main class="flex-1 flex flex-col lg:flex-row h-[calc(100vh-73px)]">
+<!-- Sidebar Stats & Badges -->
+<aside class="w-full lg:w-80 border-r border-white/10 glass-panel p-6 overflow-y-auto">
+<div class="mb-8">
+<h1 class="text-3xl font-black mb-1 uppercase tracking-tighter italic">Adventure Map</h1>
+<p class="text-white/40 text-sm">Your journey through the Forge.</p>
+</div>
+<!-- Heads Earned / Badges -->
+<div class="space-y-6">
+<div>
+<div class="flex justify-between items-end mb-3">
+<h3 class="text-xs font-black text-white/50 uppercase tracking-widest">Hydra Heads</h3>
+<span class="text-primary font-bold text-sm">14 / 20</span>
+</div>
+<div class="grid grid-cols-4 gap-3">
+<!-- Earned Head -->
+<div class="aspect-square rounded-lg bg-primary/20 border border-primary/40 flex items-center justify-center group cursor-help relative" title="The Logic Breaker">
+<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">military_tech</span>
+</div>
+<div class="aspect-square rounded-lg bg-primary/20 border border-primary/40 flex items-center justify-center group cursor-help" title="Data Voyager">
+<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">explore</span>
+</div>
+<div class="aspect-square rounded-lg bg-primary/20 border border-primary/40 flex items-center justify-center group cursor-help" title="Code Titan">
+<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">terminal</span>
+</div>
+<div class="aspect-square rounded-lg bg-primary/20 border border-primary/40 flex items-center justify-center group cursor-help" title="API Architect">
+<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">hub</span>
+</div>
+<!-- Locked Head -->
+<div class="aspect-square rounded-lg bg-white/5 border border-white/10 flex items-center justify-center opacity-40 grayscale">
+<span class="material-symbols-outlined text-white">lock</span>
+</div>
+<div class="aspect-square rounded-lg bg-white/5 border border-white/10 flex items-center justify-center opacity-40 grayscale">
+<span class="material-symbols-outlined text-white">lock</span>
+</div>
+</div>
+</div>
+<!-- Current Mission Card -->
+<div class="bg-[#2a2a2a] rounded-xl p-5 border border-white/10 relative overflow-hidden">
+<div class="absolute top-0 right-0 w-24 h-24 bg-primary/10 rounded-full -mr-8 -mt-8 blur-2xl"></div>
+<h4 class="text-xs font-bold text-accent-cyan uppercase mb-3 flex items-center">
+<span class="material-symbols-outlined text-sm mr-1">priority_high</span> Current Mission
+                        </h4>
+<p class="font-bold text-lg leading-tight mb-2">Recursive Rift Mastery</p>
+<div class="w-full bg-white/10 h-1.5 rounded-full overflow-hidden mb-4">
+<div class="bg-primary h-full w-[65%]"></div>
+</div>
+<button class="w-full py-2 bg-primary rounded-lg text-sm font-bold hover:bg-primary/80 transition-all">RESUME QUEST</button>
+</div>
+<!-- Sector Quick Navigation -->
+<div class="space-y-2">
+<h3 class="text-xs font-black text-white/50 uppercase tracking-widest mb-3">Sectors</h3>
+<button class="w-full flex items-center gap-3 p-3 rounded-lg bg-primary/10 border border-primary/30 text-white">
+<span class="material-symbols-outlined text-primary">account_tree</span>
+<span class="text-sm font-bold">Logic Labyrinth</span>
+</button>
+<button class="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-white/5 transition-colors text-white/60">
+<span class="material-symbols-outlined">mountain_flag</span>
+<span class="text-sm font-bold">Code Canyon</span>
+</button>
+<button class="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-white/5 transition-colors text-white/60">
+<span class="material-symbols-outlined">landscape</span>
+<span class="text-sm font-bold">Data Desert</span>
+</button>
+</div>
+</div>
+</aside>
+<!-- Main Map Area -->
+<section class="flex-1 relative bg-black overflow-hidden">
+<!-- Map UI Overlays -->
+<div class="absolute top-6 left-6 z-20 flex gap-4">
+<div class="flex items-center gap-2 px-4 py-2 bg-black/60 backdrop-blur border border-white/10 rounded-full text-xs font-bold uppercase tracking-wider">
+<span class="w-2 h-2 rounded-full bg-green-500"></span> Completed
+                    </div>
+<div class="flex items-center gap-2 px-4 py-2 bg-black/60 backdrop-blur border border-primary/50 rounded-full text-xs font-bold uppercase tracking-wider text-primary">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span> Active
+                    </div>
+<div class="flex items-center gap-2 px-4 py-2 bg-black/60 backdrop-blur border border-white/10 rounded-full text-xs font-bold uppercase tracking-wider opacity-50">
+<span class="w-2 h-2 rounded-full bg-white/20"></span> Locked
+                    </div>
+</div>
+<div class="absolute bottom-6 right-6 z-20 flex flex-col gap-2">
+<button class="w-10 h-10 bg-[#2a2a2a] border border-white/10 rounded-lg flex items-center justify-center hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined">add</span>
+</button>
+<button class="w-10 h-10 bg-[#2a2a2a] border border-white/10 rounded-lg flex items-center justify-center hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined">remove</span>
+</button>
+<button class="w-10 h-10 bg-[#2a2a2a] border border-white/10 rounded-lg flex items-center justify-center hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined">my_location</span>
+</button>
+</div>
+<!-- The Interactive Map Canvas -->
+<div class="w-full h-full flex items-center justify-center relative cursor-grab active:cursor-grabbing p-20 overflow-visible" data-location="Hero's Forge Sector-7" style="">
+<!-- Path SVG -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none" style="filter: drop-shadow(0 0 8px rgba(91,19,236,0.4))">
+<path d="M 200,600 C 400,600 400,200 600,200 S 800,500 1000,500" fill="none" stroke="url(#pathGradient)" stroke-dasharray="12 8" stroke-width="4"></path>
+<defs>
+<lineargradient id="pathGradient" x1="0%" x2="100%" y1="0%" y2="0%">
+<stop offset="0%" style="stop-color:#5b13ec;stop-opacity:1"></stop>
+<stop offset="100%" style="stop-color:#00f2ff;stop-opacity:1"></stop>
+</lineargradient>
+</defs>
+</svg>
+<!-- Quest Nodes -->
+<!-- Node 1: Completed -->
+<div class="absolute left-[15%] bottom-[20%] group">
+<div class="w-16 h-16 bg-green-500 rounded-xl flex items-center justify-center rotate-45 border-4 border-black group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-white -rotate-45 text-3xl">check</span>
+</div>
+<div class="absolute top-full mt-4 left-1/2 -translate-x-1/2 whitespace-nowrap bg-black/80 px-3 py-1 rounded border border-white/10 text-xs font-bold uppercase opacity-0 group-hover:opacity-100 transition-opacity">
+                            Entry Protocol
+                        </div>
+</div>
+<!-- Node 2: Completed -->
+<div class="absolute left-[30%] bottom-[35%] group">
+<div class="w-16 h-16 bg-green-500 rounded-xl flex items-center justify-center rotate-45 border-4 border-black group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-white -rotate-45 text-3xl">database</span>
+</div>
+</div>
+<!-- Node 3: Active Quest -->
+<div class="absolute left-[45%] top-[25%] group z-30">
+<!-- Pulse Effect -->
+<div class="absolute inset-0 bg-primary/40 rounded-xl rotate-45 animate-ping"></div>
+<div class="w-20 h-20 bg-primary node-glow-active rounded-xl flex items-center justify-center rotate-45 border-4 border-black relative z-10 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-white -rotate-45 text-4xl">psychology</span>
+</div>
+<!-- Hover Card -->
+<div class="absolute bottom-full mb-6 left-1/2 -translate-x-1/2 w-64 p-4 glass-panel rounded-xl opacity-0 group-hover:opacity-100 transition-all scale-95 group-hover:scale-100 pointer-events-none">
+<div class="flex justify-between items-start mb-2">
+<span class="text-[10px] font-black text-accent-cyan uppercase bg-accent-cyan/10 px-2 py-0.5 rounded">Current Mission</span>
+<span class="text-[10px] font-black text-white/40 uppercase">S-Rank</span>
+</div>
+<h5 class="font-bold text-lg leading-none mb-1">Logic Labyrinth V.2</h5>
+<p class="text-xs text-white/60 mb-3">Solve the recursive riddles to unlock the next forge sector.</p>
+<div class="flex justify-between items-center text-xs font-bold">
+<span class="flex items-center text-primary"><span class="material-symbols-outlined text-sm mr-1">bolt</span> 450 XP</span>
+<span class="flex items-center text-accent-cyan"><span class="material-symbols-outlined text-sm mr-1">token</span> 100 FC</span>
+</div>
+</div>
+</div>
+<!-- Node 4: Locked -->
+<div class="absolute left-[65%] bottom-[25%] group opacity-50">
+<div class="w-16 h-16 bg-[#2a2a2a] rounded-xl flex items-center justify-center rotate-45 border-4 border-black grayscale">
+<span class="material-symbols-outlined text-white/40 -rotate-45 text-3xl">lock</span>
+</div>
+<div class="absolute top-full mt-4 left-1/2 -translate-x-1/2 whitespace-nowrap bg-black/80 px-3 py-1 rounded border border-white/10 text-xs font-bold uppercase">
+                            Deep Code Mining
+                        </div>
+</div>
+<!-- Node 5: Locked Boss -->
+<div class="absolute right-[10%] bottom-[40%] group opacity-30">
+<div class="w-24 h-24 bg-[#2a2a2a] rounded-xl flex items-center justify-center rotate-45 border-4 border-black grayscale">
+<span class="material-symbols-outlined text-white/20 -rotate-45 text-5xl">skull</span>
+</div>
+</div>
+<!-- Abstract Map Art Elements -->
+<div class="absolute top-20 right-40 w-64 h-64 border border-white/5 rounded-full pointer-events-none"></div>
+<div class="absolute top-20 right-40 w-48 h-48 border border-white/5 rounded-full pointer-events-none"></div>
+<div class="absolute bottom-20 left-40 w-80 h-80 border border-white/5 rounded-full pointer-events-none"></div>
+</div>
+<!-- Sector Labels -->
+<div class="absolute top-1/2 left-[10%] -translate-y-1/2 pointer-events-none opacity-20">
+<h2 class="text-9xl font-black italic tracking-tighter uppercase whitespace-nowrap select-none">LOGIC LABYRINTH</h2>
+</div>
+<div class="absolute bottom-[10%] right-[10%] pointer-events-none opacity-10">
+<h2 class="text-9xl font-black italic tracking-tighter uppercase whitespace-nowrap select-none">CODE CANYON</h2>
+</div>
+</section>
+</main>
+<!-- Bottom Progress HUD -->
+<footer class="h-14 border-t border-white/10 bg-black/80 backdrop-blur px-6 flex items-center justify-between z-50">
+<div class="flex items-center gap-6 text-xs font-bold text-white/40">
+<span class="flex items-center gap-2 uppercase tracking-widest"><span class="w-1.5 h-1.5 rounded-full bg-primary"></span> System Online</span>
+<span class="flex items-center gap-2 uppercase tracking-widest"><span class="w-1.5 h-1.5 rounded-full bg-accent-cyan"></span> Sync: 98%</span>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-4">
+<div class="text-right">
+<p class="text-[10px] text-white/40 font-black uppercase">Global Rank</p>
+<p class="text-sm font-bold text-white">#1,204</p>
+</div>
+<div class="h-8 w-px bg-white/10"></div>
+<div class="text-right">
+<p class="text-[10px] text-white/40 font-black uppercase">Win Streak</p>
+<p class="text-sm font-bold text-accent-cyan">7 DAYS</p>
+</div>
+</div>
+</div>
+</footer>
+</div>
+</body></html>

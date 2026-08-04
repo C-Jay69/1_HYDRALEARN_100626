@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The Forge: AI Training Lab | HydraLearn</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#5b13ec",
+                        "accent-cyan": "#06b6d4",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#000000",
+                        "card-dark": "#2a2a2a",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .gradient-border {
+            background: linear-gradient(#2a2a2a, #2a2a2a) padding-box,
+                        linear-gradient(to right, #5b13ec, #06b6d4) border-box;
+            border: 2px solid transparent;
+        }
+        .slider-thumb::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            background: #ffffff;
+            cursor: pointer;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(6, 182, 212, 0.5);
+        }
+        .custom-gradient-bg {
+            background: linear-gradient(90deg, #5b13ec 0%, #06b6d4 100%);
+        }
+    </style>
+</head>
+<body class="bg-background-dark font-display text-white min-h-screen">
+<div class="relative flex h-auto min-h-screen w-full flex-col bg-background-dark overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<!-- Top Navigation Bar -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-white/10 px-6 py-4 lg:px-10 bg-background-dark/80 backdrop-blur-md sticky top-0 z-50">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3 text-white">
+<div class="size-8 flex items-center justify-center rounded-lg bg-gradient-to-br from-primary to-accent-cyan">
+<span class="material-symbols-outlined text-white text-xl">storm</span>
+</div>
+<h2 class="text-white text-xl font-extrabold leading-tight tracking-tight">HydraLearn</h2>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-white/70 hover:text-white text-sm font-medium transition-colors" href="#">Dashboard</a>
+<a class="text-white text-sm font-semibold border-b-2 border-primary pb-1" href="#">The Forge</a>
+<a class="text-white/70 hover:text-white text-sm font-medium transition-colors" href="#">Curriculum</a>
+<a class="text-white/70 hover:text-white text-sm font-medium transition-colors" href="#">Students</a>
+</nav>
+</div>
+<div class="flex flex-1 justify-end gap-6 items-center">
+<label class="hidden lg:flex flex-col min-w-40 h-10 max-w-64">
+<div class="flex w-full flex-1 items-stretch rounded-xl h-full">
+<div class="text-white/50 flex border-none bg-card-dark items-center justify-center pl-4 rounded-l-xl">
+<span class="material-symbols-outlined text-xl">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 border-none bg-card-dark text-white focus:ring-0 h-full placeholder:text-white/30 px-4 rounded-r-xl text-sm" placeholder="Search lab..." value=""/>
+</div>
+</label>
+<div class="flex gap-3">
+<button class="flex items-center justify-center rounded-xl size-10 bg-card-dark text-white hover:bg-card-dark/80 transition-all border border-white/5">
+<span class="material-symbols-outlined text-xl">notifications</span>
+</button>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-primary/50" data-alt="User profile photo of a teacher" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDMr8BXWdjk04czXpThd5suZHAobrWps4aIxHxKi-xUDJKZhH1eXHvuwQsm1uOD-qOO-ErMXkiChBVeH2L7ivxXKqFYppibsuMVnLkBVK1SOd4VmoGMhs4RJ3nCpuWRaOFsKUrCnuDh5m9bdb_AWhXInLi7NNx6pGl1IEo0KIFx5UVSsYChI3A24PApuE8dJ8ksQwPZapNfWHAYDYLHieqb2sLJCGvAD0eVBmwKdqPc3aR-KY8jp0zLGned78vNfBBRFXP_HmuIUBlA");'></div>
+</div>
+</div>
+</header>
+<main class="flex-1 px-6 py-8 lg:px-40 flex flex-col gap-8">
+<!-- Page Hero Header -->
+<div class="flex flex-wrap justify-between items-end gap-6">
+<div class="flex flex-col gap-2">
+<h1 class="text-white text-4xl lg:text-5xl font-black leading-tight tracking-tight">The Forge: <span class="text-transparent bg-clip-text custom-gradient-bg">AI Training Lab</span></h1>
+<p class="text-white/60 text-lg max-w-xl">Calibrate your digital teaching assistant. Fine-tune pedagogical behavior and knowledge ingestion.</p>
+</div>
+<div class="flex gap-4">
+<button class="flex items-center justify-center rounded-xl h-12 px-6 bg-card-dark text-white text-sm font-bold border border-white/10 hover:bg-white/5 transition-all">
+<span class="material-symbols-outlined mr-2">restart_alt</span> Reset Defaults
+                        </button>
+<button class="flex items-center justify-center rounded-xl h-12 px-8 custom-gradient-bg text-white text-sm font-bold shadow-lg shadow-primary/20 hover:opacity-90 transition-all">
+                            Deploy Assistant
+                        </button>
+</div>
+</div>
+<!-- Main Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Left Column: Parameters -->
+<div class="lg:col-span-7 flex flex-col gap-6">
+<div class="bg-card-dark rounded-xl p-8 border border-white/5 shadow-2xl">
+<div class="flex items-center gap-3 mb-8">
+<span class="material-symbols-outlined text-accent-cyan">tune</span>
+<h3 class="text-xl font-bold">Parameter Calibration</h3>
+</div>
+<div class="flex flex-col gap-10">
+<!-- Slider: Pedagogical Strictness -->
+<div class="space-y-4">
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-2">
+<span class="text-base font-semibold">Pedagogical Strictness</span>
+<span class="material-symbols-outlined text-white/40 text-sm cursor-help">info</span>
+</div>
+<span class="text-accent-cyan text-sm font-medium px-2 py-1 rounded bg-accent-cyan/10">Structured Curriculum</span>
+</div>
+<div class="relative pt-1">
+<input class="w-full h-2 bg-black rounded-lg appearance-none cursor-pointer slider-thumb" style="background: linear-gradient(to right, #5b13ec, #06b6d4);" type="range"/>
+<div class="flex justify-between text-xs text-white/40 mt-3 font-medium">
+<span>OPEN INQUIRY</span>
+<span>STRICT GUIDELINES</span>
+</div>
+</div>
+</div>
+<!-- Slider: Creativity Level -->
+<div class="space-y-4">
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-2">
+<span class="text-base font-semibold">Creativity Level</span>
+<span class="material-symbols-outlined text-white/40 text-sm cursor-help">info</span>
+</div>
+<span class="text-primary text-sm font-medium px-2 py-1 rounded bg-primary/10">Inspired &amp; Imaginative</span>
+</div>
+<div class="relative pt-1">
+<input class="w-full h-2 bg-black rounded-lg appearance-none cursor-pointer slider-thumb" style="background: linear-gradient(to right, #5b13ec, #06b6d4);" type="range"/>
+<div class="flex justify-between text-xs text-white/40 mt-3 font-medium">
+<span>FACT-BASED</span>
+<span>CREATIVE FLAIR</span>
+</div>
+</div>
+</div>
+<!-- Slider: Tone -->
+<div class="space-y-4">
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-2">
+<span class="text-base font-semibold">Tone &amp; Voice</span>
+<span class="material-symbols-outlined text-white/40 text-sm cursor-help">info</span>
+</div>
+<span class="text-white/80 text-sm font-medium px-2 py-1 rounded bg-white/5">Encouraging/Relatable</span>
+</div>
+<div class="relative pt-1">
+<input class="w-full h-2 bg-black rounded-lg appearance-none cursor-pointer slider-thumb" style="background: linear-gradient(to right, #5b13ec, #06b6d4);" type="range"/>
+<div class="flex justify-between text-xs text-white/40 mt-3 font-medium">
+<span>PROFESSIONAL</span>
+<span>PEER-LIKE</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Knowledge Ingestion -->
+<div class="bg-card-dark rounded-xl p-8 border border-white/5 shadow-2xl">
+<div class="flex items-center justify-between mb-6">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">auto_stories</span>
+<h3 class="text-xl font-bold">Knowledge Base Injection</h3>
+</div>
+<span class="text-xs font-bold text-white/40 tracking-widest uppercase">3/10 Files</span>
+</div>
+<div class="gradient-border rounded-xl p-10 border-dashed flex flex-col items-center justify-center gap-4 cursor-pointer hover:bg-white/5 transition-all">
+<div class="size-16 rounded-full bg-primary/10 flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-primary text-3xl">upload_file</span>
+</div>
+<div class="text-center">
+<p class="text-lg font-semibold">Drop curriculum files here</p>
+<p class="text-white/40 text-sm mt-1">PDF, DOCX, or JSON (Max 50MB per file)</p>
+</div>
+<button class="mt-2 px-6 py-2 rounded-lg bg-white/10 hover:bg-white/20 font-bold text-sm transition-all">Browse Files</button>
+</div>
+<div class="mt-6 space-y-3">
+<div class="flex items-center justify-between p-4 bg-black/40 rounded-lg border border-white/5">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-red-400">picture_as_pdf</span>
+<div>
+<p class="text-sm font-medium">World_History_Unit_1.pdf</p>
+<p class="text-[10px] text-white/40 uppercase font-bold">Processed</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-white/30 hover:text-white cursor-pointer">close</span>
+</div>
+<div class="flex items-center justify-between p-4 bg-black/40 rounded-lg border border-white/5">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-blue-400">description</span>
+<div>
+<p class="text-sm font-medium">State_Standards_2024.docx</p>
+<p class="text-[10px] text-accent-cyan uppercase font-bold">Syncing Knowledge... 84%</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-white/30 hover:text-white cursor-pointer">close</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Live Preview & Stats -->
+<div class="lg:col-span-5 flex flex-col gap-6">
+<!-- AI Preview Console -->
+<div class="bg-card-dark rounded-xl border border-white/5 overflow-hidden flex flex-col h-[500px]">
+<div class="bg-black/50 px-6 py-4 flex items-center justify-between border-b border-white/5">
+<div class="flex items-center gap-2">
+<div class="size-2 rounded-full bg-green-500 animate-pulse"></div>
+<span class="text-sm font-bold uppercase tracking-wider text-white/60">Live Preview Console</span>
+</div>
+<span class="material-symbols-outlined text-white/40 text-sm cursor-pointer hover:text-white">refresh</span>
+</div>
+<div class="flex-1 p-6 overflow-y-auto space-y-6">
+<div class="flex flex-col gap-2 max-w-[90%]">
+<div class="text-[10px] font-bold text-white/30 uppercase ml-1 tracking-tighter">Teacher Prompt</div>
+<div class="bg-white/5 rounded-2xl rounded-tl-none p-4 text-sm text-white/80 leading-relaxed border border-white/5">
+                                        "Explain the cause of the French Revolution to a 9th grade student who struggles with complex vocabulary."
+                                    </div>
+</div>
+<div class="flex flex-col gap-2 max-w-[90%] self-end items-end">
+<div class="text-[10px] font-bold text-primary uppercase mr-1 tracking-tighter text-right">HydraAI Response</div>
+<div class="bg-primary/20 rounded-2xl rounded-tr-none p-4 text-sm text-white/90 leading-relaxed border border-primary/30 relative">
+<span class="material-symbols-outlined absolute -left-10 top-2 text-accent-cyan">auto_awesome</span>
+                                        "Imagine a giant pizza party where only a few people at the top get all the slices, while everyone else pays for the pizza but gets none. That's a bit like France in 1789! The common people were hungry and tired of paying high taxes to a King who didn't listen..."
+                                    </div>
+</div>
+</div>
+<div class="p-4 bg-black/40">
+<div class="relative">
+<input class="w-full bg-card-dark border-white/10 rounded-xl px-4 py-3 text-sm focus:ring-primary focus:border-primary placeholder:text-white/20" placeholder="Type a test prompt..." type="text"/>
+<button class="absolute right-2 top-2 size-8 flex items-center justify-center rounded-lg bg-primary hover:opacity-90 transition-all">
+<span class="material-symbols-outlined text-sm">send</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Status Cards -->
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-card-dark p-6 rounded-xl border border-white/5 hover:border-primary/30 transition-all">
+<p class="text-white/40 text-[10px] font-bold uppercase tracking-widest mb-1">Model Status</p>
+<div class="flex items-center gap-2">
+<h4 class="text-xl font-bold">Optimized</h4>
+<span class="material-symbols-outlined text-green-500 text-sm">check_circle</span>
+</div>
+</div>
+<div class="bg-card-dark p-6 rounded-xl border border-white/5 hover:border-accent-cyan/30 transition-all">
+<p class="text-white/40 text-[10px] font-bold uppercase tracking-widest mb-1">Sync Latency</p>
+<div class="flex items-center gap-2">
+<h4 class="text-xl font-bold">120ms</h4>
+<span class="material-symbols-outlined text-accent-cyan text-sm">bolt</span>
+</div>
+</div>
+</div>
+<!-- Tip Box -->
+<div class="bg-gradient-to-br from-primary/10 to-accent-cyan/10 p-6 rounded-xl border border-white/10 relative overflow-hidden group">
+<div class="absolute -right-8 -bottom-8 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-9xl">lightbulb</span>
+</div>
+<div class="flex items-start gap-3 relative z-10">
+<span class="material-symbols-outlined text-accent-cyan mt-1">tips_and_updates</span>
+<div>
+<h5 class="text-sm font-bold text-white mb-1">Pro Tip: Tone Modulation</h5>
+<p class="text-white/60 text-xs leading-relaxed">Increasing 'Creativity' while keeping 'Strictness' high allows the AI to generate unique metaphors while staying 100% aligned with your uploaded curriculum.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer Section -->
+<footer class="mt-auto px-6 lg:px-40 py-8 border-t border-white/5 flex flex-wrap justify-between items-center gap-4 bg-background-dark">
+<div class="flex items-center gap-6">
+<p class="text-white/40 text-xs">© 2024 HydraLearn AI. All rights reserved.</p>
+<div class="flex gap-4">
+<a class="text-white/40 hover:text-white text-xs transition-colors" href="#">Documentation</a>
+<a class="text-white/40 hover:text-white text-xs transition-colors" href="#">API Status</a>
+<a class="text-white/40 hover:text-white text-xs transition-colors" href="#">Privacy</a>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-white/40 text-xs font-medium">Secure Forge Environment</span>
+<span class="material-symbols-outlined text-primary text-sm">verified_user</span>
+</div>
+</footer>
+</div>
+</div>
+</body></html>

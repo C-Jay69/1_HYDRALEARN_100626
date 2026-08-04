@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Game Show Arena | HydraLearn</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#5b13ec",
+                        "accent-cyan": "#00ffff",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#000000",
+                        "card-dark": "#2a2a2a",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .gradient-primary {
+            background: linear-gradient(135deg, #5b13ec 0%, #00ffff 100%);
+        }
+        .text-gradient {
+            background: linear-gradient(135deg, #5b13ec 0%, #00ffff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .card-hover:hover {
+            border-color: #5b13ec;
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px -10px rgba(91, 19, 236, 0.5);
+        }
+        input[type='range']::-webkit-slider-runnable-track {
+            background: #2a2a2a;
+            height: 8px;
+            border-radius: 4px;
+        }
+        input[type='range']::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 24px;
+            width: 24px;
+            border-radius: 50%;
+            background: #5b13ec;
+            margin-top: -8px;
+            cursor: pointer;
+            border: 3px solid #00ffff;
+        }
+    </style>
+</head>
+<body class="bg-background-dark font-display text-white min-h-screen">
+<!-- Navigation Bar -->
+<header class="sticky top-0 z-50 w-full border-b border-white/10 bg-black/80 backdrop-blur-md">
+<div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3">
+<img alt="HydraLearn Logo" class="h-10 w-10 rounded-lg" data-alt="HL logo with purple background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6Vzi6Y_etLW5JnnMvlZ6JOqoacmKPpZ0RpGt_6k12gnL69rjHYhDLU561VsN9GfL1ep29Cb5EASPCUlbO09vZ3uFUE6JIHztANMJ24wzk5-R7R5jV3zVBZlVcLkboDW0HyXiA8NIRDulY2G19v9Nmzn1qjQ8oJK8DxB2t4uAEr5zmHaCfSR4k04iG6LonwHQpfeOA5KMCaIoOBKA0r7mTJVNpdhOv_7XMICVoTI1GIoIshG8tfowsiOngvt-9X6AVWHjOlEZADj1L"/>
+<span class="text-2xl font-black tracking-tight uppercase">Hydra<span class="text-gradient">Learn</span></span>
+</div>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Dashboard</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Classes</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Library</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Reports</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 hover:bg-white/10 rounded-full transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="h-10 w-10 rounded-full bg-primary/20 border border-primary/50 overflow-hidden">
+<img alt="User Profile" data-alt="User profile avatar placeholder" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtyQd9rE6AMvS5RJcVyuUOFKVNbdc6y7-cjrca5cR8J1kfBk0q7PoXTIiQ1wK4E7ynvkGilkvM5iYqWTxHyArZDUWAIzHNlzU036_w52x6v3Bq_6J1h205lsyGcqBh7RFP9dvTG1GVukUs5cpDCzE9NIFEjNg3Fw3JYQPBzyxyJ6zRfKrPLX7kWPRx3ygM_tQ8o8sS3p10wTwnyiPpzYeTYhO58be1GiQlQTXpHRlucMQqeUjUHoCcSU8BX3hcmV6qjb10MZvqS8g6"/>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-7xl mx-auto px-6 py-12">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+<div>
+<h1 class="text-5xl font-black tracking-tighter mb-3">GAME SHOW <span class="text-gradient">ARENA</span></h1>
+<p class="text-gray-400 text-lg">Configure your live classroom challenge and engage your students.</p>
+</div>
+<button class="px-6 py-3 bg-card-dark border border-white/10 hover:border-primary/50 rounded-xl font-bold transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">history</span>
+                View Arena History
+            </button>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Left Column: Settings -->
+<div class="lg:col-span-1 space-y-8">
+<!-- Topic Selection -->
+<section class="bg-card-dark p-8 rounded-2xl border border-white/5 shadow-2xl">
+<div class="flex items-center gap-3 mb-6">
+<div class="h-10 w-10 rounded-lg bg-primary/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">topic</span>
+</div>
+<h2 class="text-xl font-bold">1. Choose Topic</h2>
+</div>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-gray-500">search</span>
+<select class="w-full pl-12 pr-4 py-4 bg-black border border-white/10 rounded-xl focus:border-primary focus:ring-1 focus:ring-primary appearance-none">
+<option>Select a subject...</option>
+<option>World History: The Renaissance</option>
+<option>Biology: Cellular Structure</option>
+<option>Advanced Calculus: Derivatives</option>
+<option>English Literature: Modern Classics</option>
+<option>Computer Science: Data Structures</option>
+</select>
+</div>
+<div class="mt-4 flex flex-wrap gap-2">
+<span class="px-3 py-1 bg-primary/10 border border-primary/30 rounded-full text-xs font-medium text-primary">Trending: Science</span>
+<span class="px-3 py-1 bg-primary/10 border border-primary/30 rounded-full text-xs font-medium text-primary">Trending: Math</span>
+</div>
+</section>
+<!-- Question Count -->
+<section class="bg-card-dark p-8 rounded-2xl border border-white/5 shadow-2xl">
+<div class="flex items-center gap-3 mb-6">
+<div class="h-10 w-10 rounded-lg bg-accent-cyan/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-accent-cyan">quiz</span>
+</div>
+<h2 class="text-xl font-bold">2. Question Count</h2>
+</div>
+<div class="space-y-6">
+<div class="flex justify-between items-end">
+<span class="text-sm text-gray-400">Length</span>
+<span class="text-4xl font-black text-gradient">25</span>
+</div>
+<input class="w-full appearance-none bg-transparent cursor-pointer" max="50" min="5" type="range" value="25"/>
+<div class="flex justify-between text-xs font-bold text-gray-500">
+<span>5 QUESTIONS</span>
+<span>50 QUESTIONS</span>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Game Formats -->
+<div class="lg:col-span-2">
+<section class="bg-card-dark p-8 rounded-2xl border border-white/5 shadow-2xl h-full">
+<div class="flex items-center justify-between mb-8">
+<div class="flex items-center gap-3">
+<div class="h-10 w-10 rounded-lg bg-primary/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">sports_esports</span>
+</div>
+<h2 class="text-xl font-bold">3. Select Your Game Mode</h2>
+</div>
+<span class="text-xs font-black uppercase tracking-widest text-primary bg-primary/10 px-3 py-1 rounded-full">Classic Modes</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+<!-- Jeopardy Card -->
+<button class="card-hover group flex flex-col items-start p-6 bg-black rounded-xl border border-white/10 transition-all text-left">
+<div class="h-12 w-12 rounded-lg bg-gradient-to-br from-primary to-accent-cyan flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-white">grid_view</span>
+</div>
+<h3 class="text-lg font-bold mb-2">Jeopardy</h3>
+<p class="text-sm text-gray-500 leading-relaxed">Classic grid-based trivia with category-specific point values.</p>
+</button>
+<!-- Millionaire Card -->
+<button class="card-hover group flex flex-col items-start p-6 bg-black rounded-xl border border-white/10 transition-all text-left">
+<div class="h-12 w-12 rounded-lg bg-gradient-to-br from-primary to-accent-cyan flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-white">payments</span>
+</div>
+<h3 class="text-lg font-bold mb-2">Millionaire</h3>
+<p class="text-sm text-gray-500 leading-relaxed">High-stakes ladder climb with increasing difficulty and lifelines.</p>
+</button>
+<!-- Family Feud Card -->
+<button class="card-hover group flex flex-col items-start p-6 bg-black rounded-xl border border-white/10 transition-all text-left">
+<div class="h-12 w-12 rounded-lg bg-gradient-to-br from-primary to-accent-cyan flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-white">groups</span>
+</div>
+<h3 class="text-lg font-bold mb-2">Family Feud</h3>
+<p class="text-sm text-gray-500 leading-relaxed">Survey-style competition focusing on the most popular answers.</p>
+</button>
+<!-- BlockBusters Card -->
+<button class="card-hover group flex flex-col items-start p-6 bg-black rounded-xl border border-white/10 transition-all text-left">
+<div class="h-12 w-12 rounded-lg bg-gradient-to-br from-primary to-accent-cyan flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-white">hexagon</span>
+</div>
+<h3 class="text-lg font-bold mb-2">BlockBusters</h3>
+<p class="text-sm text-gray-500 leading-relaxed">Strategic path-finding across a hexagonal board of letters.</p>
+</button>
+<!-- Countdown Card -->
+<button class="card-hover group flex flex-col items-start p-6 bg-black rounded-xl border border-white/10 transition-all text-left">
+<div class="h-12 w-12 rounded-lg bg-gradient-to-br from-primary to-accent-cyan flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-white">timer</span>
+</div>
+<h3 class="text-lg font-bold mb-2">Countdown</h3>
+<p class="text-sm text-gray-500 leading-relaxed">Fast-paced race against the clock with letters and numbers.</p>
+</button>
+<!-- Randomize Card -->
+<button class="group flex flex-col items-center justify-center p-6 bg-primary/5 rounded-xl border-2 border-dashed border-primary/30 hover:border-primary transition-all text-center">
+<span class="material-symbols-outlined text-primary text-4xl mb-2">shuffle</span>
+<h3 class="text-sm font-bold text-primary">Surprise Me</h3>
+</button>
+</div>
+<!-- Action Area -->
+<div class="mt-12 pt-8 border-t border-white/10">
+<div class="flex flex-col sm:flex-row items-center justify-between gap-6">
+<div class="flex items-center gap-4">
+<div class="p-3 rounded-full bg-white/5">
+<span class="material-symbols-outlined text-gray-400">info</span>
+</div>
+<p class="text-sm text-gray-400 max-w-xs">Students can join using the Arena Code displayed after launch.</p>
+</div>
+<button class="gradient-primary w-full sm:w-auto px-12 py-5 rounded-2xl text-white font-black text-xl tracking-tight hover:scale-105 transition-transform shadow-[0_0_30px_rgba(91,19,236,0.4)] flex items-center justify-center gap-3 group">
+                                LAUNCH ARENA
+                                <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">rocket_launch</span>
+</button>
+</div>
+</div>
+</section>
+</div>
+</div>
+</main>
+<!-- Visual Accents -->
+<div class="fixed top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/10 blur-[120px] rounded-full pointer-events-none -z-10"></div>
+<div class="fixed bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-accent-cyan/10 blur-[120px] rounded-full pointer-events-none -z-10"></div>
+</body></html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#5b13ec",
+                        "secondary-cyan": "#00f2fe",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#000000",
+                        "card-dark": "#2a2a2a",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .gradient-text {
+            background: linear-gradient(90deg, #5b13ec 0%, #00f2fe 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="bg-background-dark text-white font-display overflow-x-hidden min-h-screen">
+<div class="layout-container flex h-full grow flex-col">
+<!-- TopNavBar -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-gray-800 px-10 py-4 bg-background-dark/80 backdrop-blur-md sticky top-0 z-50">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-4 text-white">
+<div class="size-8 text-primary">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M8.57829 8.57829C5.52816 11.6284 3.451 15.5145 2.60947 19.7452C1.76794 23.9758 2.19984 28.361 3.85056 32.3462C5.50128 36.3314 8.29667 39.7376 11.8832 42.134C15.4698 44.5305 19.6865 45.8096 24 45.8096C28.3135 45.8096 32.5302 44.5305 36.1168 42.134C39.7033 39.7375 42.4987 36.3314 44.1494 32.3462C45.8002 28.361 46.2321 23.9758 45.3905 19.7452C44.549 15.5145 42.4718 11.6284 39.4217 8.57829L24 24L8.57829 8.57829Z" fill="currentColor"></path>
+</svg>
+</div>
+<h2 class="text-white text-2xl font-bold leading-tight tracking-[-0.015em]">HydraLearn</h2>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-gray-300 hover:text-white text-sm font-medium transition-colors" href="#">Teachers</a>
+<a class="text-gray-300 hover:text-white text-sm font-medium transition-colors" href="#">Students</a>
+<a class="text-gray-300 hover:text-white text-sm font-medium transition-colors" href="#">Safety</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="flex min-w-[100px] cursor-pointer items-center justify-center rounded-xl h-10 px-5 bg-primary hover:bg-primary/80 text-white text-sm font-bold transition-all">
+                    Log In
+                </button>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border border-gray-700" data-alt="User profile placeholder" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCRXwc-knfclxf1sZZcNwAlMA5bYpvYK9YExINP_lnWIAWq7AFWBengaaHc2HHzmNK8BAUo9oPZgaSHUPf8W6sa-ovveUFjVA09ECTpf8Ddd1SEgqvdaTry9bBWO1rSlyJ8r8iWur3YDsnWn50DzLP0ZUE4AnvLykA4ZqpheYfPJBKhBL0wExtIcS5KhRDAVXDBBh9nat_NBdngXN4o8bN1JsPXTmDTrVrQPw3Z-ZzZUrQQ7Nkk1K3E06qOFoVFMBD2XmvSOEUwYZGM");'></div>
+</div>
+</header>
+<main class="flex-1 max-w-6xl mx-auto px-6 py-12 w-full">
+<!-- HeadlineText -->
+<div class="mb-12 text-center">
+<h1 class="gradient-text tracking-tight text-[48px] md:text-[64px] font-bold leading-tight pb-4">How to Use HydraLearn</h1>
+<p class="text-gray-400 text-lg max-w-2xl mx-auto">Learn how to make the most of our AI tools with these simple, step-by-step guides.</p>
+</div>
+<!-- SearchBar Section -->
+<div class="max-w-xl mx-auto mb-16">
+<div class="p-1 rounded-2xl bg-gradient-to-r from-primary to-secondary-cyan">
+<div class="bg-background-dark rounded-xl px-4 py-3 flex items-center gap-3">
+<span class="material-symbols-outlined text-gray-400">search</span>
+<input class="w-full bg-transparent border-none focus:ring-0 text-white placeholder-gray-500 text-lg" placeholder="Search Help Center..." value=""/>
+</div>
+</div>
+</div>
+<!-- SectionHeader: Guides -->
+<div class="flex items-center gap-4 mb-8">
+<div class="h-px grow bg-gray-800"></div>
+<h2 class="text-white text-2xl font-bold px-4">Guides for Everyone</h2>
+<div class="h-px grow bg-gray-800"></div>
+</div>
+<!-- Step-by-step Grid (3 columns) -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-20">
+<!-- For Teachers -->
+<div class="flex flex-col gap-6">
+<div class="flex items-center gap-3 mb-2">
+<span class="material-symbols-outlined text-primary text-4xl">school</span>
+<h3 class="text-2xl font-bold">For Teachers</h3>
+</div>
+<div class="bg-card-dark p-6 rounded-xl border border-gray-800 hover:border-primary/50 transition-all group">
+<div class="size-12 rounded-full bg-primary/20 flex items-center justify-center mb-4 text-primary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">edit_note</span>
+</div>
+<h4 class="text-lg font-bold mb-2">Step 1: Pick a topic</h4>
+<p class="text-gray-400 leading-relaxed">Tell HydraLearn what you want to teach today. It can be anything from space to cooking!</p>
+</div>
+<div class="bg-card-dark p-6 rounded-xl border border-gray-800 hover:border-primary/50 transition-all group">
+<div class="size-12 rounded-full bg-primary/20 flex items-center justify-center mb-4 text-primary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">auto_fix_high</span>
+</div>
+<h4 class="text-lg font-bold mb-2">Step 2: Hit the magic button</h4>
+<p class="text-gray-400 leading-relaxed">Click "Generate" and watch the AI build your lesson, quizzes, and slides in seconds.</p>
+</div>
+</div>
+<!-- For Students -->
+<div class="flex flex-col gap-6">
+<div class="flex items-center gap-3 mb-2">
+<span class="material-symbols-outlined text-secondary-cyan text-4xl">person_search</span>
+<h3 class="text-2xl font-bold">For Students</h3>
+</div>
+<div class="bg-card-dark p-6 rounded-xl border border-gray-800 hover:border-secondary-cyan/50 transition-all group">
+<div class="size-12 rounded-full bg-secondary-cyan/20 flex items-center justify-center mb-4 text-secondary-cyan group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">question_mark</span>
+</div>
+<h4 class="text-lg font-bold mb-2">Step 1: Ask anything</h4>
+<p class="text-gray-400 leading-relaxed">Stuck on homework? Just type your question or upload a photo of your problem.</p>
+</div>
+<div class="bg-card-dark p-6 rounded-xl border border-gray-800 hover:border-secondary-cyan/50 transition-all group">
+<div class="size-12 rounded-full bg-secondary-cyan/20 flex items-center justify-center mb-4 text-secondary-cyan group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">psychology</span>
+</div>
+<h4 class="text-lg font-bold mb-2">Step 2: Get a smart guide</h4>
+<p class="text-gray-400 leading-relaxed">The AI won't just give the answer. It shows you how to solve it so you get smarter!</p>
+</div>
+</div>
+<!-- For Safety -->
+<div class="flex flex-col gap-6">
+<div class="flex items-center gap-3 mb-2">
+<span class="material-symbols-outlined text-white text-4xl">verified_user</span>
+<h3 class="text-2xl font-bold">Safety First</h3>
+</div>
+<div class="bg-card-dark p-6 rounded-xl border border-gray-800 hover:border-white/50 transition-all group">
+<div class="size-12 rounded-full bg-white/10 flex items-center justify-center mb-4 text-white group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">lock</span>
+</div>
+<h4 class="text-lg font-bold mb-2">Private &amp; Safe</h4>
+<p class="text-gray-400 leading-relaxed">We keep your data locked up tight. Only you and your teacher can see your work.</p>
+</div>
+<div class="bg-card-dark p-6 rounded-xl border border-gray-800 hover:border-white/50 transition-all group">
+<div class="size-12 rounded-full bg-white/10 flex items-center justify-center mb-4 text-white group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">security</span>
+</div>
+<h4 class="text-lg font-bold mb-2">AI Guardrails</h4>
+<p class="text-gray-400 leading-relaxed">Our AI is built specifically for schools, making sure everything stays helpful and polite.</p>
+</div>
+</div>
+</div>
+<!-- ImageGrid Replacement - Platform Overview -->
+<div class="bg-gradient-to-br from-[#2a2a2a] to-background-dark p-8 rounded-2xl border border-gray-800 mb-20">
+<h3 class="text-xl font-bold mb-6 text-center">See HydraLearn in Action</h3>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="flex flex-col gap-3">
+<div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl border border-gray-700" data-alt="Abstract interface showing lesson planning tools" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAh10Xz7DH8thBEFB4yXlbYzyCSc6ay7sd1XJhyHIpSbFWWTJIes8VG1vxy25Cjp8sguheOOikedYx8hGHXli0BN8MsfnTDQeoSwBer3y3JFCLGGIOiA-aUIlykxAMaxOYu3z2yqI_CfdUJlW7DVt3QZNV_svmtFUwfauPh0Lgqapl7Q9yB80Dwk3BZOT0n_12mURXOWFE-e0FuTfYtZMavM-5qzeor72LimaU7HMjnx-lfCapXDrByt_m8LpGWGMPqQTDADnjVh0l4");'></div>
+<p class="text-gray-300 text-sm font-medium text-center">Smart Planner</p>
+</div>
+<div class="flex flex-col gap-3">
+<div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl border border-gray-700" data-alt="Abstract interface showing student quiz progress" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAtheqvtBcHprteccUEQ4M77Y3RHZOEurF_4-yArrdxseKwvYtJq0-ENBN93VTremCJQF1UX2vBTEIe7J5fGjt1DeG3QRUv8OE0Js-Z0x52zcKIfC3NeQ5Ju66azJOX3RoNJ7uLc_GfyxCBr0fWE0R3HmfKME0cxpTUwieJXwmzWbdWvGW46mKaf1YzNnT6uEBXtU6isiNRuTTmae_4hQzuVygusn_UilOz4LmSPd2mkFMWTyJwIgkBVS6UWcS5j7_Nnntj-w8eUR9r");'></div>
+<p class="text-gray-300 text-sm font-medium text-center">Interactive Quizzes</p>
+</div>
+<div class="flex flex-col gap-3">
+<div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl border border-gray-700" data-alt="Abstract dashboard showing data privacy settings" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB0LL_R67IKRui8wIlSts9x580XMekKojghoNi40jwdcDWE3fhlL8PWfQBVeIDJa96K_-zNvPK2y0u25OBJ7605_6N4NLFY6RuZwDRckpOVBJo_j46m6JqPsL7UGJBqQYK0S4PYwhXKriToogQ3KH9jMyQHc6qOuJykvD_8Xnm0p2CRwYsVX2P4m1BafPfg00iC31c_g5t0__I8dZaU31i5YaZFOGWirMUqj7xDn4KS56MgWo1FYitOvHPQaBQgmC16SrXVHJ9k4Gip");'></div>
+<p class="text-gray-300 text-sm font-medium text-center">Safety Dashboard</p>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer Area -->
+<footer class="bg-background-dark border-t border-gray-800 py-12 px-6">
+<div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
+<div>
+<h4 class="text-lg font-bold mb-2">Still need help?</h4>
+<p class="text-gray-400">Our team is ready to answer any tricky questions you have.</p>
+</div>
+<button class="flex min-w-[200px] items-center justify-center rounded-xl h-12 px-8 border-2 border-white text-white font-bold hover:bg-white hover:text-black transition-all">
+                    Talk to a Human
+                </button>
+</div>
+<div class="max-w-6xl mx-auto mt-12 pt-8 border-t border-gray-900 text-center text-gray-600 text-sm">
+                © 2024 HydraLearn AI Platform. Making learning fun for everyone.
+            </div>
+</footer>
+</div>
+</body></html>

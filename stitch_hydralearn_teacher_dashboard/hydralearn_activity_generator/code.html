@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>HydraLearn Activity Generator</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#5b13ec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#000000",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Lexend', sans-serif;
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #a855f7, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gradient-btn {
+            background: linear-gradient(to right, #a855f7, #06b6d4);
+        }
+    </style>
+</head>
+<body class="bg-black text-white min-h-screen font-display">
+<!-- Top Navigation Bar -->
+<header class="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-md border-b border-gray-800">
+<div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3">
+<div class="size-8 text-primary">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M8.57829 8.57829C5.52816 11.6284 3.451 15.5145 2.60947 19.7452C1.76794 23.9758 2.19984 28.361 3.85056 32.3462C5.50128 36.3314 8.29667 39.7376 11.8832 42.134C15.4698 44.5305 19.6865 45.8096 24 45.8096C28.3135 45.8096 32.5302 44.5305 36.1168 42.134C39.7033 39.7375 42.4987 36.3314 44.1494 32.3462C45.8002 28.361 46.2321 23.9758 45.3905 19.7452C44.549 15.5145 42.4718 11.6284 39.4217 8.57829L24 24L8.57829 8.57829Z" fill="currentColor"></path>
+</svg>
+</div>
+<span class="text-xl font-bold tracking-tight">HydraLearn</span>
+</div>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-gray-400 hover:text-white text-sm font-medium transition-colors" href="#">Dashboard</a>
+<a class="text-white text-sm font-medium transition-colors border-b-2 border-primary pb-1" href="#">Playground</a>
+<a class="text-gray-400 hover:text-white text-sm font-medium transition-colors" href="#">Classes</a>
+<a class="text-gray-400 hover:text-white text-sm font-medium transition-colors" href="#">Library</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-lg">search</span>
+<input class="bg-gray-900 border-none rounded-xl pl-10 pr-4 py-2 text-sm focus:ring-1 focus:ring-primary w-64" placeholder="Search activities..." type="text"/>
+</div>
+<button class="p-2 hover:bg-gray-800 rounded-xl transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="h-8 w-8 rounded-full bg-primary/30 border border-primary/50 flex items-center justify-center overflow-hidden">
+<img alt="User avatar" class="w-full h-full object-cover" data-alt="Teacher profile picture icon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDb_j9lXjkk41iPVAm134sGnLlwMavnseFcTMcZwe72vkGlKolJ66baNy77gA0sS8RBo-jDsGCiiWr5DCfIC6v_wURWlubWL3_nG_vwWdrzvuEzA1uzWrXLKoksBSnciEOqT1K6NAUIXQMNzqlGVzyOMj0k_uJwcXbntRBtMj_-Fn4ACC1tC5aYwtPYSIRiq7HtpaogIJ--v00d2DStuJr9_fxQwozdgknr76zCPrL0E4P7Nw8kPnnQN5y14cbW8UIRduKVHc1n02NS"/>
+</div>
+</div>
+</div>
+</header>
+<main class="pt-24 pb-12 px-6 max-w-7xl mx-auto">
+<!-- Hero Header -->
+<div class="mb-10">
+<h1 class="text-5xl lg:text-6xl font-black gradient-text tracking-tight pb-2">
+                Activity Playground
+            </h1>
+<p class="text-gray-400 mt-2 text-lg">Configure your AI-powered lesson with real-time Generation.</p>
+</div>
+<div class="grid lg:grid-cols-2 gap-8 items-start">
+<!-- Left: Configuration Card -->
+<section class="bg-[#2a2a2a] rounded-xl border border-gray-800 p-8 shadow-2xl">
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-cyan-400">settings</span>
+<h2 class="text-2xl font-bold">Activity Configuration</h2>
+</div>
+<!-- Activity Type -->
+<div class="space-y-4 mb-8">
+<label class="text-sm font-semibold text-gray-400 uppercase tracking-wider">Select Activity Type</label>
+<div class="flex bg-black/40 p-1.5 rounded-xl border border-gray-700">
+<label class="flex-1 cursor-pointer">
+<input checked="" class="hidden peer" name="type" type="radio"/>
+<div class="py-2.5 text-center rounded-lg peer-checked:bg-primary peer-checked:text-white text-gray-500 font-medium transition-all">Quiz</div>
+</label>
+<label class="flex-1 cursor-pointer">
+<input class="hidden peer" name="type" type="radio"/>
+<div class="py-2.5 text-center rounded-lg peer-checked:bg-primary peer-checked:text-white text-gray-500 font-medium transition-all">Meme Battle</div>
+</label>
+<label class="flex-1 cursor-pointer">
+<input class="hidden peer" name="type" type="radio"/>
+<div class="py-2.5 text-center rounded-lg peer-checked:bg-primary peer-checked:text-white text-gray-500 font-medium transition-all">Scavenger</div>
+</label>
+</div>
+</div>
+<!-- Humor Level Slider -->
+<div class="space-y-4 mb-8">
+<div class="flex justify-between items-center">
+<label class="text-sm font-semibold text-gray-400 uppercase tracking-wider">AI Humor Intensity</label>
+<span class="text-cyan-400 text-xs font-bold bg-cyan-400/10 px-2 py-0.5 rounded-full border border-cyan-400/20">CHAOTIC / GEN-Z</span>
+</div>
+<div class="relative flex items-center h-8">
+<div class="w-full h-1.5 bg-gray-700 rounded-full overflow-hidden">
+<div class="h-full w-3/4 gradient-btn"></div>
+</div>
+<div class="absolute left-3/4 -translate-x-1/2 w-5 h-5 bg-white rounded-full shadow-lg border-2 border-primary cursor-pointer"></div>
+</div>
+<div class="flex justify-between text-xs text-gray-500 font-medium">
+<span>Dry/Academic</span>
+<span>Balanced</span>
+<span>Pure Chaos</span>
+</div>
+</div>
+<!-- Gamification Checkboxes -->
+<div class="space-y-4 mb-10">
+<label class="text-sm font-semibold text-gray-400 uppercase tracking-wider">Gamification Settings</label>
+<div class="grid gap-3">
+<label class="flex items-center justify-between p-4 bg-black/20 border border-gray-700 rounded-xl cursor-pointer hover:border-primary/50 transition-colors">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">leaderboard</span>
+<div>
+<p class="font-medium">Real-time Leaderboard</p>
+<p class="text-xs text-gray-500">Enable competitive scoring</p>
+</div>
+</div>
+<input checked="" class="w-5 h-5 rounded border-gray-600 bg-gray-800 text-primary focus:ring-primary" type="checkbox"/>
+</label>
+<label class="flex items-center justify-between p-4 bg-black/20 border border-gray-700 rounded-xl cursor-pointer hover:border-primary/50 transition-colors">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">military_tech</span>
+<div>
+<p class="font-medium">Badge Rewards</p>
+<p class="text-xs text-gray-500">Auto-assign digital achievements</p>
+</div>
+</div>
+<input checked="" class="w-5 h-5 rounded border-gray-600 bg-gray-800 text-primary focus:ring-primary" type="checkbox"/>
+</label>
+</div>
+</div>
+<!-- Action Button -->
+<button class="w-full py-4 rounded-xl gradient-btn text-white font-bold text-lg shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">rocket_launch</span>
+                    Launch to Classroom
+                </button>
+</section>
+<!-- Right: Live Preview Area -->
+<section class="lg:sticky lg:top-24 space-y-6">
+<div class="flex items-center justify-between px-2">
+<div class="flex items-center gap-2">
+<span class="flex h-2 w-2 rounded-full bg-cyan-400 animate-pulse"></span>
+<h3 class="text-sm font-bold text-gray-400 uppercase tracking-widest">Live Generation Preview</h3>
+</div>
+<button class="text-xs font-bold text-primary hover:text-white transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">refresh</span>
+                        Regenerate
+                    </button>
+</div>
+<div class="bg-gray-900 rounded-xl border border-gray-800 p-8 min-h-[500px] flex flex-col shadow-2xl relative overflow-hidden">
+<!-- Subtle pattern background -->
+<div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(circle at 2px 2px, #5b13ec 1px, transparent 0); background-size: 24px 24px;"></div>
+<!-- Question Area -->
+<div class="relative z-10 space-y-6">
+<div class="space-y-2">
+<span class="text-xs font-bold text-primary bg-primary/10 px-2 py-1 rounded">QUESTION #04</span>
+<h4 class="text-2xl font-bold leading-tight">If you divide a pizza by zero, what's the most likely outcome?</h4>
+</div>
+<!-- Meme Placeholder -->
+<div class="aspect-video bg-black/60 rounded-xl border border-dashed border-gray-700 flex flex-col items-center justify-center text-gray-500 gap-4 group">
+<div class="relative">
+<span class="material-symbols-outlined text-6xl text-gray-700 group-hover:text-primary transition-colors">image</span>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="material-symbols-outlined animate-spin text-primary">sync</span>
+</div>
+</div>
+<div class="text-center">
+<p class="text-sm font-medium">Generating Meme...</p>
+<p class="text-xs text-gray-600">Level: Chaotic/Gen-Z</p>
+</div>
+</div>
+<!-- Options -->
+<div class="grid gap-3">
+<div class="group flex items-center gap-4 p-4 bg-gray-800/50 border border-gray-700 rounded-lg hover:border-cyan-400 transition-all cursor-pointer">
+<div class="w-8 h-8 rounded-full border-2 border-gray-600 flex items-center justify-center text-sm font-bold group-hover:border-cyan-400 group-hover:text-cyan-400">A</div>
+<span class="font-medium">Universal heat death (No pizza for you)</span>
+</div>
+<div class="group flex items-center gap-4 p-4 bg-gray-800/50 border border-gray-700 rounded-lg hover:border-cyan-400 transition-all cursor-pointer">
+<div class="w-8 h-8 rounded-full border-2 border-gray-600 flex items-center justify-center text-sm font-bold group-hover:border-cyan-400 group-hover:text-cyan-400">B</div>
+<span class="font-medium">The pizza starts speaking in binary</span>
+</div>
+<div class="group flex items-center gap-4 p-4 bg-gray-800/50 border border-gray-700 rounded-lg hover:border-cyan-400 transition-all cursor-pointer">
+<div class="w-8 h-8 rounded-full border-2 border-gray-600 flex items-center justify-center text-sm font-bold group-hover:border-cyan-400 group-hover:text-cyan-400">C</div>
+<span class="font-medium">You transcend humanity and become a slice</span>
+</div>
+</div>
+</div>
+<!-- Preview Footer -->
+<div class="mt-auto pt-8 flex items-center justify-between relative z-10">
+<div class="flex -space-x-2">
+<div class="w-6 h-6 rounded-full border-2 border-gray-900 bg-purple-500"></div>
+<div class="w-6 h-6 rounded-full border-2 border-gray-900 bg-cyan-500"></div>
+<div class="w-6 h-6 rounded-full border-2 border-gray-900 bg-pink-500"></div>
+</div>
+<span class="text-[10px] text-gray-500 font-bold uppercase tracking-tighter">Live Preview: Student Mode</span>
+</div>
+</div>
+<!-- Quick Stats -->
+<div class="grid grid-cols-3 gap-4">
+<div class="bg-[#1a1a1a] p-4 rounded-xl border border-gray-800">
+<p class="text-[10px] text-gray-500 font-bold uppercase mb-1">Estimated Time</p>
+<p class="text-lg font-bold">12 Min</p>
+</div>
+<div class="bg-[#1a1a1a] p-4 rounded-xl border border-gray-800">
+<p class="text-[10px] text-gray-500 font-bold uppercase mb-1">Difficulty</p>
+<div class="flex gap-0.5">
+<span class="w-3 h-1.5 bg-primary rounded-full"></span>
+<span class="w-3 h-1.5 bg-primary rounded-full"></span>
+<span class="w-3 h-1.5 bg-gray-700 rounded-full"></span>
+</div>
+</div>
+<div class="bg-[#1a1a1a] p-4 rounded-xl border border-gray-800">
+<p class="text-[10px] text-gray-500 font-bold uppercase mb-1">Engagement</p>
+<p class="text-lg font-bold text-cyan-400">High 🔥</p>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Global Footer Branding -->
+<footer class="mt-12 py-8 border-t border-gray-900">
+<div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4 text-gray-600 text-sm">
+<p>© 2024 HydraLearn AI Platform. All rights reserved.</p>
+<div class="flex gap-6">
+<a class="hover:text-gray-400" href="#">Terms of Service</a>
+<a class="hover:text-gray-400" href="#">Privacy Policy</a>
+<a class="hover:text-gray-400" href="#">Support</a>
+</div>
+</div>
+</footer>
+</body></html>

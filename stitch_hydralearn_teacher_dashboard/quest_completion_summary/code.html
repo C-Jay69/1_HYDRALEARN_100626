@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Quest Complete - HydraLearn</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#5b13ec",
+                        "accent": "#00f2ff",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#0a0812",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .tech-grid {
+            background-image: 
+                linear-gradient(to right, rgba(91, 19, 236, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(91, 19, 236, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+        .glow-purple {
+            box-shadow: 0 0 20px rgba(91, 19, 236, 0.3);
+        }
+        .glow-cyan {
+            box-shadow: 0 0 20px rgba(0, 242, 255, 0.2);
+        }
+        .bg-glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-white min-h-screen selection:bg-primary/30">
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden tech-grid">
+<!-- Navigation Header -->
+<header class="flex items-center justify-between px-6 py-4 lg:px-20 border-b border-white/10 bg-background-dark/80 backdrop-blur-md sticky top-0 z-50">
+<div class="flex items-center gap-3">
+<div class="size-10 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-2xl">electric_bolt</span>
+</div>
+<h2 class="text-xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white to-white/70">HydraLearn</h2>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-xl bg-white/5 hover:bg-white/10 transition-colors border border-white/10">
+<span class="material-symbols-outlined text-white">notifications</span>
+</button>
+<div class="flex items-center gap-3 pl-4 border-l border-white/10">
+<div class="text-right hidden sm:block">
+<p class="text-xs text-white/50 uppercase tracking-widest font-bold">Forge Master</p>
+<p class="text-sm font-semibold">Level 14</p>
+</div>
+<div class="size-10 rounded-full border-2 border-primary overflow-hidden">
+<img alt="Student avatar" class="w-full h-full object-cover" data-alt="Portrait of a young male student smiling" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDap25C5jRnrG1ap7e98JodSfL7UBaGEiarwD517a1vowpSbMZ8mAk3f6DyUMy9EN2q9mo5_SVeiCf48O4NkUsvoo2qQb-MEXXeUrQIcQJ8kQ74dbzzkRrwnszltNk874W5RVHqBzHR7KPS8u6PG2BPBaF-JvGhirfFjDz_x8NX3xkwC1aVq9QaXIHrs6PXD0L8UHWd7V7Tid6jLmoNFOqisvafF36reGY2l1hPmslB3lBX_tGERob5_ao-RAqRJ537aE4l3zU9VLAH"/>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-1 flex flex-col items-center justify-center p-6 lg:p-12 max-w-5xl mx-auto w-full gap-12">
+<!-- Hero Section -->
+<div class="text-center space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-700">
+<div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/20 border border-primary/30 text-primary text-sm font-bold uppercase tracking-widest mb-4">
+<span class="material-symbols-outlined text-sm">verified</span>
+                    Quest Complete
+                </div>
+<h1 class="text-5xl lg:text-7xl font-black tracking-tighter italic uppercase text-white drop-shadow-2xl">
+                    Recursive Rift <span class="bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">Mastery</span>
+</h1>
+<p class="text-white/60 text-lg max-w-2xl mx-auto">
+                    You've successfully stabilized the temporal loops of the Recursive Rift. Your logical prowess has grown exponentially.
+                </p>
+</div>
+<!-- Main Reward Card -->
+<div class="w-full grid lg:grid-cols-2 gap-8 items-stretch">
+<!-- Badge & XP Display -->
+<div class="bg-glass rounded-xl p-8 flex flex-col items-center justify-center relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-b from-primary/10 to-transparent opacity-50"></div>
+<!-- Glow effect behind badge -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-primary/20 rounded-full blur-3xl"></div>
+<div class="relative z-10 text-center space-y-6">
+<div class="relative inline-block">
+<div class="size-48 rounded-full bg-gradient-to-br from-[#1a152e] to-[#0a0812] border-4 border-primary/50 flex items-center justify-center glow-purple">
+<span class="material-symbols-outlined text-8xl text-accent group-hover:scale-110 transition-transform duration-500" style="font-variation-settings: 'FILL' 1">hub</span>
+</div>
+<div class="absolute -bottom-2 -right-2 bg-accent text-background-dark text-xs font-black px-3 py-1 rounded-full uppercase tracking-tighter">New Badge</div>
+</div>
+<div class="space-y-1">
+<h3 class="text-2xl font-bold">Logic Hydra</h3>
+<p class="text-accent font-medium tracking-widest text-sm uppercase">Collection Added</p>
+</div>
+<div class="flex items-center gap-4 bg-white/5 border border-white/10 px-6 py-3 rounded-xl">
+<span class="material-symbols-outlined text-primary">add_circle</span>
+<span class="text-3xl font-black tracking-tight text-white">+250 XP</span>
+</div>
+</div>
+</div>
+<!-- Stats & Objectives -->
+<div class="flex flex-col gap-6">
+<!-- Stats Grid -->
+<div class="grid grid-cols-3 gap-4">
+<div class="bg-glass p-4 rounded-xl border-t border-white/10 flex flex-col items-center text-center">
+<span class="material-symbols-outlined text-primary mb-2">timer</span>
+<p class="text-[10px] text-white/50 uppercase font-bold tracking-widest">Time Spent</p>
+<p class="text-xl font-bold">12:45</p>
+</div>
+<div class="bg-glass p-4 rounded-xl border-t border-white/10 flex flex-col items-center text-center">
+<span class="material-symbols-outlined text-accent mb-2">bolt</span>
+<p class="text-[10px] text-white/50 uppercase font-bold tracking-widest">Accuracy</p>
+<p class="text-xl font-bold text-accent">95%</p>
+</div>
+<div class="bg-glass p-4 rounded-xl border-t border-white/10 flex flex-col items-center text-center">
+<span class="material-symbols-outlined text-primary mb-2">workspace_premium</span>
+<p class="text-[10px] text-white/50 uppercase font-bold tracking-widest">Streak</p>
+<p class="text-xl font-bold">15 Qs</p>
+</div>
+</div>
+<!-- Mastered Objectives -->
+<div class="bg-glass p-6 rounded-xl flex-1 flex flex-col gap-4">
+<h4 class="text-sm font-bold uppercase tracking-widest text-white/70 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">checklist</span>
+                            Mastered Objectives
+                        </h4>
+<ul class="space-y-3">
+<li class="flex items-center gap-3 bg-white/5 p-3 rounded-lg border border-white/10">
+<div class="size-6 rounded-full bg-primary/20 text-primary flex items-center justify-center border border-primary/30">
+<span class="material-symbols-outlined text-xs">check</span>
+</div>
+<span class="text-sm font-medium">Recursive Base Cases identified</span>
+</li>
+<li class="flex items-center gap-3 bg-white/5 p-3 rounded-lg border border-white/10">
+<div class="size-6 rounded-full bg-primary/20 text-primary flex items-center justify-center border border-primary/30">
+<span class="material-symbols-outlined text-xs">check</span>
+</div>
+<span class="text-sm font-medium">Stack Depth Management optimized</span>
+</li>
+<li class="flex items-center gap-3 bg-white/5 p-3 rounded-lg border border-white/10">
+<div class="size-6 rounded-full bg-primary/20 text-primary flex items-center justify-center border border-primary/30">
+<span class="material-symbols-outlined text-xs">check</span>
+</div>
+<span class="text-sm font-medium">Tail Call Optimization implemented</span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<!-- Actions -->
+<div class="w-full flex flex-col sm:flex-row gap-4 items-center justify-center pt-8 border-t border-white/5">
+<button class="w-full sm:w-auto px-10 py-4 bg-primary hover:bg-primary/90 rounded-xl font-bold text-lg flex items-center justify-center gap-3 transition-all transform hover:scale-105 glow-purple group">
+                    Continue to Adventure Map
+                    <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">map</span>
+</button>
+<button class="w-full sm:w-auto px-10 py-4 bg-transparent border-2 border-white/20 hover:border-white/40 hover:bg-white/5 rounded-xl font-bold text-lg flex items-center justify-center gap-3 transition-all">
+                    Review Lesson
+                    <span class="material-symbols-outlined">history_edu</span>
+</button>
+</div>
+</main>
+<!-- Background Decorative Elements -->
+<div class="fixed top-0 left-0 w-full h-full pointer-events-none -z-10 overflow-hidden">
+<div class="absolute top-1/4 -left-20 size-[500px] bg-primary/5 rounded-full blur-[120px]"></div>
+<div class="absolute bottom-1/4 -right-20 size-[500px] bg-accent/5 rounded-full blur-[120px]"></div>
+</div>
+<!-- Bottom Banner -->
+<footer class="mt-auto px-6 py-8 text-center border-t border-white/5 bg-black/40">
+<p class="text-white/30 text-xs uppercase tracking-widest font-medium">© 2024 HydraLearn Forge. Secure Neural Connection Active.</p>
+</footer>
+</div>
+</body></html>

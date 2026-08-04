@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>HydraLearn | Education with Bite</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Plus+Jakarta+Sans:wght@700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#8b5cf6",
+                        "background-light": "#f8fafc",
+                        "background-dark": "#0a0a0a",
+                    },
+                    fontFamily: {
+                        sans: ["Inter", "sans-serif"],
+                        display: ["Plus Jakarta Sans", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.75rem",
+                    },
+                },
+            },
+        };
+    </script>
+<style>
+        .gradient-text {
+            background: linear-gradient(135deg, #a855f7 0%, #06b6d4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gradient-border {
+            position: relative;
+        }
+        .gradient-border::after {
+            content: "";
+            position: absolute;
+            inset: -1px;
+            background: linear-gradient(135deg, #a855f7, #06b6d4);
+            border-radius: inherit;
+            z-index: -1;
+            opacity: 0.3;
+        }
+        .grid-bg {
+            background-image: radial-gradient(circle at 2px 2px, rgba(255,255,255,0.05) 1px, transparent 0);
+            background-size: 40px 40px;
+        }
+        .light .grid-bg {
+            background-image: radial-gradient(circle at 2px 2px, rgba(0,0,0,0.05) 1px, transparent 0);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-sans transition-colors duration-300">
+<nav class="fixed w-full z-50 top-0 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between h-20 items-center">
+<div class="flex items-center gap-2">
+<div class="w-10 h-10 rounded-lg bg-gradient-to-br from-purple-500 to-cyan-500 flex items-center justify-center text-white shadow-lg shadow-purple-500/20">
+<span class="material-icons-round text-2xl">school</span>
+</div>
+<span class="text-2xl font-display font-extrabold tracking-tight">Hydra<span class="gradient-text">Learn</span></span>
+</div>
+<div class="hidden md:flex items-center space-x-8 font-medium">
+<a class="hover:text-primary transition-colors" href="#">Platform</a>
+<a class="hover:text-primary transition-colors" href="#">Solutions</a>
+<a class="hover:text-primary transition-colors" href="#">Resources</a>
+<a class="hover:text-primary transition-colors" href="#">Pricing</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" id="theme-toggle">
+<span class="material-icons-round dark:hidden">dark_mode</span>
+<span class="material-icons-round hidden dark:block">light_mode</span>
+</button>
+<button class="bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 px-6 py-2.5 rounded-full font-semibold hover:opacity-90 transition-opacity">
+                        Sign In
+                    </button>
+</div>
+</div>
+</div>
+</nav>
+<section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden grid-bg">
+<div class="absolute top-0 right-0 -z-10 w-1/2 h-full opacity-20 pointer-events-none">
+<div class="absolute top-1/4 right-0 w-96 h-96 bg-purple-500 rounded-full blur-[128px]"></div>
+<div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyan-500 rounded-full blur-[128px]"></div>
+</div>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+<div class="grid lg:grid-cols-2 gap-16 items-center">
+<div>
+<span class="inline-flex items-center px-4 py-1.5 rounded-full text-sm font-semibold bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 mb-6">
+<span class="material-icons-round text-base mr-2">auto_awesome</span>
+                        AI-Powered Future of Learning
+                    </span>
+<h1 class="text-5xl lg:text-7xl font-display font-extrabold leading-tight mb-8">
+                        Education <br/>
+<span class="gradient-text italic">with Bite.</span>
+</h1>
+<p class="text-lg lg:text-xl text-slate-600 dark:text-slate-400 mb-10 max-w-lg leading-relaxed">
+                        Unleash the multi-headed power of AI in your classroom. Personalized learning for students, streamlined workflows for teachers, and deep insights for admins.
+                    </p>
+<div class="flex flex-col sm:flex-row gap-4">
+<button class="px-8 py-4 bg-gradient-to-r from-purple-500 to-cyan-500 text-white rounded-xl font-bold text-lg shadow-xl shadow-purple-500/25 hover:scale-105 transition-transform">
+                            Join the Forge
+                        </button>
+<button class="px-8 py-4 border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-900 rounded-xl font-bold text-lg transition-colors flex items-center justify-center gap-2">
+<span class="material-icons-round">play_circle</span>
+                            See how it works
+                        </button>
+</div>
+</div>
+<div class="relative group">
+<div class="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-cyan-500/20 blur-3xl rounded-full scale-75 group-hover:scale-100 transition-transform duration-700"></div>
+<img alt="HydraLearn Isometric Logo" class="relative w-full h-auto drop-shadow-2xl animate-float" src="{{DATA:IMAGE:IMAGE_7}}" style="animation: float 6s ease-in-out infinite;"/>
+</div>
+</div>
+</div>
+</section>
+<section class="py-12 border-y border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/20 backdrop-blur-sm">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<p class="text-center text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-8">Trusted by Educators Worldwide</p>
+<div class="flex flex-wrap justify-center items-center gap-12 opacity-50 grayscale hover:grayscale-0 transition-all">
+<div class="flex items-center gap-2">
+<span class="material-icons-round text-3xl">account_balance</span>
+<span class="text-xl font-bold font-display">University of Oxford</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-icons-round text-3xl">architecture</span>
+<span class="text-xl font-bold font-display">MIT Edu</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-icons-round text-3xl">science</span>
+<span class="text-xl font-bold font-display">Stanford Tech</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-icons-round text-3xl">public</span>
+<span class="text-xl font-bold font-display">Global Schools</span>
+</div>
+</div>
+</div>
+</section>
+<section class="py-24 relative">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center mb-16">
+<h2 class="text-4xl font-display font-bold mb-4">A Triple-Headed Solution</h2>
+<p class="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto text-lg">Powerful tools designed specifically for every stakeholder in the modern educational ecosystem.</p>
+</div>
+<div class="grid md:grid-cols-3 gap-8">
+<div class="group p-8 rounded-2xl bg-white dark:bg-[#2a2a2a] border border-slate-200 dark:border-slate-800 hover:border-purple-500/50 transition-all duration-300 hover:shadow-2xl hover:shadow-purple-500/10">
+<div class="w-16 h-16 rounded-2xl bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center text-purple-600 dark:text-purple-400 mb-6 group-hover:scale-110 transition-transform">
+<span class="material-icons-round text-3xl">rocket_launch</span>
+</div>
+<h3 class="text-2xl font-display font-bold mb-4">Learn</h3>
+<p class="text-slate-600 dark:text-slate-400 mb-6 leading-relaxed">
+                        Adaptive AI tutors that understand your pace. Mastery-based learning paths designed to keep students engaged and thriving.
+                    </p>
+<ul class="space-y-3 text-sm font-medium text-slate-500 dark:text-slate-300">
+<li class="flex items-center gap-2"><span class="material-icons-round text-cyan-500 text-sm">check_circle</span> 24/7 Personal AI Tutor</li>
+<li class="flex items-center gap-2"><span class="material-icons-round text-cyan-500 text-sm">check_circle</span> Interactive Study Quests</li>
+</ul>
+</div>
+<div class="group p-8 rounded-2xl bg-white dark:bg-[#2a2a2a] border border-slate-200 dark:border-slate-800 hover:border-cyan-500/50 transition-all duration-300 hover:shadow-2xl hover:shadow-cyan-500/10">
+<div class="w-16 h-16 rounded-2xl bg-cyan-100 dark:bg-cyan-900/30 flex items-center justify-center text-cyan-600 dark:text-cyan-400 mb-6 group-hover:scale-110 transition-transform">
+<span class="material-icons-round text-3xl">insights</span>
+</div>
+<h3 class="text-2xl font-display font-bold mb-4">Manage</h3>
+<p class="text-slate-600 dark:text-slate-400 mb-6 leading-relaxed">
+                        Empower teachers with AI grading assistants and real-time intervention dashboards. Spend more time teaching, less time tracking.
+                    </p>
+<ul class="space-y-3 text-sm font-medium text-slate-500 dark:text-slate-300">
+<li class="flex items-center gap-2"><span class="material-icons-round text-purple-500 text-sm">check_circle</span> Auto-Grading &amp; Feedback</li>
+<li class="flex items-center gap-2"><span class="material-icons-round text-purple-500 text-sm">check_circle</span> Class Health Analytics</li>
+</ul>
+</div>
+<div class="group p-8 rounded-2xl bg-white dark:bg-[#2a2a2a] border border-slate-200 dark:border-slate-800 hover:border-indigo-500/50 transition-all duration-300 hover:shadow-2xl hover:shadow-indigo-500/10">
+<div class="w-16 h-16 rounded-2xl bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center text-indigo-600 dark:text-indigo-400 mb-6 group-hover:scale-110 transition-transform">
+<span class="material-icons-round text-3xl">shield_locked</span>
+</div>
+<h3 class="text-2xl font-display font-bold mb-4">Protect</h3>
+<p class="text-slate-600 dark:text-slate-400 mb-6 leading-relaxed">
+                        Enterprise-grade data security and AI ethics frameworks. We ensure your institution's data remains private and compliant.
+                    </p>
+<ul class="space-y-3 text-sm font-medium text-slate-500 dark:text-slate-300">
+<li class="flex items-center gap-2"><span class="material-icons-round text-indigo-500 text-sm">check_circle</span> FERPA/GDPR Compliant</li>
+<li class="flex items-center gap-2"><span class="material-icons-round text-indigo-500 text-sm">check_circle</span> Ethical AI Safeguards</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<footer class="bg-slate-100 dark:bg-[#0f0f0f] pt-20 pb-10 border-t border-slate-200 dark:border-slate-800">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="grid md:grid-cols-4 gap-12 mb-16">
+<div class="col-span-1 md:col-span-1">
+<div class="flex items-center gap-2 mb-6">
+<div class="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500 to-cyan-500 flex items-center justify-center text-white">
+<span class="material-icons-round text-xl">school</span>
+</div>
+<span class="text-xl font-display font-extrabold">HydraLearn</span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 mb-6">Revolutionizing education through the lens of ethical and powerful AI technology.</p>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center hover:bg-primary hover:text-white transition-colors" href="#">
+<span class="material-icons-round text-lg">facebook</span>
+</a>
+<a class="w-10 h-10 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center hover:bg-primary hover:text-white transition-colors" href="#">
+<span class="material-icons-round text-lg">alternate_email</span>
+</a>
+</div>
+</div>
+<div>
+<h4 class="font-bold mb-6 uppercase text-sm tracking-widest text-slate-400">Platform</h4>
+<ul class="space-y-4 text-slate-600 dark:text-slate-400">
+<li><a class="hover:text-primary transition-colors" href="#">How it works</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">For Teachers</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">For Students</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">For Admins</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold mb-6 uppercase text-sm tracking-widest text-slate-400">Company</h4>
+<ul class="space-y-4 text-slate-600 dark:text-slate-400">
+<li><a class="hover:text-primary transition-colors" href="#">About Us</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Careers</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Contact</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Press Kit</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold mb-6 uppercase text-sm tracking-widest text-slate-400">Join our Newsletter</h4>
+<p class="text-sm text-slate-500 dark:text-slate-400 mb-4">Stay updated with the latest in AI ed-tech.</p>
+<form class="flex flex-col gap-2">
+<input class="bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 focus:ring-primary focus:border-primary" placeholder="you@university.edu" type="email"/>
+<button class="bg-primary text-white py-3 rounded-xl font-bold hover:bg-opacity-90 transition-colors">Subscribe</button>
+</form>
+</div>
+</div>
+<div class="pt-8 border-t border-slate-200 dark:border-slate-800 flex flex-col md:row items-center justify-between gap-4 text-sm text-slate-500">
+<p>© 2024 HydraLearn AI Inc. All rights reserved.</p>
+<div class="flex gap-8">
+<a class="hover:text-primary" href="#">Privacy Policy</a>
+<a class="hover:text-primary" href="#">Terms of Service</a>
+</div>
+</div>
+</div>
+</footer>
+<style>
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+    </style>
+<script>
+        const themeToggle = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+        themeToggle.addEventListener('click', () => {
+            html.classList.toggle('dark');
+        });
+        // Add intersection observer for reveal animations
+        const observerOptions = {
+            threshold: 0.1
+        };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-10');
+                }
+            });
+        }, observerOptions);
+        document.querySelectorAll('.group').forEach(el => {
+            el.classList.add('transition-all', 'duration-700', 'opacity-0', 'translate-y-10');
+            observer.observe(el);
+        });
+    </script>
+</body></html>

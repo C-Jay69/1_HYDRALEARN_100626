@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#5b13ec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#161022",
+                        "forge-dark": "#0a0a0c",
+                        "forge-card": "#2a2a2a",
+                        "cyan-accent": "#06b6d4",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            font-family: 'Lexend', sans-serif;
+            overflow-x: hidden;
+        }
+        .glow-purple { box-shadow: 0 0 25px -5px rgba(91, 19, 236, 0.4); }
+        .glow-cyan { box-shadow: 0 0 25px -5px rgba(6, 182, 212, 0.4); }
+        .forge-gradient-text {
+            background: linear-gradient(to right, #5b13ec, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .forge-radial-bg {
+            background: radial-gradient(circle at center, rgba(91, 19, 236, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
+        }
+    </style>
+</head>
+<body class="font-display">
+<!-- Ambient Background Glows -->
+<div class="fixed top-0 left-0 w-full h-full pointer-events-none overflow-hidden -z-10">
+<div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/20 blur-[120px] rounded-full"></div>
+<div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-cyan-500/10 blur-[120px] rounded-full"></div>
+</div>
+<div class="min-h-screen flex flex-col max-w-7xl mx-auto px-6 py-8">
+<!-- Header Navigation -->
+<header class="flex justify-between items-center mb-10 border-b border-white/10 pb-6">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-gradient-to-br from-primary to-cyan-accent rounded-lg flex items-center justify-center">
+<span class="material-icons text-white">bolt</span>
+</div>
+<div>
+<h1 class="text-2xl font-extrabold tracking-tight forge-gradient-text">HYDRAFORGE</h1>
+<p class="text-[10px] text-white/50 tracking-[0.2em] uppercase">Advanced Item Synthesis</p>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="bg-forge-card rounded-lg px-4 py-2 border border-white/5 flex items-center gap-3">
+<span class="text-xs text-white/60">CURRENT TIER</span>
+<span class="text-cyan-accent font-bold">LEGENDARY IV</span>
+</div>
+<button class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/5 transition-colors">
+<span class="material-icons text-sm">settings</span>
+</button>
+</div>
+</header>
+<!-- Main Workspace -->
+<main class="grid grid-cols-12 gap-8 flex-grow">
+<!-- Materials Sidebar (Left) -->
+<aside class="col-span-3 space-y-4">
+<h3 class="text-sm font-semibold text-white/70 uppercase tracking-widest mb-4 flex items-center gap-2">
+<span class="material-icons text-xs">inventory_2</span> Components
+                </h3>
+<div class="space-y-3 overflow-y-auto max-h-[60vh] pr-2 custom-scrollbar">
+<!-- Material Item -->
+<div class="bg-forge-card p-4 rounded-lg border border-white/5 hover:border-primary/50 transition-all group cursor-pointer">
+<div class="flex items-center justify-between mb-3">
+<div class="w-10 h-10 bg-primary/20 rounded border border-primary/30 flex items-center justify-center text-primary">
+<span class="material-icons">layers</span>
+</div>
+<span class="text-xs font-bold text-primary">x24</span>
+</div>
+<h4 class="text-sm font-medium text-white group-hover:text-primary transition-colors">Hydra Scrap</h4>
+<p class="text-[10px] text-white/40 mt-1">Found in collapsed data nodes.</p>
+</div>
+<div class="bg-forge-card p-4 rounded-lg border border-white/5 hover:border-cyan-accent/50 transition-all group cursor-pointer">
+<div class="flex items-center justify-between mb-3">
+<div class="w-10 h-10 bg-cyan-accent/20 rounded border border-cyan-accent/30 flex items-center justify-center text-cyan-accent">
+<span class="material-icons">memory</span>
+</div>
+<span class="text-xs font-bold text-cyan-accent">x08</span>
+</div>
+<h4 class="text-sm font-medium text-white group-hover:text-cyan-accent transition-colors">Logic Cores</h4>
+<p class="text-[10px] text-white/40 mt-1">Refined algorithmic intelligence.</p>
+</div>
+<div class="bg-forge-card p-4 rounded-lg border border-white/5 hover:border-purple-400/50 transition-all group cursor-pointer">
+<div class="flex items-center justify-between mb-3">
+<div class="w-10 h-10 bg-purple-500/20 rounded border border-purple-500/30 flex items-center justify-center text-purple-400">
+<span class="material-icons">auto_awesome</span>
+</div>
+<span class="text-xs font-bold text-purple-400">x03</span>
+</div>
+<h4 class="text-sm font-medium text-white group-hover:text-purple-400 transition-colors">Digital Essence</h4>
+<p class="text-[10px] text-white/40 mt-1">The soul of the mainframe.</p>
+</div>
+<div class="bg-forge-card p-4 rounded-lg border border-white/5 opacity-50 grayscale">
+<div class="flex items-center justify-between mb-3">
+<div class="w-10 h-10 bg-white/10 rounded flex items-center justify-center text-white/30">
+<span class="material-icons">token</span>
+</div>
+<span class="text-xs font-bold text-white/30">x00</span>
+</div>
+<h4 class="text-sm font-medium text-white/30">Void Fragment</h4>
+<p class="text-[10px] text-white/20 mt-1">Requires Sector 9 access.</p>
+</div>
+</div>
+</aside>
+<!-- Forge Core (Center) -->
+<section class="col-span-6 relative flex flex-col items-center justify-center">
+<div class="forge-radial-bg absolute inset-0 -z-10"></div>
+<!-- Assembly Ring -->
+<div class="relative w-full aspect-square max-w-[500px] flex items-center justify-center">
+<!-- Rotating Elements Simulated with concentric circles -->
+<div class="absolute inset-0 border-[1px] border-primary/20 rounded-full"></div>
+<div class="absolute inset-8 border-[2px] border-dashed border-cyan-accent/10 rounded-full animate-spin-slow"></div>
+<div class="absolute inset-20 border-[1px] border-primary/40 rounded-full"></div>
+<!-- Energy Lines -->
+<svg class="absolute inset-0 w-full h-full opacity-50" viewbox="0 0 100 100">
+<path d="M50 10 L50 25 M50 75 L50 90 M10 50 L25 50 M75 50 L90 50" stroke="#5b13ec" stroke-linecap="round" stroke-width="0.5"></path>
+<circle cx="50" cy="50" fill="none" r="35" stroke="url(#energyGradient)" stroke-dasharray="2 4" stroke-width="0.2"></circle>
+<defs>
+<lineargradient id="energyGradient" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" style="stop-color:#5b13ec;stop-opacity:1"></stop>
+<stop offset="100%" style="stop-color:#06b6d4;stop-opacity:1"></stop>
+</lineargradient>
+</defs>
+</svg>
+<!-- The Item Being Forged -->
+<div class="relative z-10 w-64 h-64 flex flex-col items-center justify-center drop-shadow-[0_0_30px_rgba(91,19,236,0.6)]">
+<img alt="Neural Blade Projection" class="w-full h-full object-contain filter hue-rotate-[240deg] brightness-125" data-alt="A glowing holographic futuristic sword weapon in a dark void" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwSzGdmoCJB25ZkFUDboQ2eD68l2CdUIzjfF9Xeh7Qq9cy3Q5fU-BMdVr-ABB0YwX_pBg0hBZpwGLcNJvCSnEijHW95rUsCTYHRG-R1Mn089TCUAYOLTD4UMs0ScgjHEew8Gns9cFpv-pzGNZgKYXy1DNUhScPUEJI8CFHZwuc6CbyeADQjR_zG-RSdgTjtykUONW3etOzLnkw7jgt_LBqkTLLzitUiPkEVUe210Z-nvImnWP83bqh3beSwafmn3RVmwEcK2t1hDlv"/>
+<div class="absolute -bottom-4 text-center">
+<h2 class="text-xl font-bold tracking-widest text-white uppercase italic">Neural Blade</h2>
+<div class="flex gap-1 justify-center mt-1">
+<div class="w-1 h-1 bg-cyan-accent rounded-full"></div>
+<div class="w-1 h-1 bg-cyan-accent rounded-full"></div>
+<div class="w-1 h-1 bg-cyan-accent rounded-full"></div>
+</div>
+</div>
+</div>
+<!-- Ambient Sparks (Decorative Dots) -->
+<div class="absolute top-1/4 left-1/4 w-1 h-1 bg-white rounded-full blur-[1px]"></div>
+<div class="absolute bottom-1/3 right-1/4 w-1.5 h-1.5 bg-cyan-accent rounded-full blur-[2px]"></div>
+<div class="absolute top-1/2 right-1/4 w-1 h-1 bg-primary rounded-full blur-[1px]"></div>
+</div>
+</section>
+<!-- Stats & Stability (Right) -->
+<aside class="col-span-3 space-y-6">
+<div class="bg-forge-card/50 backdrop-blur-md p-6 rounded-xl border border-white/5 space-y-6">
+<h3 class="text-sm font-semibold text-white/70 uppercase tracking-widest mb-2">Stability Matrix</h3>
+<!-- Progress Bar 1 -->
+<div class="space-y-2">
+<div class="flex justify-between text-[10px] font-bold">
+<span class="text-white/60">FORGING STABILITY</span>
+<span class="text-primary">88%</span>
+</div>
+<div class="h-2 w-full bg-black/40 rounded-full overflow-hidden border border-white/5 p-[1px]">
+<div class="h-full bg-gradient-to-r from-primary to-purple-400 rounded-full" style="width: 88%"></div>
+</div>
+</div>
+<!-- Progress Bar 2 -->
+<div class="space-y-2">
+<div class="flex justify-between text-[10px] font-bold">
+<span class="text-white/60">ENERGY OUTPUT</span>
+<span class="text-cyan-accent">1.21 GW</span>
+</div>
+<div class="h-2 w-full bg-black/40 rounded-full overflow-hidden border border-white/5 p-[1px]">
+<div class="h-full bg-gradient-to-r from-cyan-600 to-cyan-accent rounded-full" style="width: 65%"></div>
+</div>
+</div>
+<div class="pt-4 border-t border-white/5 space-y-4">
+<div class="flex justify-between items-center">
+<span class="text-xs text-white/40">Success Probability</span>
+<span class="text-sm font-bold text-green-400">HIGH</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-xs text-white/40">Power Rating</span>
+<span class="text-sm font-bold text-white italic">750 - 820 PR</span>
+</div>
+</div>
+</div>
+<!-- Active Modifiers -->
+<div class="p-4 rounded-xl border border-dashed border-white/10 space-y-3">
+<span class="text-[10px] text-white/30 uppercase tracking-tighter">Active Modifiers</span>
+<div class="flex flex-wrap gap-2">
+<div class="px-2 py-1 bg-primary/10 border border-primary/20 rounded text-[9px] text-primary-400 font-bold uppercase">Heat Shield v2</div>
+<div class="px-2 py-1 bg-cyan-accent/10 border border-cyan-accent/20 rounded text-[9px] text-cyan-accent font-bold uppercase">Clock Sync</div>
+</div>
+</div>
+</aside>
+</main>
+<!-- Forge Controller Footer -->
+<footer class="mt-8 border-t border-white/10 pt-8 pb-4">
+<div class="flex flex-col items-center">
+<div class="flex items-center gap-12 mb-8">
+<div class="text-center group cursor-pointer">
+<span class="material-icons text-white/30 group-hover:text-primary transition-colors">tune</span>
+<p class="text-[9px] text-white/40 mt-1 uppercase">Parameters</p>
+</div>
+<div class="text-center group cursor-pointer">
+<span class="material-icons text-white/30 group-hover:text-primary transition-colors">security</span>
+<p class="text-[9px] text-white/40 mt-1 uppercase">Safeguards</p>
+</div>
+<!-- Main CTA -->
+<button class="relative group">
+<div class="absolute inset-0 bg-gradient-to-r from-primary to-cyan-accent blur-xl opacity-40 group-hover:opacity-100 transition-opacity"></div>
+<div class="relative bg-gradient-to-r from-primary to-cyan-accent hover:scale-105 transition-transform px-16 py-4 rounded-lg flex items-center gap-4">
+<span class="material-icons text-white">offline_bolt</span>
+<span class="text-lg font-extrabold text-white tracking-widest uppercase">Activate Forge</span>
+</div>
+</button>
+<div class="text-center group cursor-pointer">
+<span class="material-icons text-white/30 group-hover:text-primary transition-colors">history</span>
+<p class="text-[9px] text-white/40 mt-1 uppercase">Logs</p>
+</div>
+<div class="text-center group cursor-pointer">
+<span class="material-icons text-white/30 group-hover:text-primary transition-colors">share</span>
+<p class="text-[9px] text-white/40 mt-1 uppercase">Broadcast</p>
+</div>
+</div>
+<div class="w-full flex justify-between items-center text-[10px] text-white/20 tracking-widest">
+<span>SYSTEM STATUS: OPERATIONAL</span>
+<div class="flex gap-4">
+<a class="hover:text-white transition-colors" href="#">ARMORY</a>
+<a class="hover:text-white transition-colors" href="#">MARKETPLACE</a>
+<a class="hover:text-white transition-colors" href="#">DATABASE</a>
+</div>
+<span>COORD: 45.9221 // 12.0093</span>
+</div>
+</div>
+</footer>
+</div>
+<style>
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(91, 19, 236, 0.2);
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: rgba(91, 19, 236, 0.5);
+        }
+        
+        @keyframes spin-slow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .animate-spin-slow {
+            animation: spin-slow 20s linear infinite;
+        }
+    </style>
+</body></html>

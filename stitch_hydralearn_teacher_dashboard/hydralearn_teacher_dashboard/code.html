@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>HydraLearn Teacher Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "card-bg": "#2a2a2a",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "lg": "0.5rem",
+                    },
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #000000;
+        }
+        .gradient-text {
+            @apply bg-gradient-to-r from-purple-500 to-cyan-500 text-transparent bg-clip-text;
+        }
+        .gradient-bg {
+            @apply bg-gradient-to-r from-purple-500 to-cyan-500 text-white;
+        }
+    </style>
+</head>
+<body class="bg-black text-white min-h-screen">
+<header class="fixed top-0 left-0 right-0 h-16 bg-black/80 backdrop-blur-md border-b border-gray-800 z-50">
+<div class="max-w-7xl mx-auto px-4 h-full flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="size-8 gradient-bg rounded-lg flex items-center justify-center">
+<svg class="text-white size-5" fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M44 4H30.6666V17.3334H17.3334V30.6666H4V44H44V4Z" fill="currentColor"></path>
+</svg>
+</div>
+<div class="flex flex-col">
+<h1 class="text-lg font-extrabold tracking-tight">HydraLearn</h1>
+<p class="gradient-text text-[10px] font-bold uppercase tracking-widest">Education with bite</p>
+</div>
+</div>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-sm font-semibold text-white border-b-2 border-purple-500 pb-1" href="#">Dashboard</a>
+<a class="text-sm font-medium text-gray-400 hover:text-white transition-colors" href="#">Manage</a>
+<a class="text-sm font-medium text-gray-400 hover:text-white transition-colors" href="#">Protect</a>
+<a class="text-sm font-medium text-gray-400 hover:text-white transition-colors" href="#">Learn</a>
+</nav>
+<div class="flex items-center gap-4">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-lg">search</span>
+<input class="pl-10 pr-4 py-1.5 bg-[#1a1a1a] border border-gray-800 rounded-lg text-xs focus:ring-1 focus:ring-purple-500 focus:border-purple-500 w-48" placeholder="Search hive mind..." type="text"/>
+</div>
+<button class="text-gray-400 hover:text-white"><span class="material-symbols-outlined">notifications</span></button>
+<div class="flex items-center gap-3 pl-4 border-l border-gray-800">
+<div class="text-right hidden sm:block">
+<p class="text-xs font-bold">Commander Sarah</p>
+<p class="text-[9px] gradient-text uppercase font-bold">Lead Educator</p>
+</div>
+<img alt="Profile" class="size-8 rounded-lg object-cover border border-gray-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4CX5fbl_5AB9-GzKz1kwYa7vOb-pqPV5KU_l3UD6DPkK0LBMXlg5jCCeQ3pAdRfKOZMUuj1gkVkLHhFMxx7soH_dY4IaOqqVDJOiJlzD1Qzg4CRuaLAibdzdRZjuQjlD1p75z8mPfEtn3UBFOIsI3h0St0Wi0WZPkupKq01E-NQxXwDQCQRrFAaqWenjweriN-gAaGRfw3GlNXgmrwl97LVIChlzVQ3EV10PJKvjODZI6fgxBk9Yuuygvez67n7y4kzRNYM8ZH-rG"/>
+</div>
+</div>
+</div>
+</header>
+<main class="pt-24 pb-12">
+<div class="max-w-7xl mx-auto px-4">
+<div class="mb-10">
+<h2 class="text-4xl md:text-5xl font-black tracking-tighter uppercase italic mb-2">
+                    Welcome back, <span class="gradient-text">Commander</span>
+</h2>
+<p class="text-gray-400 font-medium text-lg">Ready to grow a new lesson today? The hive is hungry.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+<div class="bg-card-bg border border-gray-800 rounded-lg p-6 hover:border-purple-500/50 transition-all group">
+<div class="size-14 rounded-lg gradient-bg flex items-center justify-center mb-6 shadow-lg shadow-purple-500/20">
+<span class="material-symbols-outlined text-3xl">menu_book</span>
+</div>
+<h3 class="text-xl font-bold text-white mb-3 uppercase italic tracking-tight">Create Lesson</h3>
+<p class="text-gray-400 text-sm leading-relaxed mb-6">Deploy multi-headed curricula using AI-enhanced structuring. Rapid growth guaranteed.</p>
+<button class="w-full py-3 rounded-lg gradient-bg font-bold text-sm uppercase tracking-wider flex items-center justify-center gap-2 hover:opacity-90 transition-opacity">
+                        Start Building <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+<div class="bg-card-bg border border-gray-800 rounded-lg p-6 hover:border-cyan-500/50 transition-all group">
+<div class="size-14 rounded-lg gradient-bg flex items-center justify-center mb-6 shadow-lg shadow-cyan-500/20">
+<span class="material-symbols-outlined text-3xl">sports_esports</span>
+</div>
+<h3 class="text-xl font-bold text-white mb-3 uppercase italic tracking-tight">Generate Activities</h3>
+<p class="text-gray-400 text-sm leading-relaxed mb-6">Turn study time into battle time. Auto-generate gamified quizzes and missions.</p>
+<button class="w-full py-3 rounded-lg gradient-bg font-bold text-sm uppercase tracking-wider flex items-center justify-center gap-2 hover:opacity-90 transition-opacity">
+                        Launch Forge <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+<div class="bg-card-bg border border-gray-800 rounded-lg p-6 hover:border-purple-500/50 transition-all group">
+<div class="size-14 rounded-lg gradient-bg flex items-center justify-center mb-6 shadow-lg shadow-purple-500/20">
+<span class="material-symbols-outlined text-3xl">psychology</span>
+</div>
+<h3 class="text-xl font-bold text-white mb-3 uppercase italic tracking-tight">AI Counselor</h3>
+<p class="text-gray-400 text-sm leading-relaxed mb-6">Consult the hive mind for insights on student blockers or pedagogy shifts.</p>
+<button class="w-full py-3 rounded-lg gradient-bg font-bold text-sm uppercase tracking-wider flex items-center justify-center gap-2 hover:opacity-90 transition-opacity">
+                        Open Comm-link <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<div class="lg:col-span-2 space-y-6">
+<div class="flex items-center justify-between">
+<h2 class="text-2xl font-black italic uppercase tracking-tighter gradient-text">Class Vitals</h2>
+<button class="text-cyan-500 text-xs font-bold uppercase hover:underline">Full Analytics</button>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+<div class="bg-card-bg border border-gray-800 p-6 rounded-lg">
+<p class="text-gray-400 text-xs font-bold uppercase mb-6">Engagement Surge</p>
+<div class="flex items-end gap-2 h-24 mb-6">
+<div class="w-full bg-purple-500/20 rounded-sm h-[40%]"></div>
+<div class="w-full bg-purple-500/20 rounded-sm h-[60%]"></div>
+<div class="w-full bg-purple-500/20 rounded-sm h-[55%]"></div>
+<div class="w-full bg-purple-500/20 rounded-sm h-[85%]"></div>
+<div class="w-full bg-purple-500/20 rounded-sm h-[70%]"></div>
+<div class="w-full bg-cyan-500 rounded-sm h-[95%] shadow-[0_0_15px_rgba(6,182,212,0.5)]"></div>
+<div class="w-full bg-purple-500/20 rounded-sm h-[75%]"></div>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-2xl font-black text-white">+24%</span>
+<span class="text-cyan-500 text-xs font-bold">vs Last Week</span>
+</div>
+</div>
+<div class="bg-card-bg border border-gray-800 p-6 rounded-lg">
+<p class="text-gray-400 text-xs font-bold uppercase mb-6">Top Head Performance</p>
+<div class="space-y-5">
+<div class="space-y-2">
+<div class="flex justify-between text-xs font-bold">
+<span>Unit 4: Photosynthesis</span>
+<span class="text-cyan-500">92%</span>
+</div>
+<div class="h-1.5 w-full bg-gray-900 rounded-full overflow-hidden">
+<div class="h-full bg-gradient-to-r from-purple-500 to-cyan-500" style="width: 92%"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between text-xs font-bold">
+<span>Unit 3: Mitochondria</span>
+<span class="text-purple-500">78%</span>
+</div>
+<div class="h-1.5 w-full bg-gray-900 rounded-full overflow-hidden">
+<div class="h-full bg-gradient-to-r from-purple-500 to-cyan-500" style="width: 78%"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="flex flex-wrap gap-3 pt-2">
+<span class="px-3 py-1 bg-gray-900 border border-gray-800 rounded-lg text-[10px] font-bold text-gray-400 uppercase">Biology 101</span>
+<span class="px-3 py-1 bg-gray-900 border border-gray-800 rounded-lg text-[10px] font-bold text-gray-400 uppercase">Advanced Physics</span>
+<button class="px-3 py-1 border border-dashed border-gray-700 rounded-lg text-[10px] font-bold text-purple-500 uppercase hover:bg-purple-500/10 transition-colors">+ New Class</button>
+</div>
+</div>
+<div class="space-y-6">
+<div class="flex items-center justify-between">
+<h2 class="text-2xl font-black italic uppercase tracking-tighter gradient-text">Live Feed</h2>
+<span class="flex size-2 rounded-full bg-cyan-500 shadow-[0_0_8px_#06b6d4]"></span>
+</div>
+<div class="bg-card-bg border border-gray-800 rounded-lg divide-y divide-gray-800">
+<div class="p-4 flex gap-4 items-start hover:bg-white/5 transition-colors">
+<div class="size-10 rounded-lg bg-blue-500/10 text-blue-400 flex items-center justify-center flex-shrink-0 border border-blue-500/20">
+<span class="material-symbols-outlined text-xl">description</span>
+</div>
+<div>
+<p class="text-sm font-bold text-white">"Deep Sea Life" Ready</p>
+<p class="text-xs text-gray-400">AI Counselor finished generation.</p>
+<p class="text-[9px] text-gray-500 mt-2 uppercase font-bold tracking-tighter">2 MINS AGO</p>
+</div>
+</div>
+<div class="p-4 flex gap-4 items-start hover:bg-white/5 transition-colors">
+<div class="size-10 rounded-lg bg-cyan-500/10 text-cyan-400 flex items-center justify-center flex-shrink-0 border border-cyan-500/20">
+<span class="material-symbols-outlined text-xl">military_tech</span>
+</div>
+<div>
+<p class="text-sm font-bold text-white">New Hydra Rank</p>
+<p class="text-xs text-gray-400">Student <span class="text-cyan-500 font-bold">Leo X.</span> completed 10 missions.</p>
+<p class="text-[9px] text-gray-500 mt-2 uppercase font-bold tracking-tighter">15 MINS AGO</p>
+</div>
+</div>
+<div class="p-4 flex gap-4 items-start hover:bg-white/5 transition-colors">
+<div class="size-10 rounded-lg bg-purple-500/10 text-purple-400 flex items-center justify-center flex-shrink-0 border border-purple-500/20">
+<span class="material-symbols-outlined text-xl">warning</span>
+</div>
+<div>
+<p class="text-sm font-bold text-white">Blockage Detected</p>
+<p class="text-xs text-gray-400">Unit 2 Quiz showing low scores (42%).</p>
+<p class="text-[9px] text-gray-500 mt-2 uppercase font-bold tracking-tighter">1 HOUR AGO</p>
+</div>
+</div>
+<div class="p-4 text-center">
+<button class="text-[10px] font-bold gradient-text uppercase tracking-widest hover:brightness-125">View All Intelligence</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<footer class="py-12 border-t border-gray-900 mt-12">
+<div class="max-w-7xl mx-auto px-4 text-center">
+<p class="text-3xl font-black italic uppercase tracking-tighter gradient-text opacity-50">Education with bite</p>
+<p class="text-[10px] text-gray-600 mt-2 uppercase tracking-[0.2em] font-bold">Powered by HydraForge Intelligence</p>
+</div>
+</footer>
+
+</body></html>

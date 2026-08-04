@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#5b13ec",
+                        "secondary": "#06b6d4",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#0a0a0c",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .gradient-text {
+            background: linear-gradient(90deg, #5b13ec 0%, #06b6d4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gradient-bg {
+            background: linear-gradient(90deg, #5b13ec 0%, #06b6d4 100%);
+        }
+        .glow-button:hover {
+            box-shadow: 0 0 20px rgba(91, 19, 236, 0.4), 0 0 40px rgba(6, 182, 212, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-white min-h-screen">
+<div class="relative flex h-full w-full flex-col overflow-x-hidden">
+<header class="flex items-center justify-between border-b border-white/10 bg-background-dark/50 backdrop-blur-md px-10 py-4 sticky top-0 z-50">
+<div class="flex items-center gap-4">
+<div class="size-8 gradient-bg rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-white">psychology</span>
+</div>
+<h2 class="text-white text-xl font-extrabold tracking-tight">HydraLearn</h2>
+</div>
+<div class="flex flex-1 justify-center gap-10">
+<a class="text-gray-400 hover:text-white transition-colors text-sm font-medium" href="#">Dashboard</a>
+<a class="text-gray-400 hover:text-white transition-colors text-sm font-medium" href="#">Courses</a>
+<a class="text-white border-b-2 border-primary pb-1 text-sm font-medium" href="#">Meme Battle</a>
+<a class="text-gray-400 hover:text-white transition-colors text-sm font-medium" href="#">Leaderboard</a>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex gap-2">
+<button class="flex items-center justify-center rounded-xl h-10 w-10 bg-white/5 hover:bg-white/10 text-white transition-all">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+</button>
+<button class="flex items-center justify-center rounded-xl h-10 w-10 bg-white/5 hover:bg-white/10 text-white transition-all">
+<span class="material-symbols-outlined text-[20px] text-orange-500">local_fire_department</span>
+</button>
+</div>
+<div class="h-10 w-10 rounded-full border-2 border-primary/50 bg-center bg-cover" data-alt="User profile avatar with neon highlights" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAY3yPz1LMgHkjuvy7y5pyrlDmh3m8-t29z2eCPXkmnEU0Ya96psptOkYib2kKv9NpVVSZKaZyTWKJtycb4lNmuIebI7l5LBJuCChNb3zMqZqxZqMdJ4VltvmZdIud10TXx4_1Q2ZDOFS69J24wxR1oR1uugKgX-LUBYSo4TokJpDvp12UyUX05kf73JFqXa4lzxnsqBiBDvBlQy82ONgug1IEA196L2Kapl7DE5NYxhlxQjJN2-dEujh1At_bleug7KHZsxu0RFGYs");'></div>
+</div>
+</header>
+<main class="max-w-7xl mx-auto w-full px-6 py-8">
+<div class="mb-10 max-w-4xl mx-auto">
+<div class="flex flex-col gap-3">
+<div class="flex gap-6 justify-between items-end">
+<div>
+<p class="text-white text-lg font-bold">Level 12 Meme Master</p>
+<p class="text-secondary text-xs uppercase tracking-widest font-semibold">Active Streak: 15 Battles</p>
+</div>
+<p class="text-gray-400 text-sm font-normal">650 / 1000 XP</p>
+</div>
+<div class="h-3 w-full rounded-full bg-white/5 overflow-hidden">
+<div class="h-full gradient-bg" style="width: 65%;"></div>
+</div>
+<p class="text-gray-500 text-xs text-right italic">350 XP to unlock 'The Hydra King' title</p>
+</div>
+</div>
+<div class="text-center mb-12">
+<h1 class="gradient-text text-5xl font-black tracking-tighter uppercase italic">Meme Battle</h1>
+<p class="text-gray-400 mt-2">Translate the lesson into the perfect vibe</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<div class="lg:col-span-5 flex flex-col gap-6">
+<div class="relative group">
+<div class="absolute -top-3 -right-3 z-10">
+<div class="bg-yellow-500/10 border border-yellow-500/50 p-2 rounded-lg flex items-center gap-2">
+<span class="material-symbols-outlined text-yellow-500 text-sm">stars</span>
+<span class="text-yellow-500 text-[10px] font-bold">DOUBLE XP ACTIVE</span>
+</div>
+</div>
+<div class="bg-[#2a2a2a] border border-white/5 rounded-2xl overflow-hidden shadow-2xl">
+<div class="p-6 border-b border-white/5 bg-white/5 flex items-center justify-between">
+<span class="text-primary font-bold text-sm tracking-widest uppercase">Challenge #142</span>
+<div class="flex gap-1">
+<span class="material-symbols-outlined text-cyan-400 text-sm">auto_awesome</span>
+<span class="text-cyan-400 text-xs font-bold italic">AI GENERATED</span>
+</div>
+</div>
+<div class="aspect-video w-full bg-center bg-cover" data-alt="Epic illustration of King John signing the Magna Carta in a dark forest" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAAn4IIJ7fQu3pGq1aicHM9KwmnBoppkaaEXLpzSE8z3JgoPmYRQW50NfHbU4zrsdBYY6CmPVHfOUUemuLPYJE0xdU37JGB9JAtZZZid9zCJNzjIV8egZFXf2x2KMaG-W-zjAZtvXXHFE7DJsijSLRgopf6hv0u0LHSt0AZVlBUDmK3hOeiqfetzMEWVbvuaLW9_gz0BAuYtf4woOP99PeysP9Nd_SGZG4xQHrs_xsIbmwwfj1Ir6wvfN9WnBbQlhJYbyQYr3zydX78");'></div>
+<div class="p-8">
+<h3 class="text-2xl font-bold text-white mb-4 leading-tight">In 1215, King John of England was forced to sign this document, limiting his power for the first time. Name it.</h3>
+<div class="p-4 bg-black/30 rounded-xl border-l-4 border-secondary">
+<p class="text-gray-400 text-sm leading-relaxed italic">"Context: The barons were fed up with high taxes and failures in France. They cornered John at Runnymede and said: 'Sign this or else'..."</p>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-[#1a1a1f] p-4 rounded-xl border border-white/5 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-lg bg-primary/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">psychology</span>
+</div>
+<div>
+<p class="text-xs text-gray-400 uppercase font-bold">Active Power-up</p>
+<p class="text-sm text-white font-medium">The Multi-Head Multiplier</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-secondary text-xs font-bold">2m 45s left</p>
+</div>
+</div>
+</div>
+<div class="lg:col-span-7">
+<div class="flex items-center justify-between mb-6 px-2">
+<h4 class="text-xl font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-cyan-500">grid_view</span>
+                            Select Your Reaction
+                        </h4>
+<div class="flex gap-2">
+<button class="bg-white/5 px-3 py-1 rounded text-xs hover:bg-white/10">All Memes</button>
+<button class="bg-primary px-3 py-1 rounded text-xs">Recommended</button>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-gray-900 border-2 border-transparent hover:border-primary/50 transition-all cursor-pointer rounded-2xl p-3 group overflow-hidden">
+<div class="aspect-square w-full rounded-xl mb-3 bg-center bg-cover transition-transform group-hover:scale-105" data-alt="Classic meme of a man looking back at another girl while with his girlfriend" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDbwRmTHkrHG4a8BjgwklmXvWUX6KgPwqm4Iw2m76lMAqrEtVLBZ1M3OXeEXzKJ4fVjGvn0ffMeXAxCJ8ZKE-5OR0O4-lu0FcaB-Hxr_DQ2ZW_hm5GOVSMcqVVt1vetazxjGyeSnRDUiZR5JKXbh2RxNX_Di81E3nPgYgALd3EUFaHn1pBKjuTxTDLBNRIK_LIw0fKjlQvx959_pI5ZYdJiBAvtedDcsqB1UwEf5hRw2m9PycfHj2KQXnPZQs1UQ8nkWiNZRYPXP5ut");'></div>
+<p class="text-center text-xs font-medium text-gray-400 uppercase tracking-tighter">The "Me vs Responsibilities" Vibe</p>
+</div>
+<div class="bg-gray-900 border-2 border-primary transition-all cursor-pointer rounded-2xl p-3 group overflow-hidden relative">
+<div class="absolute top-2 right-2 bg-primary text-white text-[10px] font-bold px-2 py-0.5 rounded-full z-10">SELECTED</div>
+<div class="aspect-square w-full rounded-xl mb-3 bg-center bg-cover transition-transform group-hover:scale-105" data-alt="Success kid meme with a determined expression" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA4ATgCI8QMuv2pmikr578ZLVY-hDsFcKeM6iYgQbAo8qB3l_TLSn2e_hykIoBML0MLEHuTT4GqlSiMB5Hz1ED5910b9IMgAxN93I-2mxhC3CPeVjE4L2XOgLJp5fO8cxzCCkQQvytMEXlz2XpPo5yqQHaHgGf1amJa3q4nQ_1Tj1DOdfSCpkZrHbbJBu5QxeQr0aqGrOjvXIrvRel93Z9I7bXAACDbF598pFDmaOulJgdivHob0iPvoECz8B_c2jZyYnjqugjcA16w");'></div>
+<p class="text-center text-xs font-medium text-white uppercase tracking-tighter">Absolute Legend Energy</p>
+</div>
+<div class="bg-gray-900 border-2 border-transparent hover:border-primary/50 transition-all cursor-pointer rounded-2xl p-3 group overflow-hidden">
+<div class="aspect-square w-full rounded-xl mb-3 bg-center bg-cover transition-transform group-hover:scale-105" data-alt="Confused woman with math equations floating around her head" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBhPM9GNY7phV7od13X8m2nbJredml82wC57LY4fyhVPcwxr6y02W_OCqRx5HlEDunVTeISHGYDCqUieePeeWgvyIV_DXLxjeeF0tNRcEKuFXEzbCTTX8CfPLnkuPJRbAvrSVPdCCuF39SryKTHgSLQIxl_SEyLQXo7K7PjMl-x8oAeJNh3R19UEC8dqW16t3sAAPPPzNIQ3rWtB5foqHBjgSsLw9slcrf0bML-nQH25UiSdDh-NJ7f9yITskyzzeO7G-zED32h_Hc3");'></div>
+<p class="text-center text-xs font-medium text-gray-400 uppercase tracking-tighter">The "Wait, what?" Moment</p>
+</div>
+<div class="bg-gray-900 border-2 border-transparent hover:border-primary/50 transition-all cursor-pointer rounded-2xl p-3 group overflow-hidden">
+<div class="aspect-square w-full rounded-xl mb-3 bg-center bg-cover transition-transform group-hover:scale-105" data-alt="Buff doge vs Cheems comparison meme" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDBn93Sz8IeA2MQ7i8XCHx8SVN5irVoZaz_seiAUuFwVAAuu7s8zjR6K8qVITpn339Qlu6VzLztAQ6fJyliOG0rXnU7uYwNh4e7LvWKYCX2Rp_AZt-G-rtYpt2kB3zxGROxu8w28glAjtKdXwb2mqnlyCnPswFy8BvBP4sDdFVx4YM8XS6IcYZH0puNvZEV2-SPEjS4yXsRHClR1327LPdTNl6lC7hzaHw3lwADe1oy792cumxeD4f6XuBdN8ppAcVlH7uoq5HgclOF");'></div>
+<p class="text-center text-xs font-medium text-gray-400 uppercase tracking-tighter">Barons then vs Barons now</p>
+</div>
+</div>
+<div class="mt-8">
+<button class="w-full py-5 rounded-2xl gradient-bg glow-button flex items-center justify-center gap-3 transition-all transform hover:-translate-y-1">
+<span class="text-xl font-black uppercase tracking-widest italic">Submit Battle Entry</span>
+<span class="material-symbols-outlined">send</span>
+</button>
+</div>
+</div>
+</div>
+<footer class="mt-20 border-t border-white/5 pt-8 pb-12 flex flex-col md:flex-row justify-between items-center text-gray-500 text-sm">
+<div class="flex items-center gap-2 mb-4 md:mb-0">
+<span class="material-symbols-outlined text-primary">token</span>
+<span>1,250 Hydra Tokens Earned Today</span>
+</div>
+<div class="flex gap-8">
+<a class="hover:text-white" href="#">Game Rules</a>
+<a class="hover:text-white" href="#">Meme Copyright</a>
+<a class="hover:text-white" href="#">Student Hub</a>
+</div>
+</footer>
+</main>
+</div>
+</body></html>

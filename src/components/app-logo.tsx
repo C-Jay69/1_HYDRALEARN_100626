@@ -4,7 +4,7 @@ export function AppLogo() {
   return (
     <div className="flex items-center gap-2">
        <Image 
-        src="https://storage.googleapis.com/stabl-new-3rd-party-assets/misc-assets/hydralearn-logo-1024.png"
+        src="/logo.svg"
         alt="HydraLearn Logo"
         width={36}
         height={36}

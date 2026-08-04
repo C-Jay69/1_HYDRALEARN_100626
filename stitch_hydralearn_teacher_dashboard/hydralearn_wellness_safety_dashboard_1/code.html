@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>HydraLearn Wellness &amp; Safety Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#5b13ec",
+                        "accent-cyan": "#00ffff",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#000000",
+                        "card-dark": "#161022",
+                        "surface-dark": "#2a2a2a",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .gradient-text {
+            background: linear-gradient(90deg, #5b13ec, #00ffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #5b13ec, #00ffff);
+        }
+        .glow-purple {
+            box-shadow: 0 0 15px rgba(91, 19, 236, 0.4);
+        }
+        .mood-halo:hover {
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-black text-white font-display min-h-screen">
+<div class="layout-container flex flex-col min-h-screen">
+<!-- Top Navigation Bar -->
+<header class="flex items-center justify-between border-b border-white/10 px-10 py-4 bg-black sticky top-0 z-50">
+<div class="flex items-center gap-4">
+<div class="size-8 gradient-bg rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-xl">shield_with_heart</span>
+</div>
+<h2 class="text-white text-xl font-bold tracking-tight">HydraLearn</h2>
+</div>
+<nav class="flex flex-1 justify-center gap-8">
+<a class="text-white/70 hover:text-white text-sm font-medium transition-colors" href="#">Dashboard</a>
+<a class="text-white/70 hover:text-white text-sm font-medium transition-colors" href="#">Classes</a>
+<a class="text-white/70 hover:text-white text-sm font-medium transition-colors" href="#">Resources</a>
+<a class="text-white text-sm font-medium border-b-2 border-primary pb-1" href="#">Wellness</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-xl bg-surface-dark text-white hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="flex items-center gap-3 pl-4 border-l border-white/10">
+<div class="text-right">
+<p class="text-xs text-white/50">Student</p>
+<p class="text-sm font-bold">Alex Chen</p>
+</div>
+<div class="size-10 rounded-full bg-gradient-to-br from-primary to-accent-cyan p-0.5">
+<img class="w-full h-full rounded-full object-cover" data-alt="Student profile picture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDIohB-LLY5F_aOilca1E5BTI3wo-Q8k6mpg0ZC-2zE1Ye5KrVnxV_58aWd-KZ7p_3--52TPRnji3sIsmn50KIePJ4P3H4kNBA-DrR3g39dlYx5HAZHTxZ1wn3rbER6it4W2gHNPN8IL_-BcCgOaZ-wKRmVJIYnK_mJp3BcKJhykzI2HklhTFLDrSQusulpkT5nTIuLV7j3lWyUHa5xqJUoOmdfcAMo10Em4D0Y0K1ajdBMGFWB8ni_PObIubU4pi9Qkd37ZjXBGJyQ"/>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-1 max-w-7xl mx-auto w-full px-6 py-8">
+<!-- Page Heading & Streak -->
+<div class="flex flex-wrap justify-between items-end gap-6 mb-10">
+<div class="flex flex-col gap-2">
+<h1 class="text-5xl font-black gradient-text">Hydra Guard &amp; Wellness</h1>
+<p class="text-white/60 text-lg">Your safe space for emotional support and school safety</p>
+</div>
+<div class="bg-surface-dark p-6 rounded-2xl min-w-[300px] border border-white/5 glow-purple">
+<div class="flex justify-between items-center mb-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-orange-500 fill-1">local_fire_department</span>
+<span class="font-bold">Wellness Streak</span>
+</div>
+<span class="text-primary font-bold">7 days</span>
+</div>
+<div class="h-2 w-full bg-white/10 rounded-full overflow-hidden">
+<div class="h-full gradient-bg" style="width: 70%;"></div>
+</div>
+<p class="text-xs text-white/40 mt-3 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">info</span>
+                        3 days until your next milestone!
+                    </p>
+</div>
+</div>
+<!-- Mood Tracker Section -->
+<section class="mb-12">
+<div class="text-center mb-6">
+<h3 class="text-white/80 text-lg font-medium">How are you feeling today?</h3>
+</div>
+<div class="flex justify-center items-center gap-4 max-w-2xl mx-auto p-2 bg-surface-dark/50 rounded-2xl border border-white/10">
+<button class="flex-1 py-4 flex flex-col items-center gap-2 rounded-xl hover:bg-white/5 transition-all group mood-halo">
+<span class="text-3xl grayscale group-hover:grayscale-0 transition-all">😢</span>
+<span class="text-xs text-white/40 group-hover:text-white">Low</span>
+</button>
+<button class="flex-1 py-4 flex flex-col items-center gap-2 rounded-xl hover:bg-white/5 transition-all group mood-halo">
+<span class="text-3xl grayscale group-hover:grayscale-0 transition-all">😐</span>
+<span class="text-xs text-white/40 group-hover:text-white">Okay</span>
+</button>
+<button class="flex-1 py-4 flex flex-col items-center gap-2 rounded-xl bg-primary/20 border border-primary/30 glow-purple">
+<span class="text-3xl">🙂</span>
+<span class="text-xs text-white">Good</span>
+</button>
+<button class="flex-1 py-4 flex flex-col items-center gap-2 rounded-xl hover:bg-white/5 transition-all group mood-halo">
+<span class="text-3xl grayscale group-hover:grayscale-0 transition-all">🌟</span>
+<span class="text-xs text-white/40 group-hover:text-white">Great</span>
+</button>
+<button class="flex-1 py-4 flex flex-col items-center gap-2 rounded-xl hover:bg-white/5 transition-all group mood-halo">
+<span class="text-3xl grayscale group-hover:grayscale-0 transition-all">🔥</span>
+<span class="text-xs text-white/40 group-hover:text-white">Unstoppable</span>
+</button>
+</div>
+</section>
+<!-- Main Content Grid -->
+<div class="grid lg:grid-cols-2 gap-8">
+<!-- Safe Space Chat Interface -->
+<div class="bg-surface-dark rounded-2xl flex flex-col h-[600px] border border-white/5 relative overflow-hidden">
+<div class="p-5 border-b border-white/10 flex items-center justify-between bg-white/5">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-full bg-gradient-to-tr from-primary to-accent-cyan flex items-center justify-center">
+<span class="material-symbols-outlined text-white">smart_toy</span>
+</div>
+<div>
+<h4 class="font-bold">Safe Space AI</h4>
+<div class="flex items-center gap-1.5">
+<span class="size-2 bg-green-500 rounded-full animate-pulse"></span>
+<span class="text-[10px] uppercase tracking-wider text-green-500 font-bold">Anonymous Counselor</span>
+</div>
+</div>
+</div>
+<button class="text-white/40 hover:text-white">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+<div class="flex-1 overflow-y-auto p-6 space-y-6">
+<div class="flex gap-3">
+<div class="size-8 rounded-full bg-white/10 flex-shrink-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-xs">smart_toy</span>
+</div>
+<div class="bg-white/10 rounded-2xl rounded-tl-none p-4 max-w-[80%]">
+<p class="text-sm leading-relaxed text-white/90">Hello Alex. I'm your private AI counselor. Everything we discuss here is confidential. How has your week been going at school?</p>
+</div>
+</div>
+<div class="flex gap-3 flex-row-reverse">
+<div class="size-8 rounded-full bg-primary flex-shrink-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-xs text-white">person</span>
+</div>
+<div class="gradient-bg rounded-2xl rounded-tr-none p-4 max-w-[80%]">
+<p class="text-sm leading-relaxed text-white">Honestly, I've been feeling a bit overwhelmed with the upcoming finals and some social pressure.</p>
+</div>
+</div>
+<div class="flex gap-3">
+<div class="size-8 rounded-full bg-white/10 flex-shrink-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-xs">smart_toy</span>
+</div>
+<div class="bg-white/10 rounded-2xl rounded-tl-none p-4 max-w-[80%]">
+<p class="text-sm leading-relaxed text-white/90">It's completely normal to feel that way. Would you like to talk about some stress-management techniques, or perhaps just vent a little more about the social aspect?</p>
+</div>
+</div>
+</div>
+<div class="p-4 border-t border-white/10 bg-black/40">
+<div class="relative">
+<input class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 pr-12 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent placeholder:text-white/20" placeholder="Type what's on your mind..." type="text"/>
+<button class="absolute right-2 top-2 size-8 gradient-bg rounded-lg flex items-center justify-center hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-sm text-white">send</span>
+</button>
+</div>
+<p class="text-[10px] text-center text-white/30 mt-3 italic">This chat is end-to-end encrypted and identity-protected.</p>
+</div>
+</div>
+<!-- Anonymous Reporting & Feed -->
+<div class="flex flex-col gap-6">
+<!-- Reporting Form Card -->
+<div class="bg-surface-dark rounded-2xl p-6 border border-white/5">
+<div class="flex items-center gap-3 mb-6">
+<div class="size-10 rounded-xl bg-red-500/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-red-500">campaign</span>
+</div>
+<div>
+<h4 class="font-bold">Anonymous Reporting</h4>
+<p class="text-xs text-white/40">Securely report bullying or safety concerns</p>
+</div>
+</div>
+<form class="space-y-4">
+<div>
+<label class="block text-xs font-bold text-white/60 mb-2 uppercase tracking-wide">Incident Type</label>
+<select class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:ring-primary focus:border-primary text-white">
+<option class="bg-surface-dark">Physical Bullying</option>
+<option class="bg-surface-dark">Cyberbullying</option>
+<option class="bg-surface-dark">Harassment</option>
+<option class="bg-surface-dark">Vandalism</option>
+<option class="bg-surface-dark">Other Concern</option>
+</select>
+</div>
+<div>
+<label class="block text-xs font-bold text-white/60 mb-2 uppercase tracking-wide">Description</label>
+<textarea class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:ring-primary focus:border-primary text-white h-24 resize-none" placeholder="Describe the situation in detail..."></textarea>
+</div>
+<button class="w-full py-4 gradient-bg rounded-xl font-bold text-sm shadow-lg shadow-primary/20 hover:scale-[1.01] active:scale-[0.99] transition-all" type="button">
+                                Submit Secure Report
+                            </button>
+</form>
+</div>
+<!-- Safety Feed Card -->
+<div class="bg-surface-dark rounded-2xl flex-1 border border-white/5 flex flex-col overflow-hidden">
+<div class="p-5 border-b border-white/10 flex justify-between items-center">
+<h4 class="font-bold text-sm uppercase tracking-wider text-white/60">Community Safety Updates</h4>
+<span class="bg-accent-cyan/10 text-accent-cyan text-[10px] px-2 py-0.5 rounded-full font-bold">LIVE</span>
+</div>
+<div class="overflow-y-auto p-4 space-y-4 max-h-[250px]">
+<div class="flex gap-4 p-3 rounded-xl hover:bg-white/5 transition-colors border border-transparent hover:border-white/5">
+<div class="size-10 rounded-full bg-green-500/10 flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-green-500 text-sm">check_circle</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between mb-1">
+<p class="text-sm font-bold text-white/90">Hallway Patrol Active</p>
+<span class="text-[10px] text-white/30">2m ago</span>
+</div>
+<p class="text-xs text-white/50">North Hall student marshals are now on duty for lunch transition.</p>
+</div>
+</div>
+<div class="flex gap-4 p-3 rounded-xl hover:bg-white/5 transition-colors border border-transparent hover:border-white/5">
+<div class="size-10 rounded-full bg-blue-500/10 flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-blue-500 text-sm">info</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between mb-1">
+<p class="text-sm font-bold text-white/90">Counseling Center Open</p>
+<span class="text-[10px] text-white/30">1h ago</span>
+</div>
+<p class="text-xs text-white/50">Walk-in peer support is available in Room 302 until 4:00 PM.</p>
+</div>
+</div>
+<div class="flex gap-4 p-3 rounded-xl hover:bg-white/5 transition-colors border border-transparent hover:border-white/5">
+<div class="size-10 rounded-full bg-purple-500/10 flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-purple-500 text-sm">verified_user</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between mb-1">
+<p class="text-sm font-bold text-white/90">Report Resolved</p>
+<span class="text-[10px] text-white/30">3h ago</span>
+</div>
+<p class="text-xs text-white/50">Anonymized report #8842 has been successfully addressed by admin.</p>
+</div>
+</div>
+</div>
+<button class="w-full py-3 bg-white/5 hover:bg-white/10 transition-colors text-xs font-bold text-white/40 uppercase tracking-widest border-t border-white/10">
+                            View Historical Feed
+                        </button>
+</div>
+</div>
+</div>
+</main>
+<footer class="mt-auto py-8 border-t border-white/5 bg-black">
+<div class="max-w-7xl mx-auto px-10 flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">verified</span>
+<p class="text-sm text-white/40">Powered by HydraAI Guard • Privacy Protected</p>
+</div>
+<div class="flex gap-6">
+<a class="text-xs text-white/40 hover:text-white transition-colors" href="#">Privacy Policy</a>
+<a class="text-xs text-white/40 hover:text-white transition-colors" href="#">Emergency Contacts</a>
+<a class="text-xs text-white/40 hover:text-white transition-colors" href="#">Student Handbook</a>
+</div>
+</div>
+</footer>
+</div>
+</body></html>

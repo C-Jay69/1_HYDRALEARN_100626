@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>HydraLearn Student Playground</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0ff06d",
+                        "brand-purple": "#a855f7",
+                        "brand-cyan": "#06b6d4",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans"]
+                    },
+                    borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        @layer utilities {
+            .text-gradient {
+                @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-purple via-brand-cyan to-primary;
+            }
+            .bg-brand-gradient {
+                background: linear-gradient(135deg, #a855f7 0%, #06b6d4 100%);
+            }
+            .progress-gradient {
+                background: linear-gradient(90deg, #a855f7 0%, #06b6d4 100%);
+            }
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-black font-display text-white min-h-screen overflow-x-hidden selection:bg-brand-purple/30">
+<header class="sticky top-0 z-50 bg-black/80 backdrop-blur-md border-b border-gray-800 px-6 py-4">
+<div class="max-w-7xl mx-auto flex items-center justify-between">
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-3">
+<div class="size-10 bg-brand-gradient rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-3xl font-bold">rocket_launch</span>
+</div>
+<h1 class="text-2xl font-extrabold tracking-tight text-white">HydraLearn</h1>
+</div>
+<nav class="hidden md:flex items-center gap-6 ml-8">
+<a class="text-white font-bold border-b-2 border-brand-cyan pb-1" href="#">Playground</a>
+<a class="text-gray-400 hover:text-brand-cyan transition-colors" href="#">Quests</a>
+<a class="text-gray-400 hover:text-brand-cyan transition-colors" href="#">Sidekick Chat</a>
+<a class="text-gray-400 hover:text-brand-cyan transition-colors" href="#">Hall of Fame</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 bg-brand-purple/10 px-4 py-2 rounded-full border border-brand-purple/20">
+<span class="material-symbols-outlined text-brand-purple">local_fire_department</span>
+<span class="font-bold text-brand-purple">7 Day Streak!</span>
+</div>
+<div class="flex gap-2">
+<button class="size-10 flex items-center justify-center rounded-full bg-gray-900 text-gray-400 hover:bg-gray-800 transition-all">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="size-10 flex items-center justify-center rounded-full bg-gray-900 text-gray-400 hover:bg-gray-800 transition-all">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+<div class="size-10 rounded-full border-2 border-brand-cyan p-0.5">
+<img alt="Profile Avatar" class="w-full h-full rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBTWy-oBduZyVDJwaNlA3Ux-GyHv5qczGrIrSj3tU-zHna46cB_uZ_j9XpV-nDoVnuWrlQMvohydLC7fzdbqt4QJOCvxKUdm6mgzRtr80kEI6tL-BbWnuNcSAgbl4PkBM6ashcHqPerJ8mFVCLXjn4oZRUwayDFJ5tG37Fg9BNnYGY_SyZfksW55a_7QruKHfY7smdo5WiMGSjaeqdNLpS7DhSrVqZyJrCa3JfhFH0hd-MZ6uhfTU0oKCFAKLla4Gi27IcsW_qH7PDe"/>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-7xl mx-auto px-6 py-12">
+<div class="mb-12 text-center">
+<h2 class="text-5xl md:text-6xl font-black mb-8 tracking-tight">
+                Welcome back, <span class="text-gradient">Super Hero!</span>
+</h2>
+<div class="max-w-3xl mx-auto bg-[#2a2a2a] p-8 rounded-2xl border border-gray-800 shadow-2xl">
+<div class="flex justify-between items-end mb-4">
+<div class="text-left">
+<p class="text-xs uppercase tracking-[0.2em] font-black text-gray-500 mb-1">Current Rank</p>
+<h3 class="text-2xl font-bold text-white">Level 14 - Junior Guardian</h3>
+</div>
+<div class="text-right">
+<p class="text-gray-400 text-sm font-bold uppercase tracking-widest mb-1">Progress</p>
+<p class="text-white font-black text-xl">850 <span class="text-gray-500">/ 1000 XP</span></p>
+</div>
+</div>
+<div class="h-6 w-full bg-black/40 rounded-full overflow-hidden p-1.5 border border-gray-700">
+<div class="h-full progress-gradient rounded-full shadow-[0_0_20px_rgba(6,182,212,0.4)]" style="width: 85%;"></div>
+</div>
+<p class="mt-4 text-sm text-gray-400">Just <span class="font-bold text-brand-cyan">150 XP</span> more until you unlock the <span class="font-bold text-white">Lightning Cape!</span></p>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<div class="lg:col-span-3 space-y-6 order-2 lg:order-1">
+<div class="bg-[#2a2a2a] p-6 rounded-2xl border border-gray-800 shadow-xl">
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-amber-400">workspace_premium</span>
+<h3 class="text-lg font-bold">Social Hero Board</h3>
+</div>
+<div class="space-y-4">
+<div class="p-3 bg-brand-purple/5 rounded-xl border border-brand-purple/20 border-dashed">
+<p class="text-xs uppercase font-bold text-brand-purple mb-1">Personal Best</p>
+<p class="text-sm font-medium">Fastest Quiz: <span class="font-bold">42 Seconds!</span></p>
+</div>
+<div class="space-y-3">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-gray-900 flex items-center justify-center font-bold text-xs">1</div>
+<div class="flex-1">
+<p class="text-sm font-bold">You (Kindness King)</p>
+<p class="text-xs text-gray-500">12 Sidekick Helps</p>
+</div>
+<span class="material-symbols-outlined text-brand-purple text-sm">favorite</span>
+</div>
+<div class="flex items-center gap-3 opacity-60">
+<div class="size-8 rounded-full bg-gray-900 flex items-center justify-center font-bold text-xs">2</div>
+<div class="flex-1">
+<p class="text-sm font-bold">Alex_Quest</p>
+<p class="text-xs text-gray-500">9 Sidekick Helps</p>
+</div>
+<span class="material-symbols-outlined text-gray-600 text-sm">favorite</span>
+</div>
+</div>
+<button class="w-full py-2 text-sm font-bold text-brand-cyan hover:text-white transition-colors">View All Streaks</button>
+</div>
+</div>
+<div class="bg-gradient-to-br from-brand-purple/20 to-transparent p-6 rounded-2xl border border-brand-purple/20">
+<h3 class="font-bold mb-2 flex items-center gap-2">
+<span class="material-symbols-outlined">lightbulb</span> Tip of the Day
+                    </h3>
+<p class="text-sm leading-relaxed text-gray-400">Helping a friend in the Sidekick Chat earns you <span class="text-brand-purple font-bold">double XP</span> for the next 10 minutes!</p>
+</div>
+</div>
+<div class="lg:col-span-6 space-y-6 order-1 lg:order-2">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="group relative md:col-span-2 overflow-hidden rounded-2xl h-80 cursor-pointer border border-gray-800">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBkUr8ubDICb9jW4UYJ9N9Kzys74sZi04Ubb7E3nWHiuLjnso9WGmGbHfDj8Zcvqei_8A-bLpCdFMnRdpHnkz_EfaeTfyNtW05yR8nv4ZUI5T4Sbc_czI1_mvVp3T16qustqlZKSIvCO6akVyx6r9ugi4MZaVUftn89gTWIy0YFXodKLO9Ac_Y6pVtLnEBnjFa8HgqFbKEVA9Ge2lo-ntioBMB9z7dxBjkC_u0qmCwlqufQ0tn3YT9N5rzMxcPiHFWuLGqAV5Nu-EOL');"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+<div class="absolute inset-0 bg-brand-gradient opacity-0 group-hover:opacity-20 transition-opacity"></div>
+<div class="absolute bottom-8 left-8 right-8 flex justify-between items-end">
+<div>
+<span class="bg-brand-purple text-white text-[10px] font-black px-3 py-1 rounded-full uppercase mb-3 inline-block tracking-tighter">Current Challenge</span>
+<h3 class="text-4xl font-black text-white mb-2 italic">ENTER THE ARENA</h3>
+<p class="text-gray-300">Test your powers against the Mega Boss!</p>
+</div>
+<div class="size-20 rounded-full bg-brand-gradient flex items-center justify-center text-white shadow-[0_0_30px_rgba(168,85,247,0.5)] group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-5xl font-bold">play_arrow</span>
+</div>
+</div>
+</div>
+<div class="group relative overflow-hidden rounded-2xl h-56 cursor-pointer bg-[#2a2a2a] border border-gray-800 hover:border-brand-purple/50 transition-all">
+<div class="absolute inset-0 opacity-20 bg-cover bg-center grayscale group-hover:grayscale-0 transition-all" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA4nnyDXw2_35CSdkGg9pufzqzwXc42FEAvS0o5sAMEYFCKapEGTpusGxQTSAvkOpe67ChqswDBJSg4ByvDHVHEesdi40VkgphbeeGZizpX6kMMbCG2eiUeDZ6J_K7oaOH1-A2-WVn23rSNQYY5Vo088nL1SlDWfOB9MFTc2_tdz5dur1TdPzn0dWY1rdtZvaNrlUi3A_x0WjVxr2lf1rfyMwvu1ar896tEn107WvrYQDTLmH8k61z9nZVkJ_dqY6Jcvejz8DP8X6CM');"></div>
+<div class="absolute inset-0 p-8 flex flex-col justify-end bg-gradient-to-t from-[#2a2a2a] to-transparent">
+<div class="bg-brand-purple size-12 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-3xl text-white">quiz</span>
+</div>
+<h3 class="text-2xl font-black text-white">Daily Quizzes</h3>
+<p class="text-sm text-gray-400">3 Challenges remaining</p>
+</div>
+</div>
+<div class="group relative overflow-hidden rounded-2xl h-56 cursor-pointer bg-[#2a2a2a] border border-gray-800 hover:border-brand-cyan/50 transition-all">
+<div class="absolute inset-0 opacity-20 bg-cover bg-center grayscale group-hover:grayscale-0 transition-all" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAUwAPs4xU5evKJOLqtvDW32v9i2oFF5YD31dBfJYZOzqg7jqU9upbcoUdue2jLZQXYcP9cmTZwo9IgPoE-6JeVxaRiuNgwtOCMwmd3Xzbi0VzkSbOWnWeenJZ0tqnAgIVVaeCR3IFisTr09Xw3rPU5AAddAQ1BMQC6LIR9nCaGowMiMwwBAcvHEGxlOw6RIx2k5bye_06yDroUS4tH1OMhqFm2SOOAaoyIdEZmEa0ghJlnaXVV8agJ5yuMAQHKpUqIfELlq0qWTWw9');"></div>
+<div class="absolute inset-0 p-8 flex flex-col justify-end bg-gradient-to-t from-[#2a2a2a] to-transparent">
+<div class="bg-brand-cyan size-12 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-3xl text-white">forum</span>
+</div>
+<h3 class="text-2xl font-black text-white">Sidekick Chat</h3>
+<p class="text-sm text-gray-400">Connect with your team</p>
+</div>
+</div>
+</div>
+<div class="p-[2px] bg-brand-gradient rounded-2xl group shadow-lg">
+<div class="bg-black p-6 rounded-[calc(1rem+4px)] flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="size-12 bg-gray-900 rounded-xl flex items-center justify-center group-hover:bg-brand-cyan/20 transition-colors">
+<span class="material-symbols-outlined text-brand-cyan text-3xl">map</span>
+</div>
+<div>
+<h4 class="font-black text-xl">Adventure Map</h4>
+<p class="text-sm text-gray-500">Currently in: <span class="text-brand-cyan font-bold">Fraction Forest</span></p>
+</div>
+</div>
+<button class="bg-brand-gradient hover:shadow-[0_0_20px_rgba(6,182,212,0.4)] text-white font-black px-8 py-3 rounded-full transition-all">Continue Quest</button>
+</div>
+</div>
+</div>
+<div class="lg:col-span-3 space-y-6 order-3">
+<div class="bg-[#2a2a2a] p-6 rounded-2xl border border-gray-800 shadow-xl">
+<div class="flex items-center justify-between mb-8">
+<h3 class="text-lg font-extrabold uppercase tracking-wider italic">Hydra Heads</h3>
+<span class="text-xs font-black bg-black border border-gray-700 px-3 py-1 rounded-full text-brand-cyan">4/12</span>
+</div>
+<div class="grid grid-cols-2 gap-6">
+<div class="flex flex-col items-center gap-3 group cursor-pointer">
+<div class="size-20 rounded-2xl bg-brand-purple p-0.5 shadow-[0_0_15px_rgba(168,85,247,0.3)] group-hover:scale-110 transition-all">
+<div class="w-full h-full rounded-[calc(1rem-2px)] bg-black flex items-center justify-center overflow-hidden border border-white/10">
+<img alt="Grammar Hydra" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJFEofqiuykdn6k0PhSSiozBcoCoY0I61vt_q3yGA-VNk9Dwf0O6lsV7s96sMVSHswLFqAw19lvxbQYxT6XSeYej06FNMmMmpvfU1zP4zsroVcX9HPiU_D9JFy573fKaEiF-R0We_BvKlDcZSZyJcXyAv7uEy7mYly5CCB7PlktE7XGBsO9L2XXngt4HLXZy8GMct-rC8BaJPMYOCs-5JeZca0yVyCVQDT6nzc4pWcgpyuri1c0rsPkQRiIzMUP3ZnvqjFizNLSvvG"/>
+</div>
+</div>
+<p class="text-[10px] font-black uppercase text-center text-gray-400 group-hover:text-brand-purple transition-colors">Grammar Hydra</p>
+</div>
+<div class="flex flex-col items-center gap-3 group cursor-pointer">
+<div class="size-20 rounded-2xl bg-brand-cyan p-0.5 shadow-[0_0_15px_rgba(6,182,212,0.3)] group-hover:scale-110 transition-all">
+<div class="w-full h-full rounded-[calc(1rem-2px)] bg-black flex items-center justify-center overflow-hidden border border-white/10">
+<img alt="Math Hydra" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMvKqD6yclnv-2v_y7-76uqDM48zMuZ4AQc6wGqpZ_IiRX0Tc2L6xC5BkzS7EXqDFL2Vii9DTIQzfrGgS9zJrTn_-hjdY3ZMi3cuM4WSF5sf7ZTlPY3LjTPydXRFipcsvTqz7IfPytT_VeWHaZPeUcAj_QAxOxebEPO8ZQvMhowhaeBTL9S9P0Vms-vq65d2oudSpKTza6R_R6V9UcSz6qw7BWQttT7GM3niU-5fqL7ryjEy0-FNa9-oc4447ZYTJWNL5MqK2yNUYC"/>
+</div>
+</div>
+<p class="text-[10px] font-black uppercase text-center text-gray-400 group-hover:text-brand-cyan transition-colors">Math Hydra</p>
+</div>
+<div class="flex flex-col items-center gap-3 opacity-30 grayscale group cursor-not-allowed">
+<div class="size-20 rounded-2xl bg-gray-900 flex items-center justify-center border border-gray-800">
+<span class="material-symbols-outlined text-3xl text-gray-700">lock</span>
+</div>
+<p class="text-[10px] font-black uppercase text-center">Science Hydra</p>
+</div>
+<div class="flex flex-col items-center gap-3 opacity-30 grayscale group cursor-not-allowed">
+<div class="size-20 rounded-2xl bg-gray-900 flex items-center justify-center border border-gray-800">
+<span class="material-symbols-outlined text-3xl text-gray-700">lock</span>
+</div>
+<p class="text-[10px] font-black uppercase text-center">History Hydra</p>
+</div>
+</div>
+<button class="w-full mt-8 py-3 bg-black border border-gray-700 rounded-xl text-xs font-black uppercase tracking-widest hover:border-brand-cyan transition-colors">Gallery View</button>
+</div>
+<div class="bg-black border-2 border-dashed border-gray-800 p-8 rounded-2xl text-center group">
+<p class="text-gray-500 text-xs font-bold mb-6 tracking-widest uppercase">Mystery Drop in 14:02:11</p>
+<div class="size-24 mx-auto mb-6 bg-[#2a2a2a] rounded-2xl flex items-center justify-center border border-gray-800 group-hover:border-brand-purple transition-colors">
+<span class="material-symbols-outlined text-5xl text-gray-600 group-hover:text-brand-purple transition-colors">inventory_2</span>
+</div>
+<p class="text-sm font-black text-gray-400">Complete 2 more Quests to reveal!</p>
+</div>
+</div>
+</div>
+</main>
+<footer class="max-w-7xl mx-auto px-6 py-12 border-t border-gray-900 mt-12 flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-brand-purple">shield</span>
+<p class="text-sm text-gray-500 font-medium">© 2024 HydraForge Educational Platforms. All Heroic Actions Reserved.</p>
+</div>
+<div class="flex gap-8 text-xs font-black uppercase tracking-widest text-gray-600">
+<a class="hover:text-brand-cyan transition-colors" href="#">Parent Portal</a>
+<a class="hover:text-brand-cyan transition-colors" href="#">Safety Center</a>
+<a class="hover:text-brand-cyan transition-colors" href="#">Help</a>
+</div>
+</footer>
+
+</body></html>

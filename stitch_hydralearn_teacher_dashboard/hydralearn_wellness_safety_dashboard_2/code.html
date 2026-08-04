@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Hydra Market Lesson Exchange</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#5b13ec",
+                        "accent-cyan": "#00ffff",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#000000",
+                        "card-dark": "#161022",
+                        "surface-dark": "#2a2a2a",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        .gradient-text {
+            @apply bg-gradient-to-r from-purple-500 to-cyan-500 text-transparent bg-clip-text;
+        }
+        .gradient-bg {
+            @apply bg-gradient-to-r from-purple-500 to-cyan-500;
+        }
+        .card-hover:hover {
+            @apply border-purple-500/50 transform -translate-y-1 transition-all duration-300;
+        }
+    </style>
+</head>
+<body class="bg-black text-white font-display min-h-screen">
+<div class="layout-container flex flex-col min-h-screen">
+<header class="flex items-center justify-between border-b border-white/10 px-10 py-4 bg-black sticky top-0 z-50">
+<div class="flex items-center gap-4">
+<div class="size-8 gradient-bg rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-xl">hub</span>
+</div>
+<h2 class="text-white text-xl font-bold tracking-tight">HydraLearn</h2>
+</div>
+<nav class="flex flex-1 justify-center gap-8">
+<a class="text-white/70 hover:text-white text-sm font-medium transition-colors" href="#">Dashboard</a>
+<a class="text-white/70 hover:text-white text-sm font-medium transition-colors" href="#">Classes</a>
+<a class="text-white text-sm font-medium border-b-2 border-primary pb-1" href="#">Marketplace</a>
+<a class="text-white/70 hover:text-white text-sm font-medium transition-colors" href="#">Wellness</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="px-4 py-2 border border-white rounded-lg text-sm font-medium hover:bg-white hover:text-black transition-all">
+                    Upload Your Lesson
+                </button>
+<div class="flex items-center gap-3 pl-4 border-l border-white/10">
+<div class="size-10 rounded-full bg-gradient-to-br from-primary to-accent-cyan p-0.5">
+<img alt="Profile" class="w-full h-full rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDIohB-LLY5F_aOilca1E5BTI3wo-Q8k6mpg0ZC-2zE1Ye5KrVnxV_58aWd-KZ7p_3--52TPRnji3sIsmn50KIePJ4P3H4kNBA-DrR3g39dlYx5HAZHTxZ1wn3rbER6it4W2gHNPN8IL_-BcCgOaZ-wKRmVJIYnK_mJp3BcKJhykzI2HklhTFLDrSQusulpkT5nTIuLV7j3lWyUHa5xqJUoOmdfcAMo10Em4D0Y0K1ajdBMGFWB8ni_PObIubU4pi9Qkd37ZjXBGJyQ"/>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-1 max-w-7xl mx-auto w-full px-6 py-12">
+<div class="flex flex-col gap-6 mb-12">
+<h1 class="text-5xl font-black gradient-text">Hydra Market</h1>
+<p class="text-white/60 text-lg max-w-2xl">Discover and share high-quality AI-enhanced lesson packs verified by top educators across the globe.</p>
+</div>
+<div class="flex flex-col gap-6 mb-12">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-white/40">search</span>
+<input class="w-full bg-[#2a2a2a] border border-gray-800 rounded-xl py-4 pl-12 pr-4 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" placeholder="Search lesson packs, subjects, or pedagogical theories..." type="text"/>
+</div>
+<div class="flex flex-wrap gap-3">
+<button class="px-6 py-2 rounded-full bg-primary text-white text-sm font-medium">All Subjects</button>
+<button class="px-6 py-2 rounded-full bg-[#2a2a2a] border border-gray-800 text-white/70 hover:text-white hover:border-white/30 text-sm font-medium transition-all">Math</button>
+<button class="px-6 py-2 rounded-full bg-[#2a2a2a] border border-gray-800 text-white/70 hover:text-white hover:border-white/30 text-sm font-medium transition-all">Science</button>
+<button class="px-6 py-2 rounded-full bg-[#2a2a2a] border border-gray-800 text-white/70 hover:text-white hover:border-white/30 text-sm font-medium transition-all">English</button>
+<button class="px-6 py-2 rounded-full bg-[#2a2a2a] border border-gray-800 text-white/70 hover:text-white hover:border-white/30 text-sm font-medium transition-all">History</button>
+<button class="px-6 py-2 rounded-full bg-[#2a2a2a] border border-gray-800 text-white/70 hover:text-white hover:border-white/30 text-sm font-medium transition-all">Computer Science</button>
+<button class="px-6 py-2 rounded-full bg-[#2a2a2a] border border-gray-800 text-white/70 hover:text-white hover:border-white/30 text-sm font-medium transition-all">Arts</button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<div class="bg-[#2a2a2a] rounded-lg border border-gray-800 overflow-hidden flex flex-col card-hover">
+<div class="h-48 bg-gray-900 flex items-center justify-center relative">
+<span class="material-symbols-outlined text-6xl text-white/10">functions</span>
+<div class="absolute top-4 right-4 bg-black/60 backdrop-blur-md px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider">Premium</div>
+</div>
+<div class="p-6 flex flex-col flex-1">
+<div class="flex justify-between items-start mb-2">
+<h3 class="text-xl font-bold">Quantum Calculus Basics</h3>
+<div class="flex items-center text-yellow-500">
+<span class="material-symbols-outlined text-sm fill-1">star</span>
+<span class="text-xs font-bold ml-1">4.9</span>
+</div>
+</div>
+<p class="text-sm text-white/60 mb-4">By Prof. Sarah Jenkins</p>
+<div class="flex flex-wrap gap-2 mb-6">
+<span class="px-2 py-1 bg-purple-500/10 border border-purple-500/20 rounded text-[10px] text-purple-400 font-bold uppercase">Piaget</span>
+<span class="px-2 py-1 bg-cyan-500/10 border border-cyan-500/20 rounded text-[10px] text-cyan-400 font-bold uppercase">Constructivism</span>
+</div>
+<div class="mt-auto">
+<button class="w-full py-3 rounded-lg gradient-bg font-bold text-sm hover:opacity-90 transition-opacity">
+                                Download Lesson Pack
+                            </button>
+</div>
+</div>
+</div>
+<div class="bg-[#2a2a2a] rounded-lg border border-gray-800 overflow-hidden flex flex-col card-hover">
+<div class="h-48 bg-gray-900 flex items-center justify-center relative">
+<span class="material-symbols-outlined text-6xl text-white/10">biotech</span>
+</div>
+<div class="p-6 flex flex-col flex-1">
+<div class="flex justify-between items-start mb-2">
+<h3 class="text-xl font-bold">Cellular Dynamics AI</h3>
+<div class="flex items-center text-yellow-500">
+<span class="material-symbols-outlined text-sm fill-1">star</span>
+<span class="text-xs font-bold ml-1">4.8</span>
+</div>
+</div>
+<p class="text-sm text-white/60 mb-4">By Dr. Marcus Thorne</p>
+<div class="flex flex-wrap gap-2 mb-6">
+<span class="px-2 py-1 bg-purple-500/10 border border-purple-500/20 rounded text-[10px] text-purple-400 font-bold uppercase">Vygotsky</span>
+<span class="px-2 py-1 bg-cyan-500/10 border border-cyan-500/20 rounded text-[10px] text-cyan-400 font-bold uppercase">ZPD Focused</span>
+</div>
+<div class="mt-auto">
+<button class="w-full py-3 rounded-lg gradient-bg font-bold text-sm hover:opacity-90 transition-opacity">
+                                Download Lesson Pack
+                            </button>
+</div>
+</div>
+</div>
+<div class="bg-[#2a2a2a] rounded-lg border border-gray-800 overflow-hidden flex flex-col card-hover">
+<div class="h-48 bg-gray-900 flex items-center justify-center relative">
+<span class="material-symbols-outlined text-6xl text-white/10">translate</span>
+</div>
+<div class="p-6 flex flex-col flex-1">
+<div class="flex justify-between items-start mb-2">
+<h3 class="text-xl font-bold">Modern English Syntax</h3>
+<div class="flex items-center text-yellow-500">
+<span class="material-symbols-outlined text-sm fill-1">star</span>
+<span class="text-xs font-bold ml-1">5.0</span>
+</div>
+</div>
+<p class="text-sm text-white/60 mb-4">By Elena Rodriguez</p>
+<div class="flex flex-wrap gap-2 mb-6">
+<span class="px-2 py-1 bg-purple-500/10 border border-purple-500/20 rounded text-[10px] text-purple-400 font-bold uppercase">Dewey</span>
+<span class="px-2 py-1 bg-cyan-500/10 border border-cyan-500/20 rounded text-[10px] text-cyan-400 font-bold uppercase">Active Learning</span>
+</div>
+<div class="mt-auto">
+<button class="w-full py-3 rounded-lg gradient-bg font-bold text-sm hover:opacity-90 transition-opacity">
+                                Download Lesson Pack
+                            </button>
+</div>
+</div>
+</div>
+<div class="bg-[#2a2a2a] rounded-lg border border-gray-800 overflow-hidden flex flex-col card-hover">
+<div class="h-48 bg-gray-900 flex items-center justify-center relative">
+<span class="material-symbols-outlined text-6xl text-white/10">history_edu</span>
+</div>
+<div class="p-6 flex flex-col flex-1">
+<div class="flex justify-between items-start mb-2">
+<h3 class="text-xl font-bold">Global Revolutions</h3>
+<div class="flex items-center text-yellow-500">
+<span class="material-symbols-outlined text-sm fill-1">star</span>
+<span class="text-xs font-bold ml-1">4.7</span>
+</div>
+</div>
+<p class="text-sm text-white/60 mb-4">By James Wilson</p>
+<div class="flex flex-wrap gap-2 mb-6">
+<span class="px-2 py-1 bg-purple-500/10 border border-purple-500/20 rounded text-[10px] text-purple-400 font-bold uppercase">Freire</span>
+<span class="px-2 py-1 bg-cyan-500/10 border border-cyan-500/20 rounded text-[10px] text-cyan-400 font-bold uppercase">Critical Pedagogy</span>
+</div>
+<div class="mt-auto">
+<button class="w-full py-3 rounded-lg gradient-bg font-bold text-sm hover:opacity-90 transition-opacity">
+                                Download Lesson Pack
+                            </button>
+</div>
+</div>
+</div>
+<div class="bg-[#2a2a2a] rounded-lg border border-gray-800 overflow-hidden flex flex-col card-hover">
+<div class="h-48 bg-gray-900 flex items-center justify-center relative">
+<span class="material-symbols-outlined text-6xl text-white/10">code</span>
+</div>
+<div class="p-6 flex flex-col flex-1">
+<div class="flex justify-between items-start mb-2">
+<h3 class="text-xl font-bold">Neural Networks 101</h3>
+<div class="flex items-center text-yellow-500">
+<span class="material-symbols-outlined text-sm fill-1">star</span>
+<span class="text-xs font-bold ml-1">4.9</span>
+</div>
+</div>
+<p class="text-sm text-white/60 mb-4">By HydraAI Lab</p>
+<div class="flex flex-wrap gap-2 mb-6">
+<span class="px-2 py-1 bg-purple-500/10 border border-purple-500/20 rounded text-[10px] text-purple-400 font-bold uppercase">Bruner</span>
+<span class="px-2 py-1 bg-cyan-500/10 border border-cyan-500/20 rounded text-[10px] text-cyan-400 font-bold uppercase">Scaffolding</span>
+</div>
+<div class="mt-auto">
+<button class="w-full py-3 rounded-lg gradient-bg font-bold text-sm hover:opacity-90 transition-opacity">
+                                Download Lesson Pack
+                            </button>
+</div>
+</div>
+</div>
+<div class="bg-[#2a2a2a] rounded-lg border border-gray-800 overflow-hidden flex flex-col card-hover">
+<div class="h-48 bg-gray-900 flex items-center justify-center relative">
+<span class="material-symbols-outlined text-6xl text-white/10">palette</span>
+</div>
+<div class="p-6 flex flex-col flex-1">
+<div class="flex justify-between items-start mb-2">
+<h3 class="text-xl font-bold">Generative Art Theory</h3>
+<div class="flex items-center text-yellow-500">
+<span class="material-symbols-outlined text-sm fill-1">star</span>
+<span class="text-xs font-bold ml-1">4.6</span>
+</div>
+</div>
+<p class="text-sm text-white/60 mb-4">By Sofia Chen</p>
+<div class="flex flex-wrap gap-2 mb-6">
+<span class="px-2 py-1 bg-purple-500/10 border border-purple-500/20 rounded text-[10px] text-purple-400 font-bold uppercase">Gardner</span>
+<span class="px-2 py-1 bg-cyan-500/10 border border-cyan-500/20 rounded text-[10px] text-cyan-400 font-bold uppercase">Multiple Intelligences</span>
+</div>
+<div class="mt-auto">
+<button class="w-full py-3 rounded-lg gradient-bg font-bold text-sm hover:opacity-90 transition-opacity">
+                                Download Lesson Pack
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<footer class="mt-auto py-12 border-t border-white/5 bg-black">
+<div class="max-w-7xl mx-auto px-10 flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">verified</span>
+<p class="text-sm text-white/40">Powered by HydraAI • Marketplace for the Future of Education</p>
+</div>
+<div class="flex gap-8">
+<a class="text-xs text-white/40 hover:text-white transition-colors" href="#">Become a Contributor</a>
+<a class="text-xs text-white/40 hover:text-white transition-colors" href="#">License Agreement</a>
+<a class="text-xs text-white/40 hover:text-white transition-colors" href="#">Teacher Support</a>
+</div>
+</div>
+</footer>
+</div>
+
+</body></html>

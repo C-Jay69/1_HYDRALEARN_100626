@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>HydraLearn - Mystery Drop Unlocked</title>
+<!-- Tailwind CSS v3 with Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Lexend Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            lexend: ['Lexend', 'sans-serif'],
+          },
+          borderRadius: {
+            'twelve': '12px',
+          },
+          animation: {
+            'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'float': 'float 3s ease-in-out infinite',
+            'beam-spin': 'beam-spin 10s linear infinite',
+            'particle': 'particle 5s ease-in-out infinite',
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-20px)' },
+            },
+            'beam-spin': {
+              'from': { transform: 'rotate(0deg)' },
+              'to': { transform: 'rotate(360deg)' },
+            },
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="custom-animations">
+    @keyframes particle {
+      0% { transform: translateY(0) scale(1); opacity: 0; }
+      50% { opacity: 1; }
+      100% { transform: translateY(-100px) scale(0.5); opacity: 0; }
+    }
+
+    .energy-particle {
+      position: absolute;
+      background: #06b6d4;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .light-streak {
+      background: linear-gradient(to top, transparent, rgba(168, 85, 247, 0.4), transparent);
+      width: 2px;
+      height: 200px;
+      position: absolute;
+    }
+  </style>
+<style data-purpose="background-effects">
+    .forge-bg {
+      background: radial-gradient(circle at center, rgba(88, 28, 135, 0.2) 0%, #000000 70%, #000000 100%);
+    }
+    
+    .glow-radial {
+      background: radial-gradient(circle, rgba(168, 85, 247, 0.3) 0%, transparent 70%);
+    }
+
+    .neon-text-glow {
+      text-shadow: 0 0 15px rgba(168, 85, 247, 0.8), 0 0 30px rgba(6, 182, 212, 0.5);
+    }
+  </style>
+</head>
+<body class="bg-black text-white font-lexend h-screen w-full overflow-hidden flex items-center justify-center">
+<!-- BEGIN: Cinematic Drop Container -->
+<main class="forge-bg relative w-full h-full flex flex-col items-center justify-center overflow-hidden" data-purpose="mystery-drop-screen">
+<!-- Background Light Beams -->
+<div class="absolute inset-0 flex items-center justify-center opacity-40 animate-beam-spin">
+<div class="w-[800px] h-[2px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent absolute rotate-45"></div>
+<div class="w-[800px] h-[2px] bg-gradient-to-r from-transparent via-purple-500 to-transparent absolute -rotate-45"></div>
+<div class="w-[800px] h-[2px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent absolute rotate-90"></div>
+</div>
+<!-- BEGIN: Loot Reveal Section -->
+<section class="relative z-10 flex flex-col items-center" data-purpose="loot-reveal">
+<!-- Energy Glow Behind Item -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 glow-radial animate-pulse-slow"></div>
+<!-- Legendary Badge Floating -->
+<div class="relative mb-8 animate-float">
+<div class="w-32 h-32 bg-gradient-to-br from-purple-600 to-cyan-500 rounded-full flex items-center justify-center p-1 shadow-[0_0_50px_rgba(168,85,247,0.6)]">
+<div class="w-full h-full bg-black rounded-full flex items-center justify-center">
+<!-- Hydra Icon (SVG) -->
+<svg class="w-20 h-20 text-cyan-400" fill="currentColor" viewbox="0 0 24 24">
+<path d="M12,2L4.5,20.29L5.21,21L12,18L18.79,21L19.5,20.29L12,2Z"></path>
+<path d="M12,4.3L16.4,15L12,13.1L7.6,15L12,4.3Z" opacity="0.5"></path>
+</svg>
+</div>
+</div>
+<div class="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-purple-600 px-4 py-1 rounded-full text-[10px] font-extrabold tracking-widest uppercase border border-cyan-400 shadow-lg">
+          Legendary
+        </div>
+</div>
+<!-- 3D Glass Chest Representation -->
+<div class="relative w-64 h-48 mb-12" data-purpose="chest-visual">
+<!-- Chest Base -->
+<div class="absolute bottom-0 w-full h-32 bg-zinc-900/80 backdrop-blur-md border border-purple-500/30 rounded-twelve overflow-hidden shadow-2xl">
+<div class="absolute inset-0 bg-gradient-to-t from-purple-900/40 to-transparent"></div>
+</div>
+<!-- Bursting Energy Beams from center -->
+<div class="absolute bottom-16 left-1/2 -translate-x-1/2 w-4 h-64 bg-gradient-to-t from-cyan-400 via-purple-500 to-transparent opacity-80 blur-sm"></div>
+<div class="absolute bottom-16 left-1/2 -translate-x-1/2 w-2 h-64 bg-white opacity-40 blur-none"></div>
+<!-- Chest Lid (Open) -->
+<div class="absolute top-0 w-full h-20 bg-zinc-800/80 backdrop-blur-md border border-cyan-500/30 rounded-twelve -translate-y-12 rotate-[-5deg] transform-origin-bottom-left shadow-2xl">
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-2 bg-cyan-400/50 rounded-full blur-md"></div>
+</div>
+</div>
+<!-- Text Headings -->
+<div class="text-center space-y-2">
+<h2 class="text-zinc-400 text-sm font-semibold tracking-[0.3em] uppercase">New Reward Discovered</h2>
+<h1 class="text-5xl md:text-7xl font-extrabold tracking-tighter neon-text-glow bg-gradient-to-r from-purple-400 via-white to-cyan-400 bg-clip-text text-transparent italic">
+          MYSTERY DROP UNLOCKED
+        </h1>
+</div>
+<!-- Action Buttons -->
+<div class="mt-12 flex flex-col md:flex-row gap-4 items-center">
+<!-- Equip Now Button -->
+<button class="group relative px-10 py-4 bg-gradient-to-r from-purple-600 to-cyan-500 rounded-twelve font-bold text-lg tracking-wide hover:scale-105 transition-transform duration-300 shadow-[0_0_20px_rgba(168,85,247,0.4)]">
+<span class="relative z-10 uppercase">Equip Now</span>
+<div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity rounded-twelve"></div>
+</button>
+<!-- Continue Button -->
+<button class="px-10 py-4 border-2 border-white/20 hover:border-white/60 bg-transparent rounded-twelve font-bold text-lg tracking-wide transition-all duration-300 uppercase">
+          Continue
+        </button>
+</div>
+</section>
+<!-- END: Loot Reveal Section -->
+<!-- Particle Overlay -->
+<div class="absolute inset-0 pointer-events-none" id="particle-container"></div>
+</main>
+<!-- END: Cinematic Drop Container -->
+<!-- BEGIN: Effects Logic -->
+<script data-purpose="particle-generator">
+    // Simple script to generate some floating particles for the ambiance
+    const container = document.getElementById('particle-container');
+    const particleCount = 20;
+
+    for (let i = 0; i < particleCount; i++) {
+      const particle = document.createElement('div');
+      particle.className = 'energy-particle';
+      
+      const size = Math.random() * 4 + 2 + 'px';
+      particle.style.width = size;
+      particle.style.height = size;
+      
+      particle.style.left = Math.random() * 100 + 'vw';
+      particle.style.top = Math.random() * 100 + 'vh';
+      
+      const duration = Math.random() * 3 + 2 + 's';
+      const delay = Math.random() * 5 + 's';
+      particle.style.animation = `particle ${duration} linear ${delay} infinite`;
+      
+      container.appendChild(particle);
+    }
+  </script>
+<!-- END: Effects Logic -->
+</body></html>

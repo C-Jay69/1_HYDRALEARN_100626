@@ -62,14 +62,17 @@ export default function Dashboard() {
       <PageHeader
         title="Welcome, Teacher!"
         description="Here's a snapshot of your classroom's progress."
+        titleClassName="gradient-text"
       />
       <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">
+            <CardTitle className="text-sm font-medium uppercase italic tracking-tight">
               Students on Track
             </CardTitle>
-            <BadgeCheck className="h-4 w-4 text-muted-foreground" />
+            <span className="flex size-9 items-center justify-center rounded-lg gradient-bg">
+              <BadgeCheck className="h-4 w-4" />
+            </span>
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">18 / 22</div>
@@ -80,10 +83,12 @@ export default function Dashboard() {
         </Card>
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">
+            <CardTitle className="text-sm font-medium uppercase italic tracking-tight">
               Needs Attention
             </CardTitle>
-            <AlertCircle className="h-4 w-4 text-muted-foreground" />
+            <span className="flex size-9 items-center justify-center rounded-lg gradient-bg">
+              <AlertCircle className="h-4 w-4" />
+            </span>
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">4</div>
@@ -94,8 +99,10 @@ export default function Dashboard() {
         </Card>
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Lessons Planned</CardTitle>
-            <BookOpen className="h-4 w-4 text-muted-foreground" />
+            <CardTitle className="text-sm font-medium uppercase italic tracking-tight">Lessons Planned</CardTitle>
+            <span className="flex size-9 items-center justify-center rounded-lg gradient-bg">
+              <BookOpen className="h-4 w-4" />
+            </span>
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">12</div>
@@ -104,8 +111,10 @@ export default function Dashboard() {
         </Card>
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Class Engagement</CardTitle>
-            <Activity className="h-4 w-4 text-muted-foreground" />
+            <CardTitle className="text-sm font-medium uppercase italic tracking-tight">Class Engagement</CardTitle>
+            <span className="flex size-9 items-center justify-center rounded-lg gradient-bg">
+              <Activity className="h-4 w-4" />
+            </span>
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">+92%</div>
@@ -118,7 +127,7 @@ export default function Dashboard() {
       <div className="grid gap-4 md:gap-8 lg:grid-cols-2 xl:grid-cols-3">
         <Card className="xl:col-span-2">
           <CardHeader>
-            <CardTitle>Class Performance</CardTitle>
+            <CardTitle className="gradient-text">Class Performance</CardTitle>
             <CardDescription>
               Average scores across key subjects this semester.
             </CardDescription>

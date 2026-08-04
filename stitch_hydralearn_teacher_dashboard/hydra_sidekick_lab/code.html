@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sidekick Lab | HydraLearn</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ec5b13",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#000000",
+                        "card-dark": "#2a2a2a",
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-effect {
+            background: rgba(42, 42, 42, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .gradient-border {
+            position: relative;
+            border-radius: 0.75rem;
+        }
+        .gradient-border::before {
+            content: "";
+            position: absolute;
+            inset: -2px;
+            border-radius: 0.85rem;
+            padding: 2px;
+            background: linear-gradient(to right, #a855f7, #06b6d4);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+        .shimmer {
+            background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0) 100%);
+            background-size: 200% 100%;
+        }
+    </style>
+</head>
+<body class="bg-background-dark font-display text-white selection:bg-primary/30">
+<div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+<!-- Top Navigation -->
+<header class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-white/10 bg-black/80 backdrop-blur-md px-6 py-3 lg:px-12">
+<div class="flex items-center gap-4">
+<div class="flex h-10 w-10 items-center justify-center rounded-xl bg-primary shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-white text-2xl">cyclone</span>
+</div>
+<div class="flex flex-col">
+<h2 class="text-lg font-bold leading-tight tracking-tight">HydraLearn</h2>
+<span class="text-[10px] uppercase tracking-widest text-primary font-black">Forge v2.4</span>
+</div>
+</div>
+<nav class="hidden flex-1 justify-center gap-8 lg:flex">
+<a class="text-sm font-medium text-white/70 hover:text-white transition-colors" href="#">Dashboard</a>
+<a class="text-sm font-bold text-primary" href="#">Sidekick Lab</a>
+<a class="text-sm font-medium text-white/70 hover:text-white transition-colors" href="#">Library</a>
+<a class="text-sm font-medium text-white/70 hover:text-white transition-colors" href="#">Community</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="hidden lg:flex min-w-[120px] cursor-pointer items-center justify-center rounded-xl h-10 px-4 glass-effect border-primary/30 text-white text-sm font-bold shadow-[0_0_15px_rgba(236,91,19,0.2)]">
+<span class="truncate">HL 3D Glass</span>
+</button>
+<div class="flex gap-2">
+<button class="flex h-10 w-10 items-center justify-center rounded-xl glass-effect text-white/70 hover:text-primary transition-all">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="flex h-10 w-10 items-center justify-center rounded-xl glass-effect text-white/70 hover:text-primary transition-all">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+<div class="h-10 w-10 overflow-hidden rounded-full border-2 border-primary/20 bg-card-dark">
+<img alt="User profile avatar" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7mPxO9c8OO3bRWjqfNx2T6lzAA5NWRyOkliQKW_kOkkYRIkKH1X1JYheKX0e9EEmuYk1f4gg3Pt-5LFXv-LyIwmLt665DOrIjdrFFcqykr4ckHZOad5Mkw253B-2SydCOe_l8DPl6B4HElVy_qndLEXXnRb2SiurBgD8v17UEcgjjpP-dgghm3kPOy63tFj-lFnDDkRvujAlyMu83OPl5NWgAzBC9kqpIi7jORiyXHg7Ytr1zQ4PyDRvJaeH08__FPW-zisSRjnmA"/>
+</div>
+</div>
+</header>
+<main class="flex flex-1 flex-col lg:flex-row">
+<!-- Left Panel: The Sidekick Preview -->
+<section class="relative flex flex-1 flex-col items-center justify-center p-6 lg:p-12 overflow-hidden">
+<!-- Background Energy Effect -->
+<div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(168,85,247,0.15)_0%,transparent_70%)]"></div>
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[500px] w-[500px] rounded-full bg-cyan-500/10 blur-[120px]"></div>
+<!-- Gamification Tracker Header -->
+<div class="absolute top-8 left-8 right-8 flex flex-wrap gap-4 z-10">
+<div class="flex flex-1 min-w-[150px] flex-col gap-1 rounded-xl glass-effect p-4 gradient-border">
+<div class="flex items-center justify-between">
+<span class="text-xs font-bold uppercase tracking-wider text-white/50">Current Streak</span>
+<span class="material-symbols-outlined text-orange-500 text-sm">local_fire_department</span>
+</div>
+<div class="flex items-baseline gap-2">
+<p class="text-2xl font-black text-white">12 Days</p>
+<span class="text-xs font-medium text-green-400">+2% Today</span>
+</div>
+</div>
+<div class="flex flex-1 min-w-[200px] flex-col gap-1 rounded-xl glass-effect p-4">
+<div class="flex items-center justify-between">
+<span class="text-xs font-bold uppercase tracking-wider text-white/50">Bond Level</span>
+<span class="text-xs font-bold text-cyan-400">LVL 14</span>
+</div>
+<p class="text-sm font-bold text-white mb-1">Trusted Companion</p>
+<div class="h-2 w-full overflow-hidden rounded-full bg-white/10">
+<div class="h-full bg-gradient-to-right from-purple-500 to-cyan-400" style="width: 85%"></div>
+</div>
+<p class="text-[10px] text-white/40 mt-1">XP: 850 / 1000</p>
+</div>
+</div>
+<!-- Main Avatar Stage -->
+<div class="relative group mt-20">
+<div class="absolute -inset-4 rounded-full bg-gradient-to-t from-cyan-500/20 to-purple-500/20 blur-2xl group-hover:scale-110 transition-transform duration-700"></div>
+<div class="relative h-[320px] w-[320px] lg:h-[450px] lg:w-[450px] flex items-center justify-center">
+<!-- Abstract Hydra Representation -->
+<div class="relative w-full h-full rounded-full border-4 border-dashed border-white/5 animate-[spin_20s_linear_infinite]"></div>
+<div class="absolute w-4/5 h-4/5 bg-gradient-to-br from-purple-600/20 to-cyan-500/20 rounded-full flex items-center justify-center">
+<div class="w-3/4 h-3/4 bg-card-dark rounded-full shadow-2xl flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover mix-blend-screen opacity-90" data-alt="Futuristic friendly three-headed hydra avatar mascot" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNUJe6nGpQ_C7NWD-iL-9siYEeyw-QtSKpNJlIFOM7qdlxHk_pQ6P8wAYR1ACASCJ_KhiUWrMXDogopfwr01Gzyn_wha1kI2CORSr75co4QIIMVLi0n0QSMjosBe7u-IqCXcj2MtjWE34QeS2_idBG2REz02AXZ6qhhPRKCMXA18CwjTceEnuqs94Fw5stt2CWQOUsYd5u-4ILarEODuJpcW7av8ZUHvE-SqzrQOhC8CqUzIxw0_ZqkAjzl8z_7CBIcx-kOg8a1L6i"/>
+</div>
+</div>
+<!-- UI Elements surrounding Avatar -->
+<div class="absolute -right-8 top-1/4 rounded-lg glass-effect p-3 animate-bounce">
+<span class="material-symbols-outlined text-cyan-400">auto_awesome</span>
+</div>
+<div class="absolute -left-12 bottom-1/3 rounded-lg glass-effect p-3 animate-pulse">
+<span class="material-symbols-outlined text-purple-400">psychology</span>
+</div>
+</div>
+<!-- Glow Pedestal -->
+<div class="mt-4 h-4 w-64 mx-auto bg-cyan-500/20 blur-xl rounded-[100%] shadow-[0_0_50px_rgba(6,182,212,0.4)]"></div>
+</div>
+<!-- Chat Preview Overlay -->
+<div class="mt-12 w-full max-w-md">
+<div class="rounded-xl glass-effect p-4 border-l-4 border-cyan-500 shadow-2xl">
+<div class="flex items-center gap-2 mb-3">
+<div class="h-2 w-2 rounded-full bg-green-500 animate-pulse"></div>
+<span class="text-[10px] font-black uppercase tracking-widest text-white/40">Live Preview: Meme-Heavy Tone</span>
+</div>
+<div class="flex flex-col gap-3">
+<div class="self-end rounded-xl rounded-tr-none bg-primary/20 p-3 text-xs text-white/90 max-w-[80%] border border-primary/30">
+                                Explain the French Revolution... but keep it short?
+                            </div>
+<div class="self-start rounded-xl rounded-tl-none glass-effect p-3 text-xs text-white max-w-[90%] flex flex-col gap-2">
+<div class="flex gap-1">
+<span class="font-bold text-cyan-400">Sidekick:</span>
+<span>Basically, the vibe was "Off with their heads" 🥖💀</span>
+</div>
+<p class="text-white/70 italic">I’ve calculated 14,000,605 ways you could fail this quiz... just kidding, let's get that bread. 🍞✨</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Right Panel: Customization Controls -->
+<aside class="w-full bg-card-dark lg:w-[450px] border-l border-white/5 p-8 flex flex-col gap-8">
+<div>
+<h1 class="text-3xl font-black text-white mb-2">Sidekick Lab</h1>
+<p class="text-sm text-white/50">Configure your AI study buddy. Personality changes core behavior and tone.</p>
+</div>
+<!-- Personality Selection -->
+<div class="flex flex-col gap-4">
+<h3 class="text-xs font-black uppercase tracking-[0.2em] text-primary">Personality Soul</h3>
+<div class="grid grid-cols-1 gap-3">
+<button class="flex items-center gap-4 rounded-xl glass-effect p-4 text-left border-l-4 border-transparent hover:border-cyan-500 transition-all hover:bg-white/5 group">
+<div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-cyan-500/10 text-cyan-400 group-hover:bg-cyan-500 group-hover:text-black transition-colors">
+<span class="material-symbols-outlined">sentiment_very_satisfied</span>
+</div>
+<div class="flex flex-col">
+<span class="text-sm font-bold text-white">Sarcastic Sage</span>
+<span class="text-[11px] text-white/40">High wit, heavy snark, actually helpful.</span>
+</div>
+</button>
+<button class="flex items-center gap-4 rounded-xl glass-effect p-4 text-left border-l-4 border-primary bg-white/5 transition-all">
+<div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-primary text-black">
+<span class="material-symbols-outlined">campaign</span>
+</div>
+<div class="flex flex-col">
+<span class="text-sm font-bold text-white">Encouraging Coach</span>
+<span class="text-[11px] text-white/40">Your biggest hype-beast. Max energy.</span>
+</div>
+<span class="ml-auto material-symbols-outlined text-primary">check_circle</span>
+</button>
+<button class="flex items-center gap-4 rounded-xl glass-effect p-4 text-left border-l-4 border-transparent hover:border-purple-500 transition-all hover:bg-white/5 group">
+<div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-purple-500/10 text-purple-400 group-hover:bg-purple-500 group-hover:text-black transition-colors">
+<span class="material-symbols-outlined">precision_manufacturing</span>
+</div>
+<div class="flex flex-col">
+<span class="text-sm font-bold text-white">Fact-Checking Robot</span>
+<span class="text-[11px] text-white/40">Zero fluff. Precise. 100% accurate.</span>
+</div>
+</button>
+</div>
+</div>
+<!-- Specialty Toggles -->
+<div class="flex flex-col gap-4">
+<h3 class="text-xs font-black uppercase tracking-[0.2em] text-primary">Active Specialties</h3>
+<div class="flex flex-wrap gap-2">
+<label class="cursor-pointer">
+<input checked="" class="peer hidden" type="checkbox"/>
+<span class="flex items-center gap-2 rounded-full border border-white/10 px-4 py-2 text-xs font-bold text-white/50 transition-all peer-checked:border-primary peer-checked:bg-primary peer-checked:text-black">
+<span class="material-symbols-outlined text-sm">functions</span> Math Whiz
+                            </span>
+</label>
+<label class="cursor-pointer">
+<input checked="" class="peer hidden" type="checkbox"/>
+<span class="flex items-center gap-2 rounded-full border border-white/10 px-4 py-2 text-xs font-bold text-white/50 transition-all peer-checked:border-purple-500 peer-checked:bg-purple-500 peer-checked:text-white">
+<span class="material-symbols-outlined text-sm">history_edu</span> Storyteller
+                            </span>
+</label>
+<label class="cursor-pointer">
+<input class="peer hidden" type="checkbox"/>
+<span class="flex items-center gap-2 rounded-full border border-white/10 px-4 py-2 text-xs font-bold text-white/50 transition-all peer-checked:border-cyan-500 peer-checked:bg-cyan-500 peer-checked:text-black">
+<span class="material-symbols-outlined text-sm">terminal</span> Code Cracker
+                            </span>
+</label>
+<label class="cursor-pointer">
+<input class="peer hidden" type="checkbox"/>
+<span class="flex items-center gap-2 rounded-full border border-white/10 px-4 py-2 text-xs font-bold text-white/50 transition-all peer-checked:border-green-500 peer-checked:bg-green-500 peer-checked:text-black">
+<span class="material-symbols-outlined text-sm">science</span> Bio Lab
+                            </span>
+</label>
+</div>
+</div>
+<!-- Interaction Style -->
+<div class="flex flex-col gap-4">
+<h3 class="text-xs font-black uppercase tracking-[0.2em] text-primary">Interaction Style</h3>
+<div class="rounded-xl glass-effect p-1 flex gap-1">
+<button class="flex-1 rounded-lg bg-white/10 py-2 text-[10px] font-black uppercase tracking-wider text-white">Classic</button>
+<button class="flex-1 rounded-lg py-2 text-[10px] font-black uppercase tracking-wider text-white/40 hover:text-white transition-colors">Concise</button>
+<button class="flex-1 rounded-lg py-2 text-[10px] font-black uppercase tracking-wider text-white/40 hover:text-white transition-colors">Academic</button>
+<button class="flex-1 rounded-lg bg-primary py-2 text-[10px] font-black uppercase tracking-wider text-black">Meme-Heavy</button>
+</div>
+</div>
+<!-- Save Action -->
+<div class="mt-auto pt-6 flex flex-col gap-3">
+<button class="w-full rounded-xl bg-primary h-14 font-black uppercase tracking-widest text-black hover:scale-[1.02] active:scale-[0.98] transition-all shadow-lg shadow-primary/20">
+                        Forged in the Lab
+                    </button>
+<p class="text-[10px] text-center text-white/30 uppercase tracking-tighter">Changes apply to all active study sessions</p>
+</div>
+</aside>
+</main>
+<!-- Signature Watermark -->
+<div class="fixed bottom-6 left-6 pointer-events-none opacity-20 hidden lg:block">
+<div class="flex items-center gap-2">
+<div class="h-8 w-8 rounded-lg bg-white/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-sm">shield</span>
+</div>
+<span class="text-[10px] font-black uppercase tracking-[0.4em]">HydraForge</span>
+</div>
+</div>
+</div>
+</body></html>

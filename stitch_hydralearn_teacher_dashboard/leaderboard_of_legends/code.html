@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Leaderboard of Legends | HydraLearn</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#5b13ec",
+            "secondary": "#00ffff",
+            "background-light": "#f6f6f8",
+            "background-dark": "#000000",
+            "card-dark": "#2a2a2a",
+          },
+          fontFamily: {
+            "display": ["Lexend", "sans-serif"]
+          },
+          borderRadius: {
+            "DEFAULT": "0.5rem",
+            "lg": "1rem",
+            "xl": "1.5rem",
+            "full": "9999px"
+          },
+        },
+      },
+    }
+  </script>
+<style>
+    .gradient-text {
+      background: linear-gradient(to right, #5b13ec, #00ffff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .glow-purple {
+      box-shadow: 0 0 15px rgba(91, 19, 236, 0.4);
+    }
+    .glow-cyan {
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+    }
+    .gold-border { border: 2px solid #ffd700; box-shadow: 0 0 10px rgba(255, 215, 0, 0.5); }
+    .silver-border { border: 2px solid #c0c0c0; box-shadow: 0 0 10px rgba(192, 192, 192, 0.5); }
+    .bronze-border { border: 2px solid #cd7f32; box-shadow: 0 0 10px rgba(205, 127, 50, 0.5); }
+  </style>
+</head>
+<body class="bg-background-dark font-display text-white min-h-screen selection:bg-primary/30">
+<!-- Fixed Top Navigation -->
+<nav class="sticky top-0 z-50 w-full bg-background-dark/80 backdrop-blur-md border-b border-white/10">
+<div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-secondary p-0.5">
+<div class="w-full h-full bg-black rounded-[7px] flex items-center justify-center overflow-hidden">
+<img class="w-8 h-8 object-contain" data-alt="3D Hydra Head logo metallic purple" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBVu4SG1hDM-8qEkgFsTWoXIc_hNHl1omsyJumxb2tqF30Yfw6FnKdJ165KQhdlhzS2Hp7agPmaV8Z51npHcpp9kzknVC_FzaBDCrvJzrhkQi69O11YCkv1qI8-4ZssV-YKiINxux-OX-DMN6FfnSKWHNVZb0RDVIt0IxHHhllZizq3MrLHbCPRDmAeK3LbA1VsH0aTbgObkejDJFRq-st20Rjq8X925tPW3GWZWcSyQOg9jzIPh9FQCPLyhqvDO_kHZMvMkYbq5Z6"/>
+</div>
+</div>
+<span class="text-xl font-extrabold tracking-tight">Hydra<span class="gradient-text">Learn</span></span>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-sm font-medium hover:text-secondary transition-colors" href="#">Playground</a>
+<a class="text-sm font-medium hover:text-secondary transition-colors" href="#">Quests</a>
+<a class="text-sm font-medium text-secondary" href="#">Hall of Fame</a>
+</div>
+<div class="flex items-center gap-4">
+<div class="text-right hidden sm:block">
+<p class="text-xs text-white/50 font-medium">Lvl 42</p>
+<p class="text-sm font-bold">Alex Rivera</p>
+</div>
+<div class="w-10 h-10 rounded-full border-2 border-primary p-0.5">
+<img class="w-full h-full rounded-full bg-card-dark" data-alt="User profile avatar hydra head" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAimiU_QedTaa-fnFlqaSoTjrDugMrc9GK09vYKusccn7alxXvyzmoiX0LZlI3Snl-PppMFnUD_KDFnMsVCLI9jKdjYQpuSe8p52KRHAmE6Xm3mPg4zsz4WAKa65YfYZT1erc6j_h8OpTq59btdQYTv96jThHh3BTLewjTdZBcS-7XRwS9QSmx0XekA_eoR4QulJHfqGR3hK4chP3Bt5foWgyO5YPj7HyoiQtA1QjWEsDuqfxv-9tZRV6Uz_lI2DozErxVnokmGBga5"/>
+</div>
+</div>
+</div>
+</nav>
+<main class="max-w-7xl mx-auto px-6 py-12">
+<!-- Hero Section -->
+<div class="text-center mb-12">
+<h1 class="text-5xl md:text-7xl font-extrabold mb-6 tracking-tighter">
+<span class="gradient-text">Leaderboard of Legends</span>
+</h1>
+<p class="text-white/60 text-lg max-w-2xl mx-auto mb-10">
+        Rise through the ranks, master the forge, and etch your name into the Hall of Fame.
+      </p>
+<!-- Toggle Section -->
+<div class="flex justify-center">
+<div class="inline-flex p-1 bg-card-dark rounded-xl border border-white/5 shadow-2xl">
+<button class="px-8 py-2.5 rounded-lg bg-primary text-white text-sm font-bold shadow-lg shadow-primary/20 transition-all">
+            Global
+          </button>
+<button class="px-8 py-2.5 rounded-lg text-white/50 hover:text-white text-sm font-medium transition-all">
+            Classroom
+          </button>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- Main Leaderboard -->
+<div class="lg:col-span-8 space-y-4">
+<!-- Header Labels -->
+<div class="grid grid-cols-12 gap-4 px-6 py-3 text-xs font-bold uppercase tracking-widest text-white/30">
+<div class="col-span-1">Rank</div>
+<div class="col-span-6">Legend</div>
+<div class="col-span-2 text-center">Badges</div>
+<div class="col-span-3 text-right">XP Total</div>
+</div>
+<!-- Rank 1 (Gold) -->
+<div class="group relative p-[1px] rounded-xl bg-gradient-to-r from-[#ffd700] via-[#fff3b0] to-[#ffd700] overflow-hidden">
+<div class="grid grid-cols-12 gap-4 items-center bg-black/90 group-hover:bg-black/80 transition-all px-6 py-5 rounded-xl">
+<div class="col-span-1 flex items-center justify-center">
+<span class="text-3xl font-black text-[#ffd700]">1</span>
+</div>
+<div class="col-span-6 flex items-center gap-4">
+<div class="relative">
+<div class="w-14 h-14 rounded-full gold-border p-0.5">
+<img class="w-full h-full rounded-full bg-card-dark" data-alt="Rank 1 player hydra head avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAi0seQugotLhfiRRFWlwMruVp5aIF1njeX03Oh0ypHuFs8nWBWdoSehY1R7fMxHFi_EchIlQ2GtlCTWFkzwqJJPhdiHNEgUULSHvp6-KcBOfIdFEZjNw4CrP3tp-4ZhM2KQiRZtL0L4SockYTnGWSR3GVsIu2LxZ6mhIl7jhDiQqRiETAo6FJwoT9_zKGxp4Kc1pAv5frlHbfK4yOV9csQX9xetN9mn_oh6nDdo9Xn-jTdmwfciIE3bD8_g25fI8B0bY9EdYqdXByo"/>
+</div>
+<div class="absolute -bottom-1 -right-1 bg-[#ffd700] rounded-full p-1 border-2 border-black">
+<span class="material-symbols-outlined text-[12px] text-black font-bold">workspace_premium</span>
+</div>
+</div>
+<div>
+<h3 class="font-bold text-lg flex items-center gap-2">
+                  ElysianForge <span class="material-symbols-outlined text-secondary text-sm">verified</span>
+</h3>
+<p class="text-xs text-white/40">Titan of the Code</p>
+</div>
+</div>
+<div class="col-span-2 flex justify-center gap-1">
+<span class="material-symbols-outlined text-[#ffd700] text-xl" title="MVP">military_tech</span>
+<span class="material-symbols-outlined text-secondary text-xl" title="Speedster">bolt</span>
+</div>
+<div class="col-span-3 text-right">
+<p class="text-xl font-black gradient-text">42,850</p>
+<p class="text-[10px] font-bold text-white/30 tracking-widest uppercase">XP TOTAL</p>
+</div>
+</div>
+</div>
+<!-- Rank 2 (Silver) -->
+<div class="group relative p-[1px] rounded-xl bg-gradient-to-r from-white/20 to-white/5">
+<div class="grid grid-cols-12 gap-4 items-center bg-card-dark group-hover:bg-white/10 transition-all px-6 py-4 rounded-xl border border-white/5">
+<div class="col-span-1 flex items-center justify-center">
+<span class="text-2xl font-black text-[#c0c0c0]">2</span>
+</div>
+<div class="col-span-6 flex items-center gap-4">
+<div class="w-12 h-12 rounded-full silver-border p-0.5">
+<img class="w-full h-full rounded-full bg-card-dark" data-alt="Rank 2 player hydra head avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWENi7hg4vOBsjRZiEkJkdPDd5bhnS3PmC2QUzHaZ9Wt3pzSW59Hq5IRwGax7m1Nohc6LGIGThpmRlUiX4EctYRAgpxfKDWfCmTaTJLivI-vC-AYk0dCBYu3KPMJIToWftmed4pAnXi_uSFKGICH5HC8BAgWnrzOiNDxert8USrElFbOnSoy-_FDxvWBMSyMna3B1Z4B5coolaQltDxIfbndpVTU5hSlibGQN6zwhiFP9HjAd8U8rxGBMMfHbrnyq83LjcMYfvCklW"/>
+</div>
+<div>
+<h3 class="font-bold">ShadowWalker</h3>
+<p class="text-xs text-white/40">Elite Architect</p>
+</div>
+</div>
+<div class="col-span-2 flex justify-center gap-1">
+<span class="material-symbols-outlined text-primary text-xl">star</span>
+</div>
+<div class="col-span-3 text-right">
+<p class="text-lg font-bold text-white">38,120</p>
+<p class="text-[10px] font-bold text-white/30 tracking-widest uppercase">XP TOTAL</p>
+</div>
+</div>
+</div>
+<!-- Rank 3 (Bronze) -->
+<div class="group relative p-[1px] rounded-xl bg-gradient-to-r from-white/20 to-white/5">
+<div class="grid grid-cols-12 gap-4 items-center bg-card-dark group-hover:bg-white/10 transition-all px-6 py-4 rounded-xl border border-white/5">
+<div class="col-span-1 flex items-center justify-center">
+<span class="text-2xl font-black text-[#cd7f32]">3</span>
+</div>
+<div class="col-span-6 flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bronze-border p-0.5">
+<img class="w-full h-full rounded-full bg-card-dark" data-alt="Rank 3 player hydra head avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxs4ibBx_NnoRvE8AUOlVUkpIUSaWrFpAuQOBCNkQHkc_B9T3xjXJxp0lNctR00Mr7RmY-ljhXf69_4r9QZQ3WCyhZKXJuIFvzFOdhkl73KIubVMMwKhX5jxCDiKZT9fgrEBR7lnUdA01S6ENk2s9vBQLycmDfMXTZt-c75j14KfMEtvHkb9eTX-3msiyX2bl9D7yedXEPV9CLcxIL4FQQnAvkGYAMQ24dyBDhuo9wOIAq-Gyk921Q15KHxWvVemofRWz0Akv4fLJ5"/>
+</div>
+<div>
+<h3 class="font-bold">NexusZero</h3>
+<p class="text-xs text-white/40">Master Contributor</p>
+</div>
+</div>
+<div class="col-span-2 flex justify-center gap-1">
+<span class="material-symbols-outlined text-secondary text-xl">workspace_premium</span>
+</div>
+<div class="col-span-3 text-right">
+<p class="text-lg font-bold text-white">36,900</p>
+<p class="text-[10px] font-bold text-white/30 tracking-widest uppercase">XP TOTAL</p>
+</div>
+</div>
+</div>
+<!-- Other Ranks -->
+<div class="space-y-2">
+<!-- Item 4 -->
+<div class="grid grid-cols-12 gap-4 items-center bg-card-dark/40 hover:bg-card-dark/60 transition-all px-6 py-3 rounded-xl border border-white/5">
+<div class="col-span-1 text-center font-bold text-white/40">4</div>
+<div class="col-span-6 flex items-center gap-4">
+<img class="w-10 h-10 rounded-full border border-white/10" data-alt="Ranked player avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2ini17zQPk0lzXOmwolkl8qkCDBP0p1hIQ_qSpgxVpX6mEcT7X-32_T8m0ILGPY01l4r_jL-Gc540XXmQ1YW5z9UEOEL9Mcg_aW6tQo3a6Tr5dGLqirNnU0rfOIXTPUVgCDYswJR-HYp6ghiYxQHixGlFT20MUG4qfO8jAU-niNgzs55eWwxVfV2fWOlmzYquZCrMdwJYEPBss-rOCDnpKS1y_l_9AwCUGSvEzCyXGm4ZdohshoeZJOklsxANnn7O8J8KEDcNyWxd"/>
+<span class="font-medium">CyberPulse</span>
+</div>
+<div class="col-span-2 flex justify-center">
+<span class="w-2 h-2 rounded-full bg-primary/40"></span>
+</div>
+<div class="col-span-3 text-right font-bold text-white/70">32,450</div>
+</div>
+<!-- Item 5 -->
+<div class="grid grid-cols-12 gap-4 items-center bg-card-dark/40 hover:bg-card-dark/60 transition-all px-6 py-3 rounded-xl border border-white/5">
+<div class="col-span-1 text-center font-bold text-white/40">5</div>
+<div class="col-span-6 flex items-center gap-4">
+<img class="w-10 h-10 rounded-full border border-white/10" data-alt="Ranked player avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_w5j5gZ7K7v8ic6MNkhnRQzL2ObKlH7ps9XZeMg6KuYgA4zIbE6pp5ZougVabpVshK3NLXECkc6Uhpbu6NgO-EcyWQI8ynSs7uul1PrW3yRWMGJ0ZLpmQznMBD8_3CKvgjp18ebwbbxbkUCq1k3H_Syjql_TVCt7NvrUwfeDCKZUuKYqp2-RiEfYyw-jtWYn7MqfsO83PlHDmcw8zOmbEvuh2rAdnk7c3WWeVH_SJfsgvvHDmFVgBWjRSSMBWxNmQtMUvEJgn3y_x"/>
+<span class="font-medium">ViperByte</span>
+</div>
+<div class="col-span-2 flex justify-center">
+<span class="w-2 h-2 rounded-full bg-primary/40"></span>
+</div>
+<div class="col-span-3 text-right font-bold text-white/70">31,900</div>
+</div>
+</div>
+</div>
+<!-- Sidebar -->
+<div class="lg:col-span-4 space-y-8">
+<!-- Top Sidekicks Card -->
+<div class="bg-card-dark rounded-2xl border border-white/5 p-6 shadow-2xl relative overflow-hidden">
+<div class="absolute top-0 right-0 p-4 opacity-10">
+<span class="material-symbols-outlined text-6xl text-secondary">handshake</span>
+</div>
+<h2 class="text-xl font-bold mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">volunteer_activism</span>
+            Top Sidekicks
+          </h2>
+<div class="space-y-4">
+<div class="flex items-center justify-between p-3 rounded-xl bg-white/5 border border-white/5">
+<div class="flex items-center gap-3">
+<img class="w-8 h-8 rounded-full" data-alt="Top helper avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXemHepNq4C34xY0bFwo_Eb29bl4A9yYxzp6J8rQTtNDPIkwJWOpsv5EPvywtRqzxnYYqd4V4s4cCHUxRdx2x3ZTcp5nxVTU1x3dZnNs1BqFxwlfiWuSqX1jeVgvMo8DY3K8pVPvZc9E68wBZ1kxoG0Y4ZWgHGl9OfURuPjtSzrlicZ2F1mghh7eblNrw-5S0uSdwt8W08s9oPOUu19jdY1CUEhJsBD5XXzpJfzbIZIUf1-nKlnDvvmmy5726T-KpCJzdGHj6X6EUQ"/>
+<div>
+<p class="text-sm font-bold">ZenCoder</p>
+<p class="text-[10px] text-white/40">124 Helps</p>
+</div>
+</div>
+<div class="flex items-center gap-1 text-secondary">
+<span class="material-symbols-outlined text-sm">favorite</span>
+<span class="text-xs font-bold">1.2k</span>
+</div>
+</div>
+<div class="flex items-center justify-between p-3 rounded-xl hover:bg-white/5 transition-colors">
+<div class="flex items-center gap-3">
+<img class="w-8 h-8 rounded-full" data-alt="Top helper avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD53FfE7camUPIniPpixRHWEFMeXpZT5r31D1Fqy2mfydhmh3mkMFytavzd7XNRh9UgP9PQ65t_Kcvg5EDflRmIY9gcWPpOiRJHtOOFoJD6nAcdZiAWhldKk-yPMhQ5A2u2b6pe_tHVEM808j9DVGIX_C9yETrIN0fHLrWZQ_xhcLb94XLXbtRUIX1y2AawXrZIjVPOY38HvK2SZnzrnVDISjngs9YxfqSGzRz0r1ji4VDXUhzF5xPA8Hdf54q4Sq0-y9Gsb0DrNnbg"/>
+<div>
+<p class="text-sm font-bold">PixelPal</p>
+<p class="text-[10px] text-white/40">98 Helps</p>
+</div>
+</div>
+<div class="flex items-center gap-1 text-white/40">
+<span class="material-symbols-outlined text-sm">favorite</span>
+<span class="text-xs font-bold">850</span>
+</div>
+</div>
+<div class="flex items-center justify-between p-3 rounded-xl hover:bg-white/5 transition-colors">
+<div class="flex items-center gap-3">
+<img class="w-8 h-8 rounded-full" data-alt="Top helper avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7zyG5q5lNY-FIzhQMNjQqZ6Z6alJsFEEQSIkup6pi5oAcK4rTCY7x3dWQMdtd8YYej4xw_zeKbiVRp071ydFLtFBoGvKIWxx_UAGPb3EbJlKg8f6HcZu1AR-XlidbSwVED_F-O9mpTQd8kb1xwRqE9mS2agC0TIqXtWwCk4R_9Of45gK3ChKlrwbiqp_zHNKxl1_KZWjO31mjjli3wKim8IuSH6j7VYFr7eicHX-7Abk8ZggV9GxwiwJ6D_kCMDc4bOARqFij6YOh"/>
+<div>
+<p class="text-sm font-bold">BugBuster</p>
+<p class="text-[10px] text-white/40">75 Helps</p>
+</div>
+</div>
+<div class="flex items-center gap-1 text-white/40">
+<span class="material-symbols-outlined text-sm">favorite</span>
+<span class="text-xs font-bold">640</span>
+</div>
+</div>
+</div>
+<button class="w-full mt-6 py-3 rounded-xl bg-white/5 hover:bg-white/10 text-xs font-bold uppercase tracking-widest transition-all">
+            View All Sidekicks
+          </button>
+</div>
+<!-- Personal Stats / Your Standings -->
+<div class="bg-gradient-to-br from-primary/20 to-secondary/10 rounded-2xl border border-primary/30 p-6 glow-purple relative">
+<div class="flex items-start justify-between mb-8">
+<div>
+<p class="text-xs font-bold text-secondary uppercase tracking-widest mb-1">Your Standing</p>
+<h2 class="text-3xl font-black">#42</h2>
+</div>
+<div class="p-2 bg-primary rounded-lg">
+<span class="material-symbols-outlined text-white">trending_up</span>
+</div>
+</div>
+<div class="space-y-6">
+<div>
+<div class="flex justify-between text-xs font-bold mb-2 uppercase tracking-tight">
+<span class="text-white/60">Next Rank: #41</span>
+<span class="text-secondary">150 XP TO GO</span>
+</div>
+<div class="w-full h-2 bg-black/40 rounded-full overflow-hidden">
+<div class="w-[75%] h-full bg-gradient-to-r from-primary to-secondary rounded-full"></div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="p-3 bg-black/30 rounded-xl border border-white/5">
+<p class="text-[10px] font-bold text-white/30 uppercase mb-1">Personal Best</p>
+<p class="text-sm font-bold text-white">500 XP <span class="text-[10px] font-normal text-white/40">/day</span></p>
+</div>
+<div class="p-3 bg-black/30 rounded-xl border border-white/5">
+<p class="text-[10px] font-bold text-white/30 uppercase mb-1">Current Streak</p>
+<p class="text-sm font-bold text-white">12 Days</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Sticky Bottom Standing Bar (Mobile/Quick View) -->
+<div class="fixed bottom-0 left-0 w-full p-4 md:hidden z-40">
+<div class="bg-card-dark/95 backdrop-blur-xl border border-white/10 rounded-2xl p-4 flex items-center justify-between shadow-2xl">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full border-2 border-primary overflow-hidden">
+<img class="w-full h-full" data-alt="Mobile user avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCEg2C-KGMPZ39w99zkctm2x8SE0afc1PcN30O4PcmSYdT_B3mqTVn17Y6DUZt6yYElBn_jr1VQ1HkGIe1cNN3w9iaj0U-hqMRTy9dpqxPFmmK4ejvrkOystHNXmptRez0djNgBZ7xOEVzvwT9OcrXjICKuBbgfFM_Ei6NLoaSzFQMDVZ3w0RInvXFhKsNja1J8DEw_I5z-gRubjD0zRYg0vYjqC9jBFNqI81tHC3DvZzUOml1hVyEd5sgtB-BhBInH7BPuB4IPyM6"/>
+</div>
+<div>
+<p class="text-xs font-bold text-white/50">Current Rank</p>
+<p class="text-lg font-black text-white">#42</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-[10px] font-bold text-secondary">8,450 XP</p>
+<div class="w-24 h-1 bg-white/10 rounded-full mt-1">
+<div class="w-3/4 h-full bg-primary rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+</body></html>

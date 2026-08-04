@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>HydraLearn Admin Command Center</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#5b13ec",
+              "background-light": "#f6f6f8",
+              "background-dark": "#0a0a0a",
+              "card-dark": "#2a2a2a",
+              "accent-cyan": "#06b6d4",
+            },
+            fontFamily: {
+              "display": ["Lexend", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+</head>
+<body class="bg-background-dark font-display text-white min-h-screen">
+<!-- Fixed Top Navigation -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-background-dark/80 backdrop-blur-md border-b border-gray-800 px-6 py-3">
+<div class="max-w-7xl mx-auto flex items-center justify-between">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3">
+<div class="size-10 bg-gradient-to-br from-purple-600 to-cyan-500 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-white">neurology</span>
+</div>
+<h2 class="text-xl font-bold tracking-tight">HydraLearn</h2>
+</div>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-white text-sm font-medium hover:text-purple-400 transition-colors" href="#">Dashboard</a>
+<a class="text-gray-400 text-sm font-medium hover:text-white transition-colors" href="#">Teachers</a>
+<a class="text-gray-400 text-sm font-medium hover:text-white transition-colors" href="#">Students</a>
+<a class="text-gray-400 text-sm font-medium hover:text-white transition-colors" href="#">Curricula</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">search</span>
+<input class="bg-[#1a1a1a] border-gray-800 rounded-full py-2 pl-10 pr-4 text-xs focus:ring-purple-500 border-none w-64" placeholder="Search data..." type="text"/>
+</div>
+<div class="w-10 h-10 rounded-full bg-primary/20 border border-primary/40 flex items-center justify-center cursor-pointer overflow-hidden">
+<img alt="Admin Avatar" class="w-full h-full object-cover" data-alt="Portrait of the administrator user avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtw8yHIz9Qv83IgO0WeeCIIFBS37u8_U-or4iOwwHJv-yigRAtolFoYSC8zrGkbWhQwfEH-j79Bpu4P6qPi8ln7ZAN0KQ0KjdEoNB7i2MJg0kZiV-IRKPM_pijp5SYZwwl7U959PgSTwCsMJB-S3Zfi1RaEenHPIjT4IkeoLXCdvM8Cm02hn35aIF8zDcJRmftf70zEU3-E8_shtJE2NMuE24SfBWULjOKkB0wPRAcvaz8Dnk9YlEEUYMx5h_BlnP3O2ev_RbCAMfQ"/>
+</div>
+</div>
+</div>
+</header>
+<main class="pt-24 pb-12 px-6">
+<div class="max-w-7xl mx-auto">
+<!-- Hero Title -->
+<div class="mb-10">
+<h1 class="text-5xl md:text-6xl font-extrabold tracking-tight bg-gradient-to-r from-purple-500 to-cyan-500 text-transparent bg-clip-text pb-2">
+                    Admin Command Center
+                </h1>
+<p class="text-gray-400 mt-2 text-lg">Real-time overview of HydraLearn's educational ecosystem.</p>
+</div>
+<!-- KPI Row -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+<div class="bg-card-dark border border-gray-800 rounded-lg p-6 flex flex-col gap-2">
+<p class="text-gray-400 text-sm font-medium">Total Students</p>
+<div class="flex items-baseline gap-2">
+<span class="text-3xl font-bold">12,450</span>
+<span class="text-green-400 text-sm font-medium">+3%</span>
+</div>
+<div class="w-full bg-gray-800 h-1 mt-2 rounded-full overflow-hidden">
+<div class="bg-purple-500 h-full w-[75%]"></div>
+</div>
+</div>
+<div class="bg-card-dark border border-gray-800 rounded-lg p-6 flex flex-col gap-2">
+<p class="text-gray-400 text-sm font-medium">Active Lesson Packs</p>
+<div class="flex items-baseline gap-2">
+<span class="text-3xl font-bold">482</span>
+<span class="text-gray-500 text-sm font-medium">Stable</span>
+</div>
+<div class="w-full bg-gray-800 h-1 mt-2 rounded-full overflow-hidden">
+<div class="bg-cyan-500 h-full w-[45%]"></div>
+</div>
+</div>
+<div class="bg-card-dark border border-gray-800 rounded-lg p-6 flex flex-col gap-2">
+<p class="text-gray-400 text-sm font-medium">Wellness Score</p>
+<div class="flex items-baseline gap-2">
+<span class="text-3xl font-bold">88%</span>
+<span class="text-purple-400 text-sm font-medium">Optimal</span>
+</div>
+<div class="w-full bg-gray-800 h-1 mt-2 rounded-full overflow-hidden">
+<div class="bg-gradient-to-r from-purple-500 to-cyan-500 h-full w-[88%]"></div>
+</div>
+</div>
+<div class="bg-card-dark border border-gray-800 rounded-lg p-6 flex flex-col gap-2">
+<p class="text-gray-400 text-sm font-medium">Pending Credentials</p>
+<div class="flex items-baseline gap-2">
+<span class="text-3xl font-bold text-orange-400">14</span>
+<span class="material-symbols-outlined text-orange-400 text-lg">priority_high</span>
+</div>
+<div class="w-full bg-gray-800 h-1 mt-2 rounded-full overflow-hidden">
+<div class="bg-orange-400 h-full w-[20%]"></div>
+</div>
+</div>
+</div>
+<!-- Main Content Area -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+<!-- Central Chart Area -->
+<div class="lg:col-span-8 bg-card-dark border border-gray-800 rounded-lg p-8">
+<div class="flex items-center justify-between mb-8">
+<div>
+<h2 class="text-2xl font-bold">School-Wide Engagement</h2>
+<p class="text-gray-400 text-sm">Aggregated student activity across all curricula</p>
+</div>
+<div class="flex gap-2">
+<button class="bg-gray-800 px-3 py-1 rounded text-xs font-medium">1W</button>
+<button class="bg-primary px-3 py-1 rounded text-xs font-medium">1M</button>
+<button class="bg-gray-800 px-3 py-1 rounded text-xs font-medium">1Y</button>
+</div>
+</div>
+<div class="relative h-72 w-full">
+<svg class="w-full h-full" preserveaspectratio="none" viewbox="0 0 1000 300">
+<defs>
+<lineargradient id="chartGradient" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#5b13ec" stop-opacity="0.3"></stop>
+<stop offset="100%" stop-color="#06b6d4" stop-opacity="0"></stop>
+</lineargradient>
+<lineargradient id="lineGradient" x1="0" x2="1" y1="0" y2="0">
+<stop offset="0%" stop-color="#5b13ec"></stop>
+<stop offset="100%" stop-color="#06b6d4"></stop>
+</lineargradient>
+</defs>
+<!-- Fill Area -->
+<path d="M0,250 C100,230 150,50 250,80 C350,110 400,280 500,240 C600,200 700,40 850,60 C950,80 1000,100 1000,100 L1000,300 L0,300 Z" fill="url(#chartGradient)"></path>
+<!-- Line -->
+<path d="M0,250 C100,230 150,50 250,80 C350,110 400,280 500,240 C600,200 700,40 850,60 C950,80 1000,100 1000,100" fill="none" stroke="url(#lineGradient)" stroke-linecap="round" stroke-width="4"></path>
+</svg>
+<!-- Axis Labels -->
+<div class="flex justify-between mt-4 text-xs text-gray-500 font-medium">
+<span>Sep</span><span>Oct</span><span>Nov</span><span>Dec</span><span>Jan</span><span>Feb</span><span>Mar</span>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-4 mt-8 pt-8 border-t border-gray-800">
+<div>
+<p class="text-xs text-gray-500 uppercase tracking-wider font-bold">Peak Engagement</p>
+<p class="text-xl font-bold">09:45 AM</p>
+</div>
+<div>
+<p class="text-xs text-gray-500 uppercase tracking-wider font-bold">Avg. Session</p>
+<p class="text-xl font-bold">42 mins</p>
+</div>
+<div>
+<p class="text-xs text-gray-500 uppercase tracking-wider font-bold">Top Course</p>
+<p class="text-xl font-bold">Quantum AI 101</p>
+</div>
+</div>
+</div>
+<!-- Teacher Credential Management -->
+<div class="lg:col-span-4 bg-card-dark border border-gray-800 rounded-lg p-6 flex flex-col">
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-xl font-bold">Credentials</h3>
+<span class="bg-primary/20 text-primary text-xs font-bold px-2 py-1 rounded">14 New</span>
+</div>
+<div class="flex-1 space-y-4 overflow-y-auto max-h-[440px] pr-2 custom-scrollbar">
+<!-- Teacher Item -->
+<div class="flex items-center justify-between p-3 rounded-lg bg-black/40 border border-gray-800">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-full bg-gradient-to-tr from-gray-700 to-gray-600 overflow-hidden">
+<img alt="Teacher Sarah" data-alt="Portrait of Sarah, a candidate teacher" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCo6fLiw4KPRULzh2EXNxlvvPffjyUmeyEO59QjC3Owf9AqBXU0WX1QQwhDWel6JSQ3mpK15nR5GnJ6j6BGB4cic1WWL9iXsPc_FTNWAgFZfoH42YUf6YK96ypWH8xU4NmeKnBPOdgLuHVX9Xh9BglBncDZL96WfeREtUHQlH4Z0o1Wn8gJ3mX1S3KJgfQ4NZTOu5WQs5WQfcUgRmYscP0QRRkOUwy0YGTvmz4N7saohTHGDSXYIbKS1JNd43xDPCrt-0FhGDehXsgj"/>
+</div>
+<div>
+<p class="text-sm font-semibold">Sarah Jenkins</p>
+<span class="text-[10px] px-1.5 py-0.5 rounded-full bg-orange-400/20 text-orange-400 font-bold uppercase">Pending</span>
+</div>
+</div>
+<button class="border border-white/20 hover:border-white text-white text-xs px-3 py-1.5 rounded transition-all">Review</button>
+</div>
+<div class="flex items-center justify-between p-3 rounded-lg bg-black/40 border border-gray-800">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-full bg-gradient-to-tr from-gray-700 to-gray-600 overflow-hidden">
+<img alt="Teacher Marcus" data-alt="Portrait of Marcus, a candidate teacher" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUSyoS5J8720co1LMYVcU58DLSJN_Hx5XGdzpXi3zLYTA5-74fhbQyQar46QxOCFixxLBStnKJCwUhXzTJxuxM-jPmySC0YTf6JpfvrUJI0irH7lASFPNfl-NCPCPOH2u-PxlMm8wn4GI1l5m0Xre9f9TqyK-SDPyS1XEnALSBCOl5Oq4_eozex_qsptzT2Q7ZAc5eTaWkaY_njE01rbq5JDpDVsr1140cx8be5618UXP5MaMfhLSR6nSzwsS5o1kDxh5zg4wieGhT"/>
+</div>
+<div>
+<p class="text-sm font-semibold">Dr. Marcus Vane</p>
+<span class="text-[10px] px-1.5 py-0.5 rounded-full bg-green-400/20 text-green-400 font-bold uppercase">Verified</span>
+</div>
+</div>
+<button class="border border-white/20 hover:border-white text-white text-xs px-3 py-1.5 rounded transition-all">Review</button>
+</div>
+<div class="flex items-center justify-between p-3 rounded-lg bg-black/40 border border-gray-800">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-full bg-gradient-to-tr from-gray-700 to-gray-600 overflow-hidden">
+<img alt="Teacher Elena" data-alt="Portrait of Elena, a candidate teacher" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAn0q_PanuhUhMMb_2HyFN4ZIJhzEwySJS9YhEXFZS-2OH_waChMPbNzeq8haM5LqbrgeFjPHA809jusQSHL3HkSzuEJ3sgXKrSJWxXEyU3DYEL10PMETaKrOhbGrpTdetYDxRLM3GO2Gc4hZmxa6TCNodEqZAlxHxLE4L7KreLR0KGt-SyA6_jLyVb-Dks6nNh-c0vr4hEJysqcEp881fj6uqK79lq8vDV-2w7qWW2wIA0BGU8PleU1nTwtM7RF7V_tMPkYkJlKbff"/>
+</div>
+<div>
+<p class="text-sm font-semibold">Elena Rodriguez</p>
+<span class="text-[10px] px-1.5 py-0.5 rounded-full bg-orange-400/20 text-orange-400 font-bold uppercase">Pending</span>
+</div>
+</div>
+<button class="border border-white/20 hover:border-white text-white text-xs px-3 py-1.5 rounded transition-all">Review</button>
+</div>
+<div class="flex items-center justify-between p-3 rounded-lg bg-black/40 border border-gray-800">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-full bg-gradient-to-tr from-gray-700 to-gray-600 overflow-hidden">
+<img alt="Teacher Robert" data-alt="Portrait of Robert, a candidate teacher" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1XlpRQ7fYVdNioyKiw5YD5yX_m0MwXpOhzXnvMt7BfqlnvJ7GuNqdkgBaTtZcame_Z6TaYfZzOjx-SoH5kVAmFGnF_fcfjS5DmEPmrFgT5zMALzovyhG9Oy6kYAHuDLUIx5apHECJfmBA8PH8658gRVcJv88naCBBqu7DVAH05vmFrnIcfLV8AxZUihy36OQRzIP2O8Rd36lnlh53VXuN1xz6jaQ6dRD7XxhkhWz09tIkGRKjDj6vyogDOStKx5e-YnZ8pYnAScNR"/>
+</div>
+<div>
+<p class="text-sm font-semibold">Robert Chen</p>
+<span class="text-[10px] px-1.5 py-0.5 rounded-full bg-orange-400/20 text-orange-400 font-bold uppercase">Pending</span>
+</div>
+</div>
+<button class="border border-white/20 hover:border-white text-white text-xs px-3 py-1.5 rounded transition-all">Review</button>
+</div>
+<div class="flex items-center justify-between p-3 rounded-lg bg-black/40 border border-gray-800">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-full bg-gradient-to-tr from-gray-700 to-gray-600 overflow-hidden">
+<img alt="Teacher Aria" data-alt="Portrait of Aria, a candidate teacher" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMiAIFfdvm2nFkYKNOCTbDjPhOGkqPPkSKQpSBQFKGRZD0wX002k2GNkGG2dkcHMiG4TnVUViSr6YCtalDgTuH7cx31xu5EKqH48s1RPseeB5RVI1L802_8UjED6pD_U8RoAnOxBgQto4eSHuFIGBA2C24IVzOETDiqQTLCuucjPBiWB_WZ1gYdTPmhxMlq54LjTyinaJ99eWom2TXVQzvFTd0x8v0h1KHvqLid08mWOpJ2q7UnNz0ibCbe_Q4P89H3CxdWvzeNMw-"/>
+</div>
+<div>
+<p class="text-sm font-semibold">Aria Stark</p>
+<span class="text-[10px] px-1.5 py-0.5 rounded-full bg-green-400/20 text-green-400 font-bold uppercase">Verified</span>
+</div>
+</div>
+<button class="border border-white/20 hover:border-white text-white text-xs px-3 py-1.5 rounded transition-all">Review</button>
+</div>
+</div>
+<button class="mt-6 w-full py-3 bg-white text-black font-bold rounded hover:bg-gray-200 transition-colors">
+                        View All Applicants
+                    </button>
+</div>
+</div>
+</div>
+</main>
+<footer class="max-w-7xl mx-auto px-6 py-8 border-t border-gray-800 mt-12 flex flex-col md:flex-row justify-between items-center text-gray-500 text-sm">
+<p>© 2024 HydraLearn AI Platforms Inc. All Rights Reserved.</p>
+<div class="flex gap-6 mt-4 md:mt-0">
+<a class="hover:text-white transition-colors" href="#">Security Audit</a>
+<a class="hover:text-white transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-white transition-colors" href="#">System Status</a>
+</div>
+</footer>
+<style>
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #5b13ec;
+            border-radius: 10px;
+        }
+    </style>
+</body></html>

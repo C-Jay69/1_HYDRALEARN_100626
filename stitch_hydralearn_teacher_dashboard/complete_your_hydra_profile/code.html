@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>HydraLearn - Profile Customization</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#5b13ec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#0a0a0c", // Deepest black for Forge feel
+                        "forge-gray": "#2a2a2a",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .forge-gradient {
+            background: linear-gradient(135deg, #a855f7 0%, #06b6d4 100%);
+        }
+        .glow-subtle {
+            box-shadow: 0 0 20px rgba(91, 19, 236, 0.15);
+        }
+        .domain-pill-active {
+            border-color: #5b13ec;
+            background: rgba(91, 19, 236, 0.1);
+            box-shadow: 0 0 10px rgba(91, 19, 236, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-white font-display min-h-screen selection:bg-primary/30">
+<div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+<!-- Top Navigation -->
+<header class="flex items-center justify-between px-6 md:px-12 py-6 border-b border-white/5 bg-background-dark/80 backdrop-blur-md sticky top-0 z-50">
+<div class="flex items-center gap-3">
+<div class="size-8 flex items-center justify-center">
+<img alt="HydraLearn Logo" class="w-full h-full" data-alt="HydraLearn abstract geometric logo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-Tb7OUkAOMLcsTtcpYMQFa6k321q3CKX8pxW1GpLDtVR5X3AEV8I2QueJ6zzz8Yl4hQ0jTaTrv-zhtQq6yOMmqf7heoosrYVWMrzT95_PJBmaVw7UOLuyo4liKqJvK_YHmFeJaxGtGN0KdKj3F_1dMtknKNiV_TOGZQlxOJslba-9c7HOWie9iZKrd3dORTQ27rOeXiXzvBPcvyXJ6UWRTuNmG8wu2G2iRp0DSSfppX9em7e_RPkjeUkKWowCX8wkZ3HEtZbneKkJ"/>
+</div>
+<h2 class="text-xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white to-white/60">HydraLearn</h2>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden md:flex flex-col items-end">
+<span class="text-[10px] uppercase tracking-[0.2em] text-white/40 font-semibold">Current Phase</span>
+<span class="text-sm font-medium text-primary">Step 02 of 03</span>
+</div>
+<div class="h-10 w-10 rounded-full border-2 border-primary/30 p-0.5">
+<div class="h-full w-full rounded-full bg-center bg-cover" data-alt="User profile placeholder gradient" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAk0VtjEt3GH_iWuqKcLl8KGRU_vxgOJ7Mx5zhFvloi4kkZVzzMybYRK8ToxjceYVtLHIOUYBuj9b0RtFHDzh8cKpawyTXUtaIrRlA83HnzGM527SEn06GnIv95itwLvqfRQWxapZR-Ae8llolFV2w6hRyWQFg7e0Lg2i5IzgBahWRuX2DzCo1Bpb1heJAqWJDw65IyxyxF9vU3Ix9nJFdrTFy9Zm7TR5OhKvsn-UKauFwyNse2xNeVb1GFrSTJmjY8JGaLfgPua8hq");'></div>
+</div>
+</div>
+</header>
+<main class="flex-1 flex flex-col items-center py-12 px-4">
+<!-- Progress Bar Section -->
+<div class="w-full max-w-[640px] mb-12">
+<div class="flex justify-between items-end mb-3 px-1">
+<div>
+<h1 class="text-2xl font-bold text-white tracking-tight">Profile Details</h1>
+<p class="text-white/50 text-sm">Forging your digital identity</p>
+</div>
+<span class="text-primary font-bold text-lg">66%</span>
+</div>
+<div class="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+<div class="h-full forge-gradient rounded-full" style="width: 66%;"></div>
+</div>
+</div>
+<!-- Content Container -->
+<div class="w-full max-w-[640px] bg-forge-gray rounded-xl border border-white/5 p-8 md:p-10 shadow-2xl relative overflow-hidden">
+<!-- Background Subtle Watermark -->
+<div class="absolute -top-10 -right-10 opacity-[0.03] pointer-events-none">
+<img alt="Watermark" class="w-64 h-64" data-alt="Large faint HydraLearn logo watermark" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJ1AmM_p-RrPfUnwFtrhXE4ZXgKXsmE7hlN1X0nH2A5agBo0wcB3yQhvC4OH9HFWPmUQM8Q_FPRdnWazY_94nUzbAkbA_Tw_S9zFc_0MEpZ1za_CmZP5x6xsGLpj3QDYXJ0_WDs5J5t1WuCbsq8-man4yy-8s_EJxtF24jAPfH8eLX-NBSwahj5Ny3Jc-RkAQBMp3OVL5Ujk0grv0PBufwSV5IQ1JuS4cPsmSFLf4DxTjSEyA5ugzs7VxuoxFMA_6PazagdGdRXXXR"/>
+</div>
+<!-- Avatar Section -->
+<section class="flex flex-col items-center mb-10 relative z-10">
+<div class="relative group">
+<div class="size-32 rounded-full border-2 border-primary/50 p-1 glow-subtle transition-all duration-500 group-hover:border-primary">
+<div class="h-full w-full rounded-full bg-center bg-cover bg-[#1a1a1a] flex items-center justify-center overflow-hidden" data-alt="Intricate 3D fractal hydra avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAcYSSulsCj4o0nZOi5vF0qpvKQNDzr7-rO-QCrtIlOwgEo_KD8dez6vQ56FApLerm5HvbT7AMtLmaA1Vgm473BkFlo1_Kmz70rqh0YWtZytU59r7xtjTI3S9j1ZtkglAwOcJzN_IQErNDGW_JeF8mwQ8frzWI0owyM8lGC_isoAHD4A-pKw2tCqHQkzhr1o-9WAUTQc_188_TgXf3MP9CgzitHP8nL1K9CZORtEA8h-EIelmHJKZuz3TYCfmw41GXXVlzSEULC4Hc8");'>
+</div>
+</div>
+<button class="absolute bottom-0 right-0 size-10 bg-primary text-white rounded-full flex items-center justify-center border-4 border-forge-gray hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-sm">edit</span>
+</button>
+</div>
+<div class="mt-4 text-center">
+<h3 class="text-lg font-bold text-white">Customize Your Hydra Identity</h3>
+<p class="text-white/40 text-sm">Refine your 'Hydra Head' skin and core traits</p>
+<button class="mt-3 text-xs font-semibold text-primary hover:text-primary/80 uppercase tracking-widest border border-primary/20 px-4 py-2 rounded-lg transition-colors">
+                            Refine Avatar
+                        </button>
+</div>
+</section>
+<!-- Form Fields -->
+<div class="space-y-6 relative z-10">
+<div>
+<label class="block text-sm font-semibold text-white/70 mb-2 ml-1 uppercase tracking-wider">Display Name</label>
+<input class="w-full bg-background-dark border border-white/10 rounded-lg h-14 px-5 text-white placeholder:text-white/20 focus:ring-1 focus:ring-primary focus:border-primary transition-all outline-none" placeholder="Enter your alias..." type="text" value="NeonPhoenix_88"/>
+</div>
+<div>
+<label class="block text-sm font-semibold text-white/70 mb-2 ml-1 uppercase tracking-wider">Bio / Mission Statement</label>
+<textarea class="w-full bg-background-dark border border-white/10 rounded-lg min-h-[120px] p-5 text-white placeholder:text-white/20 focus:ring-1 focus:ring-primary focus:border-primary transition-all outline-none resize-none" placeholder="What kind of hero are you? (e.g., Tech-alchemist, Art-warrior)"></textarea>
+</div>
+<!-- Domain Selector -->
+<div>
+<label class="block text-sm font-semibold text-white/70 mb-3 ml-1 uppercase tracking-wider">Primary Domains</label>
+<div class="flex flex-wrap gap-2">
+<button class="px-4 py-2 rounded-lg bg-background-dark border border-white/10 text-sm text-white/60 hover:border-primary/50 transition-all">Science</button>
+<button class="px-4 py-2 rounded-lg bg-background-dark border border-white/10 text-sm text-white/60 hover:border-primary/50 transition-all">Arts</button>
+<button class="px-4 py-2 rounded-lg bg-background-dark border border-primary text-white domain-pill-active text-sm">Tech</button>
+<button class="px-4 py-2 rounded-lg bg-background-dark border border-white/10 text-sm text-white/60 hover:border-primary/50 transition-all">Humanities</button>
+<button class="px-4 py-2 rounded-lg bg-background-dark border border-primary text-white domain-pill-active text-sm">Engineering</button>
+<button class="px-4 py-2 rounded-lg bg-background-dark border border-white/10 text-sm text-white/60 hover:border-primary/50 transition-all">Philosophy</button>
+</div>
+</div>
+</div>
+<!-- CTA -->
+<div class="mt-12">
+<button class="w-full h-14 rounded-lg forge-gradient text-white font-bold text-lg shadow-lg shadow-primary/20 hover:opacity-90 active:scale-[0.98] transition-all flex items-center justify-center gap-2 group">
+                        Complete My Profile
+                        <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+<p class="text-center text-white/30 text-[10px] mt-6 uppercase tracking-[0.3em]">Authorized Access Only • HydraForge Protocol</p>
+</div>
+</div>
+<!-- Footer Small Nav -->
+<div class="mt-8 flex gap-8">
+<button class="text-white/40 hover:text-white text-sm transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-base">arrow_back</span>
+                    Previous Step
+                </button>
+<button class="text-white/40 hover:text-white text-sm transition-colors">
+                    Save for later
+                </button>
+</div>
+</main>
+</div>
+</body></html>

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>HydraLearn - Join the Forge</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#5b13ec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#161022",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Lexend', sans-serif;
+        }
+        .glass-card {
+            background: rgba(42, 42, 42, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #a855f7, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gradient-button {
+            background: linear-gradient(to right, #5b13ec, #06b6d4);
+        }
+        .gradient-border-active {
+            position: relative;
+        }
+        .gradient-border-active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(to right, #5b13ec, #06b6d4);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-white min-h-screen">
+<div class="flex flex-col md:flex-row min-h-screen">
+<!-- Left Side: Branding/Hero -->
+<div class="relative w-full md:w-5/12 lg:w-4/12 flex flex-col items-center justify-center p-8 bg-black overflow-hidden">
+<!-- Background Decorative Glow -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary/20 rounded-full blur-[120px]"></div>
+<div class="relative z-10 flex flex-col items-center text-center">
+<div class="w-48 h-48 mb-8 flex items-center justify-center">
+<img class="w-full h-full object-contain" data-alt="3D isometric glass HL logo with glowing edges" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8jpb8pZZ_1XCim0wRxFFvxSkOo2_JLxOTaXpOSomuqu83RaFbUsdhB0uG_LBwWRdI7WMg6uOcqowqIQuIjplsy5bH1DmP3svPjwBXIu4Pbk2L4tvqSXOB2W6GSs6GMTJIjupsXme-91Wesu8R-n30pLr_yNCfeGfVNA9ASLkmv2RtZ7eqw50oiB3Axn41cZFAY2m6GgStbL1zD64xVKp59ENhg3aTfFCTcSuRcf0g8pDPQPGiaM902L7DxhyGpHiGHPQsweqte0yz"/>
+</div>
+<h1 class="text-4xl md:text-5xl font-bold mb-4 tracking-tight">Join the <span class="gradient-text">Forge</span></h1>
+<p class="text-[#a69db9] text-lg max-w-sm leading-relaxed">
+                    Powering the next generation of multi-faceted learning. Initialize your digital identity.
+                </p>
+</div>
+<!-- Bottom decorative line -->
+<div class="absolute bottom-10 left-10 right-10 flex items-center gap-4 opacity-30">
+<div class="h-[1px] flex-1 bg-gradient-to-r from-transparent via-white to-transparent"></div>
+<span class="text-[10px] uppercase tracking-[0.4em] text-white whitespace-nowrap">System Version 4.0.2</span>
+<div class="h-[1px] flex-1 bg-gradient-to-r from-transparent via-white to-transparent"></div>
+</div>
+</div>
+<!-- Right Side: Multi-step Registration -->
+<div class="w-full md:w-7/12 lg:w-8/12 flex items-center justify-center p-6 md:p-12 lg:p-20">
+<div class="w-full max-w-[580px] flex flex-col">
+<!-- Top Nav / Login Link -->
+<div class="flex justify-between items-center mb-12">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">shield_person</span>
+<span class="font-bold text-xl tracking-tight">HydraLearn</span>
+</div>
+<p class="text-sm text-[#a69db9]">
+                        Already have an account? 
+                        <a class="text-cyan-400 font-semibold hover:underline ml-1" href="#">Login</a>
+</p>
+</div>
+<!-- Progress Header -->
+<div class="mb-10">
+<div class="flex justify-between items-end mb-3">
+<h2 class="text-2xl font-bold">Registration Step</h2>
+<span class="text-sm text-primary font-mono">01 / 03</span>
+</div>
+<div class="w-full h-1.5 bg-[#2e2839] rounded-full overflow-hidden">
+<div class="h-full gradient-button transition-all duration-500" style="width: 33.33%;"></div>
+</div>
+</div>
+<!-- Step Content Container -->
+<div class="space-y-10">
+<!-- Step 1: Who are you? -->
+<div>
+<div class="mb-6">
+<h3 class="text-xl font-semibold mb-2">Who are you?</h3>
+<p class="text-[#a69db9] text-sm">Select your primary role within the HydraLearn ecosystem.</p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+<!-- Teacher Card -->
+<label class="group relative cursor-pointer">
+<input class="peer sr-only" name="role" type="radio" value="teacher"/>
+<div class="glass-card p-6 rounded-xl flex flex-col items-center text-center transition-all peer-checked:border-primary/60 peer-checked:bg-primary/10 hover:bg-[#322e3a]">
+<div class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mb-4 text-primary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">school</span>
+</div>
+<span class="font-medium text-sm">Teacher</span>
+</div>
+<div class="absolute -top-1 -right-1 w-4 h-4 bg-primary rounded-full scale-0 peer-checked:scale-100 transition-transform flex items-center justify-center">
+<span class="material-symbols-outlined text-[10px] text-white">check</span>
+</div>
+</label>
+<!-- Student Card -->
+<label class="group relative cursor-pointer">
+<input checked="" class="peer sr-only" name="role" type="radio" value="student"/>
+<div class="glass-card p-6 rounded-xl flex flex-col items-center text-center transition-all peer-checked:border-primary/60 peer-checked:bg-primary/10 hover:bg-[#322e3a]">
+<div class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mb-4 text-primary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">auto_stories</span>
+</div>
+<span class="font-medium text-sm">Student</span>
+</div>
+<div class="absolute -top-1 -right-1 w-4 h-4 bg-primary rounded-full scale-0 peer-checked:scale-100 transition-transform flex items-center justify-center">
+<span class="material-symbols-outlined text-[10px] text-white">check</span>
+</div>
+</label>
+<!-- Admin Card -->
+<label class="group relative cursor-pointer">
+<input class="peer sr-only" name="role" type="radio" value="admin"/>
+<div class="glass-card p-6 rounded-xl flex flex-col items-center text-center transition-all peer-checked:border-primary/60 peer-checked:bg-primary/10 hover:bg-[#322e3a]">
+<div class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mb-4 text-primary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">admin_panel_settings</span>
+</div>
+<span class="font-medium text-sm">Admin</span>
+</div>
+<div class="absolute -top-1 -right-1 w-4 h-4 bg-primary rounded-full scale-0 peer-checked:scale-100 transition-transform flex items-center justify-center">
+<span class="material-symbols-outlined text-[10px] text-white">check</span>
+</div>
+</label>
+</div>
+</div>
+<!-- Step 2: Identity Details -->
+<div class="grid grid-cols-1 gap-6">
+<div class="space-y-2">
+<label class="text-sm font-medium text-[#a69db9] flex items-center gap-2">
+<span class="material-symbols-outlined text-xs">alternate_email</span>
+                                Email Address
+                            </label>
+<input class="w-full bg-[#2a2a2a] border-[#3e3e4a] rounded-lg p-3 text-white focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder:text-[#5e5e6e]" placeholder="commander@hydra.io" type="email"/>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div class="space-y-2">
+<label class="text-sm font-medium text-[#a69db9] flex items-center gap-2">
+<span class="material-symbols-outlined text-xs">lock</span>
+                                    Password
+                                </label>
+<input class="w-full bg-[#2a2a2a] border-[#3e3e4a] rounded-lg p-3 text-white focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" placeholder="••••••••" type="password"/>
+</div>
+<div class="space-y-2">
+<label class="text-sm font-medium text-[#a69db9] flex items-center gap-2">
+<span class="material-symbols-outlined text-xs">verified_user</span>
+                                    Confirm
+                                </label>
+<input class="w-full bg-[#2a2a2a] border-[#3e3e4a] rounded-lg p-3 text-white focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" placeholder="••••••••" type="password"/>
+</div>
+</div>
+</div>
+<!-- Step 3: Avatar Selection -->
+<div>
+<div class="mb-4">
+<h3 class="text-xl font-semibold mb-1">Choose your first Hydra Head</h3>
+<p class="text-[#a69db9] text-sm">This will be your primary visual identifier in the Forge.</p>
+</div>
+<div class="flex flex-wrap gap-4 items-center">
+<!-- Avatar Options -->
+<button class="w-16 h-16 rounded-full border-2 border-primary bg-primary/20 flex items-center justify-center overflow-hidden ring-4 ring-primary/30 ring-offset-4 ring-offset-background-dark">
+<img class="w-full h-full object-cover" data-alt="Cybernetic hydra head avatar with neon purple highlights" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAz_iiuh1HTWASxej36XlHYXSrcetMH9WS4UQxgySdKRUtcl0FiQHYMTBibUbbO3HySlriV9h1OHWZ2y4jEO1xevg1Cji_PRZXkq3_2xAODwf2wC9l14ueJRK7GLII5UsDdlugyN4x_jGihRX6qgrJt906vQG55lYPAyrLMYsFwaUDu3rqaDT53igjB572kEazWkB8oWK3kFdqKajjcuqpJaYLWkQO6SeNN2hCTJy27GFSt7HGqrxPvGxES9xtMUL44NOb9_xKq5mfL"/>
+</button>
+<button class="w-14 h-14 rounded-full border-2 border-[#3e3e4a] hover:border-primary/50 flex items-center justify-center overflow-hidden transition-all grayscale hover:grayscale-0">
+<img class="w-full h-full object-cover" data-alt="Mechanical hydra head avatar with silver plating" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-RoHn3mu8oRziASaz6s1uO0T6bCt23yrLZt49ZJdD5cp3fh1Si39Kga4DWL1Fc6HjUYVtaU9A4o-VnSf4kzD_XC3O9BvcqbB4j9vRfQXkwCP2BzZbBlqG2wScK2XzGS2PTlmLCkT_om5mcPF8NXDGTbQBesR9ZVDRBVnSoXAfNZT0-AsnSyOnKGaP9E0c-jAHRUdXJlWAnq-gnt8UlTwhB_J6D-M_vgCBJIjf44S59Y66a3HNQeREeXZdCzcMsESDvB2eY9RGyZBr"/>
+</button>
+<button class="w-14 h-14 rounded-full border-2 border-[#3e3e4a] hover:border-primary/50 flex items-center justify-center overflow-hidden transition-all grayscale hover:grayscale-0">
+<img class="w-full h-full object-cover" data-alt="Bio-organic glowing hydra head avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBnCW1v2IpRlKgC8LfhXUOLIKjePjQ1NHu8bWieFyESdYg3nAFOFdInR3tAan_JG4DXnEzahkPUgM08LAW5LJLKisknKPxmlysJtc8cbUhKfsnX8FksRwlrzI_olPHOKjt-MgdnK13em6nTHUTGt-yLhnuaw42i30G9uxfLPyMVn2oyFX1fOl_70Gh6EnMimuE7p__yS6TXlH61OITIhfNcqjfYYRUFMqq_zsz5uyju58gFA8h9p_vB4cXDPc_nJP22ESnOA3lOsUiA"/>
+</button>
+<button class="w-14 h-14 rounded-full border-2 border-[#3e3e4a] hover:border-primary/50 flex items-center justify-center overflow-hidden transition-all grayscale hover:grayscale-0">
+<img class="w-full h-full object-cover" data-alt="Abstract geometric hydra head avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIILXc6xK77BZTSwWPJ7VoQ2wiOueUD3FAxhwYeiV-QjDpMIUk_KDc_wMA0FwrkBtvix-qCTdr43WeNeGFWLl6zm-wzYZEuWmI0pw9S64_ILyevD7UxoaZ8kxBkKj0NNF6cBeIz_VMZTKD6oHPJ4-yrz8aSZBAPx3ARR8tj6ucCVhYD6kHKkQnfVONkr8e9_6bJgqosEGczvldH9o51lahKHN3Z7_DT4ur2lfZfK8spgRd99eMy1PgH2VU1RNpkRXD5eiJvnUvo_Of"/>
+</button>
+<button class="w-10 h-10 rounded-full border border-dashed border-[#5e5e6e] flex items-center justify-center text-[#5e5e6e] hover:text-white hover:border-white transition-colors">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</div>
+<!-- Submit Button -->
+<div class="pt-4">
+<button class="w-full py-4 rounded-xl gradient-button text-white font-bold text-lg flex items-center justify-center gap-3 group shadow-[0_0_20px_rgba(91,19,236,0.3)] hover:shadow-[0_0_30px_rgba(6,182,212,0.4)] transition-all">
+                            Initialize My Profile
+                            <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">bolt</span>
+</button>
+<p class="text-center text-[11px] text-[#5e5e6e] mt-4 uppercase tracking-widest">
+                            By initializing, you agree to the Hydra Protocols &amp; Privacy Array.
+                        </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body></html>

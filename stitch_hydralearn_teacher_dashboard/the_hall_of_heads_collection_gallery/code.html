@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Hydra Head Gallery | HydraForge</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#5b13ec",
+                        "accent-cyan": "#06b6d4",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#000000",
+                        "card-dark": "#121212",
+                        "surface-dark": "#1a1a1a",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .glow-purple { box-shadow: 0 0 15px rgba(91, 19, 236, 0.4); }
+        .glow-cyan { box-shadow: 0 0 15px rgba(6, 182, 212, 0.4); }
+        .rarity-mythic { background: linear-gradient(135deg, #5b13ec 0%, #06b6d4 100%); }
+        .pedestal-glow {
+            background: radial-gradient(circle at center, rgba(91, 19, 236, 0.25) 0%, transparent 70%);
+        }
+        .text-gradient {
+            background: linear-gradient(to right, #5b13ec, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="bg-background-dark text-white font-display selection:bg-primary/30 min-h-screen overflow-x-hidden">
+<!-- Top Navigation -->
+<header class="sticky top-0 z-50 bg-black/80 backdrop-blur-md border-b border-white/10 px-6 py-4">
+<div class="max-w-7xl mx-auto flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="p-2 bg-primary rounded-lg glow-purple">
+<span class="material-symbols-outlined text-white text-2xl">architecture</span>
+</div>
+<h1 class="text-2xl font-black tracking-tight text-gradient">HydraForge</h1>
+</div>
+<div class="hidden md:flex flex-1 max-w-md mx-12">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-white/40">search</span>
+<input class="w-full bg-surface-dark border-none rounded-xl py-2 pl-10 pr-4 focus:ring-2 focus:ring-primary text-sm placeholder:text-white/20" placeholder="Search the collection..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex flex-col items-end mr-2 hidden sm:flex">
+<span class="text-[10px] text-white/40 uppercase font-bold tracking-widest">Hydra Essence</span>
+<span class="text-accent-cyan font-bold">12,450 ✧</span>
+</div>
+<button class="p-2 hover:bg-white/5 rounded-full transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-primary rounded-full"></span>
+</button>
+<div class="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-accent-cyan p-[2px]">
+<div class="w-full h-full rounded-full bg-black overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Student profile avatar placeholder" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOlUjKVAtQs7R__JLSHMCFzjXWA6rVa5pm0mLYf3jhn9oKlqcR20dlYx-rP3Mdxp9IoGXfk7yHeUWiNnxw4gSkT3ZNq4J0kQ1lH9ffyncOLSLyJRbBz53z0qjdaZyjvZ46rvElQwkM4y3IDuQcWNpZMGgYUH1d6p6M8rwlAANNn8VxSvC9JZhDagppnwtbwzRpBtt3RsTeXG-ywg7X_kmm-aVuk5eZ1qSmmAZh7ZhPExEhsYsPq2XHvTdvF1IAKDjBzESZvXB5ZtfH"/>
+</div>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-7xl mx-auto px-6 py-8">
+<!-- Progress Stats Section -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+<div class="bg-surface-dark p-6 rounded-xl border border-white/5 relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-24 h-24 bg-primary/10 rounded-full -mr-12 -mt-12 blur-3xl group-hover:bg-primary/20 transition-all"></div>
+<h3 class="text-white/50 text-xs font-bold uppercase tracking-widest mb-2">Collection Completion</h3>
+<div class="flex items-end gap-3 mb-3">
+<span class="text-4xl font-black">68%</span>
+<span class="text-white/30 mb-1 text-sm">136/200 Items</span>
+</div>
+<div class="w-full h-2 bg-white/5 rounded-full overflow-hidden">
+<div class="h-full bg-gradient-to-r from-primary to-accent-cyan rounded-full" style="width: 68%"></div>
+</div>
+</div>
+<div class="bg-surface-dark p-6 rounded-xl border border-white/5 relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-24 h-24 bg-accent-cyan/10 rounded-full -mr-12 -mt-12 blur-3xl group-hover:bg-accent-cyan/20 transition-all"></div>
+<h3 class="text-white/50 text-xs font-bold uppercase tracking-widest mb-2">Mastery Tier</h3>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-4xl text-accent-cyan">verified</span>
+<div>
+<p class="font-bold text-lg">Grand Synthesist</p>
+<p class="text-white/40 text-xs">Level 42 Academic Rank</p>
+</div>
+</div>
+</div>
+<div class="bg-surface-dark p-6 rounded-xl border border-white/5 flex items-center justify-between">
+<div>
+<h3 class="text-white/50 text-xs font-bold uppercase tracking-widest mb-1">Most Recent</h3>
+<p class="font-bold text-lg">Chrono-Visor</p>
+<p class="text-primary text-xs font-medium uppercase mt-1 tracking-tighter italic">Synthesized Gear • Legendary</p>
+</div>
+<div class="w-16 h-16 bg-white/5 rounded-lg flex items-center justify-center border border-white/10 glow-purple">
+<span class="material-symbols-outlined text-3xl text-primary">visibility</span>
+</div>
+</div>
+</div>
+<!-- Hero Featured Item Pedestal -->
+<section class="mb-16 relative">
+<div class="absolute inset-0 pedestal-glow -z-10"></div>
+<div class="text-center mb-8">
+<span class="text-primary font-bold tracking-[0.3em] uppercase text-xs mb-2 block">The Pedestal of Pride</span>
+<h2 class="text-5xl font-black text-white">Featured Achievement</h2>
+</div>
+<div class="flex flex-col lg:flex-row items-center justify-center gap-12 bg-white/5 rounded-[2rem] p-12 border border-white/10 backdrop-blur-sm">
+<!-- 3D Pedestal Mockup -->
+<div class="relative group">
+<div class="absolute -inset-4 bg-gradient-to-r from-primary to-accent-cyan opacity-20 blur-2xl group-hover:opacity-40 transition duration-1000"></div>
+<div class="relative w-72 h-72 bg-surface-dark rounded-2xl flex items-center justify-center border border-white/20 shadow-2xl overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-b from-transparent to-primary/20"></div>
+<img class="w-48 h-48 drop-shadow-[0_0_30px_rgba(91,19,236,0.6)]" data-alt="Intricate multi-headed hydra icon with violet scales" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNj-kVfWBlaMNUhea17X_c_LI9eUAQBKub1mGcSm_ZHRvG6X6iOrnIHKMN-jjVBnlKdM29x7wO2xAOHIkNE175SMVFltYshgdvkk1T-qe6LMVCkA-PkivdtJfsfXk-z636YGTEOy0migoOT-R9K7pTwZ4AeNCLfuAW99DteGVYHBL5fdBEoH5Pwv3folX_TqGUzugoGYUtEbbgZnzCtqxUPWdycqS7wn3W5syPaQnhN6jUt4l_pH5LOoETxmuuurNjUbsJcc5RcTLD"/>
+<div class="absolute bottom-4 left-1/2 -translate-x-1/2 w-32 h-2 bg-accent-cyan/40 blur-md rounded-full"></div>
+</div>
+<!-- Pedestal Base -->
+<div class="w-full h-8 bg-surface-dark mt-4 rounded-full border-t border-white/20 transform skew-x-[-10deg] shadow-lg"></div>
+</div>
+<div class="max-w-md text-center lg:text-left">
+<div class="inline-block px-3 py-1 rounded-full bg-primary/20 text-primary text-[10px] font-black uppercase tracking-widest mb-4 border border-primary/30">Mythic Item</div>
+<h3 class="text-4xl font-bold mb-4">The Grammar Hydra</h3>
+<p class="text-white/60 leading-relaxed mb-6">
+                        The multi-headed serpent of syntax. Its scales shimmer with the wisdom of a thousand scrolls, granting the bearer ultimate clarity in linguistic composition.
+                    </p>
+<div class="flex flex-wrap justify-center lg:justify-start gap-4 mb-8 text-sm">
+<div class="flex items-center gap-2 bg-white/5 px-4 py-2 rounded-lg border border-white/10">
+<span class="material-symbols-outlined text-accent-cyan">auto_awesome</span>
+<span>+50 Vocabulary</span>
+</div>
+<div class="flex items-center gap-2 bg-white/5 px-4 py-2 rounded-lg border border-white/10">
+<span class="material-symbols-outlined text-primary">history_edu</span>
+<span>Lore: Level 50 Academic</span>
+</div>
+</div>
+<button class="w-full lg:w-auto px-8 py-3 bg-primary hover:bg-primary/80 text-white font-bold rounded-xl transition-all transform hover:scale-105 glow-purple">
+                        Inspect Essence
+                    </button>
+</div>
+</div>
+</section>
+<!-- Gallery Controls -->
+<div class="flex flex-col md:flex-row gap-4 items-center justify-between mb-8">
+<h2 class="text-2xl font-bold flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">grid_view</span>
+                Collection Hall
+            </h2>
+<div class="flex flex-wrap gap-3 w-full md:w-auto">
+<select class="bg-surface-dark border-white/10 rounded-lg text-sm px-4 py-2 focus:ring-primary focus:border-primary">
+<option>All Rarities</option>
+<option>Mythic</option>
+<option>Legendary</option>
+<option>Rare</option>
+</select>
+<select class="bg-surface-dark border-white/10 rounded-lg text-sm px-4 py-2 focus:ring-primary focus:border-primary">
+<option>Item Type</option>
+<option>Hydra Heads</option>
+<option>Synthesized Gear</option>
+</select>
+<button class="bg-surface-dark border border-white/10 hover:border-white/20 rounded-lg px-4 py-2 flex items-center gap-2 text-sm transition-colors">
+<span class="material-symbols-outlined text-sm">filter_list</span>
+                    Sort: Date Earned
+                </button>
+</div>
+</div>
+<!-- Collection Grid -->
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+<!-- Item Card 1: Math Hydra -->
+<div class="group bg-surface-dark rounded-2xl border border-white/10 p-5 hover:border-accent-cyan/50 hover:shadow-[0_0_20px_rgba(6,182,212,0.2)] transition-all cursor-pointer">
+<div class="aspect-square bg-black rounded-xl mb-4 flex items-center justify-center relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-tr from-accent-cyan/10 to-transparent"></div>
+<img class="w-32 h-32 group-hover:scale-110 transition-transform" data-alt="Geometric math-themed hydra head with fractal patterns" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCu3b0dOTiKs66ZysxBCEmoEgNHQhGLvM3wjGPpDInDYmDkuyfMYgrHKFYv5efAR-u0pCIdpA6dOCHQbzXRJct-9ekQS46Qgh3zdqSCw9C9gERpiNPQe-gASH4cAy9TWExX3enDPww0cGFJOQKoXWYIO9ONAEvEZ72Q2oHLhBH2QiqWo19S9-hxZ5rDaLN8lJks6k__-iaQ5-rjmck3NwnkwoLk0aOocZKILd607AAaQ6FcmLfF0r9QzpjwEkulhUxHL0dHUhoZNeXt"/>
+<span class="absolute top-3 right-3 px-2 py-0.5 rounded bg-accent-cyan/20 border border-accent-cyan/40 text-accent-cyan text-[10px] font-bold uppercase">Legendary</span>
+</div>
+<h4 class="font-bold text-lg mb-1">Math Hydra</h4>
+<p class="text-white/40 text-xs mb-4 italic truncate">The geometric multi-mind of calculations.</p>
+<div class="flex items-center justify-between">
+<span class="text-[10px] text-white/30 uppercase tracking-tighter font-bold">Earned Oct 24</span>
+<span class="material-symbols-outlined text-white/20 group-hover:text-accent-cyan transition-colors">arrow_forward</span>
+</div>
+</div>
+<!-- Item Card 2: Equation Blade -->
+<div class="group bg-surface-dark rounded-2xl border border-white/10 p-5 hover:border-primary/50 hover:shadow-[0_0_20px_rgba(91,19,236,0.2)] transition-all cursor-pointer">
+<div class="aspect-square bg-black rounded-xl mb-4 flex items-center justify-center relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-tr from-primary/10 to-transparent"></div>
+<img class="w-32 h-32 group-hover:scale-110 transition-transform" data-alt="Glowing energy blade with mathematical symbols" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhx7iBB45JukO65JrH5bq282B5rpVDU5zIa9N1Q1P4GMqEu5Le9vDV6TLk9hDHYlucjXO3cZXgCG0nTLhfWafZFpDOf-vckv--ulWfq13ds3HRQeSQAKgzZoUldQXtWEbpTSh2X-eMxAQW66Q_wacA0tanesLrWIBWgiULFmFLvFECdm3WK8lMBLEBXp9BphKsvApElA-AfqnphhddwgumE-RSJWYmAq_ZiZhJR2v3AeDQQhWqJfdtjZiYr4PjJE5E89Sy9zyPGeDo"/>
+<span class="absolute top-3 right-3 px-2 py-0.5 rounded bg-primary/20 border border-primary/40 text-primary text-[10px] font-bold uppercase">Epic</span>
+</div>
+<h4 class="font-bold text-lg mb-1">Equation Blade</h4>
+<p class="text-white/40 text-xs mb-4 italic truncate">Cuts through the most complex variables.</p>
+<div class="flex items-center justify-between">
+<span class="text-[10px] text-white/30 uppercase tracking-tighter font-bold">Crafted Nov 02</span>
+<span class="material-symbols-outlined text-white/20 group-hover:text-primary transition-colors">arrow_forward</span>
+</div>
+</div>
+<!-- Item Card 3: Locked -->
+<div class="group bg-surface-dark/50 rounded-2xl border border-dashed border-white/5 p-5 relative grayscale opacity-60">
+<div class="aspect-square bg-black/40 rounded-xl mb-4 flex items-center justify-center relative">
+<span class="material-symbols-outlined text-5xl text-white/10">lock</span>
+<img class="w-24 h-24 absolute inset-0 m-auto blur-sm" data-alt="Silhouette of a locked mysterious hydra head" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjohhCaug4KlIm2ROahyb2I70GjnU9y6EManma70nxrmKPioVc-EfpV6137Qimg9xSSA8IM06YlY4v6BKLcItr16N2HVe9kA9LwJRi-jGksnuHItrlWXkooaYEikYho_GbM9w4bt_TO6hApbKE_AyNORHh2ddKyeHCpFr6WV1h3NJ7gyroUd_H6Uom7hBdjdZfGucLeIascqZ08fiMrLWsAH7dnzhbeRlb3uKUxrr1a-0hAlx0GgYMTkhlBbznfXf-cPLGOfLln-vD"/>
+</div>
+<h4 class="font-bold text-lg mb-1 text-white/20">Unknown Head</h4>
+<p class="text-white/20 text-[10px] uppercase font-bold tracking-widest">Requirement: Reach Level 60</p>
+<div class="mt-4 pt-4 border-t border-white/5 flex items-center justify-center">
+<span class="text-[10px] text-primary font-bold uppercase">Locked Artifact</span>
+</div>
+</div>
+<!-- Item Card 4: Chrono-Visor -->
+<div class="group bg-surface-dark rounded-2xl border border-white/10 p-5 hover:border-accent-cyan/50 hover:shadow-[0_0_20px_rgba(6,182,212,0.2)] transition-all cursor-pointer">
+<div class="aspect-square bg-black rounded-xl mb-4 flex items-center justify-center relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-tr from-accent-cyan/10 to-transparent"></div>
+<img class="w-32 h-32 group-hover:scale-110 transition-transform" data-alt="Futuristic cybernetic eyewear with purple glow" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDoSa5wgd-VPa3r2CblzX6Rp56tRen-G3CMQx_p3FxU4BzOP3l7TBD9I6AeajEvC_EJ_zvyHt4G3IflrH0WirFr1hU9-DvuiWx9NdtPM7Drlxp7_hv0f1ATMeuuS6TQu0hY0uP8bzIHam7hvGl_Ef2Fg37v0tI-tJiu3kMr4rmSqVPcwGqgta01ORRSveqlR89tlMCSSkgPVdJT9Xpv5XlKIG6LfswDer-gvDGYD4F1STWAitNsfIWvXCO4VyIbhI77CJ--ObsGcMoU"/>
+<span class="absolute top-3 right-3 px-2 py-0.5 rounded bg-accent-cyan/20 border border-accent-cyan/40 text-accent-cyan text-[10px] font-bold uppercase">Legendary</span>
+</div>
+<h4 class="font-bold text-lg mb-1">Chrono-Visor</h4>
+<p class="text-white/40 text-xs mb-4 italic truncate">See the solution before it exists.</p>
+<div class="flex items-center justify-between">
+<span class="text-[10px] text-white/30 uppercase tracking-tighter font-bold">Earned Dec 12</span>
+<span class="material-symbols-outlined text-white/20 group-hover:text-accent-cyan transition-colors">arrow_forward</span>
+</div>
+</div>
+<!-- Item Card 5: Logic Core -->
+<div class="group bg-surface-dark rounded-2xl border border-white/10 p-5 hover:border-primary/50 hover:shadow-[0_0_20px_rgba(91,19,236,0.2)] transition-all cursor-pointer">
+<div class="aspect-square bg-black rounded-xl mb-4 flex items-center justify-center relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-tr from-primary/10 to-transparent"></div>
+<img class="w-32 h-32 group-hover:scale-110 transition-transform" data-alt="Floating crystalline orb with internal circuitry" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6oFvKxER5GOgMZBDnHjDvOPibLaYbAUk2vg0fmfuSWF_sDU7sIqoVlvZ7RfqkBVurD2BRUb2iBvfSNfd-KrncWE11_MYul1U45pBVnX-mWICLbFJJCyRYJnzix7ufwINMFBabUB7XiRVp9UkC3wdmqPFAiqHa2wDvIAoF-JOB6j7jq2ms9m_zt2b1elEp8kKKkjBYFcpeK3Ry-e5MZQTD1oMsxCp-dB2ndJ1IxWCgvgSbZyHunRD7_3seVi5ptFeeHW4y_XQVDHoo"/>
+<span class="absolute top-3 right-3 px-2 py-0.5 rounded bg-white/10 border border-white/20 text-white/60 text-[10px] font-bold uppercase">Common</span>
+</div>
+<h4 class="font-bold text-lg mb-1">Logic Core</h4>
+<p class="text-white/40 text-xs mb-4 italic truncate">The basic building block of logic.</p>
+<div class="flex items-center justify-between">
+<span class="text-[10px] text-white/30 uppercase tracking-tighter font-bold">Earned Sep 15</span>
+<span class="material-symbols-outlined text-white/20 group-hover:text-primary transition-colors">arrow_forward</span>
+</div>
+</div>
+<!-- Item Card 6: Science Hydra -->
+<div class="group bg-surface-dark rounded-2xl border border-white/10 p-5 hover:border-accent-cyan/50 hover:shadow-[0_0_20px_rgba(6,182,212,0.2)] transition-all cursor-pointer">
+<div class="aspect-square bg-black rounded-xl mb-4 flex items-center justify-center relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-tr from-accent-cyan/10 to-transparent"></div>
+<img class="w-32 h-32 group-hover:scale-110 transition-transform" data-alt="Hydra head with bubbling beaker features" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzL5sEA6cxA8mB4O0xQ-Cxh0si2bIbxBX4pkv9VvNJTMV5zPfTZOh5ioml9x5NHIqNxcbCg674IGlCvN-1R7Nhtvphx48_fl0djWQTyOy6kH_mu9bMzF1H-roC5-4aLgM6wmvYhVp83PbTOxyVfsCAeKSnYFtNrnpZpb1FwzjV6C5Rq_vOPFfOKTDhdJq09EWpIVbqpG8Td1pkiipRiN3fw5jNW1Dc041qTBatYk2rWS3DWXx0a6wZTWbk99127MU1uf_jEMSbKpZc"/>
+<span class="absolute top-3 right-3 px-2 py-0.5 rounded bg-accent-cyan/20 border border-accent-cyan/40 text-accent-cyan text-[10px] font-bold uppercase">Rare</span>
+</div>
+<h4 class="font-bold text-lg mb-1">Science Hydra</h4>
+<p class="text-white/40 text-xs mb-4 italic truncate">Each head experiments independently.</p>
+<div class="flex items-center justify-between">
+<span class="text-[10px] text-white/30 uppercase tracking-tighter font-bold">Earned Oct 05</span>
+<span class="material-symbols-outlined text-white/20 group-hover:text-accent-cyan transition-colors">arrow_forward</span>
+</div>
+</div>
+<!-- Additional filler cards for grid structure -->
+<div class="group bg-surface-dark/40 rounded-2xl border border-white/5 p-5 opacity-40 hover:opacity-100 transition-all cursor-pointer">
+<div class="aspect-square bg-black rounded-xl mb-4 flex items-center justify-center">
+<span class="material-symbols-outlined text-white/10 text-4xl">inventory_2</span>
+</div>
+<div class="h-4 bg-white/5 rounded w-3/4 mb-2"></div>
+<div class="h-3 bg-white/5 rounded w-1/2"></div>
+</div>
+<div class="group bg-surface-dark/40 rounded-2xl border border-white/5 p-5 opacity-40 hover:opacity-100 transition-all cursor-pointer">
+<div class="aspect-square bg-black rounded-xl mb-4 flex items-center justify-center">
+<span class="material-symbols-outlined text-white/10 text-4xl">inventory_2</span>
+</div>
+<div class="h-4 bg-white/5 rounded w-3/4 mb-2"></div>
+<div class="h-3 bg-white/5 rounded w-1/2"></div>
+</div>
+</div>
+<!-- Footer Pagination / Loader -->
+<div class="mt-16 flex flex-col items-center gap-6 pb-20">
+<button class="bg-surface-dark border border-white/10 hover:border-primary px-10 py-3 rounded-full font-bold transition-all text-sm uppercase tracking-widest text-white/60 hover:text-white group">
+                Load More Artifacts
+                <span class="material-symbols-outlined align-middle ml-2 text-primary group-hover:translate-y-1 transition-transform">expand_more</span>
+</button>
+<p class="text-white/20 text-xs uppercase font-bold tracking-[0.2em]">Viewing 8 of 136 Acquired Assets</p>
+</div>
+</main>
+<!-- Detailed Modal (Simulation - Visible on some state) -->
+<!-- This is hidden in the design flow but structured for completeness -->
+<div class="fixed inset-0 bg-black/90 backdrop-blur-xl z-[100] flex items-center justify-center p-6 hidden">
+<div class="max-w-4xl w-full bg-surface-dark border border-white/20 rounded-[2.5rem] overflow-hidden shadow-[0_0_100px_rgba(91,19,236,0.2)] flex flex-col md:flex-row">
+<div class="w-full md:w-1/2 aspect-square bg-black flex items-center justify-center p-12">
+<img class="w-full h-full object-contain glow-purple" data-alt="High detail closeup of a digital artifact" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLQwygW-zP5ThZTTJXJKMw0mjmgZlFfs84w_3vTJmpcdqXG03B0Bnr-PgXeCgwqsX0vMnso9NUw6eitZQSHLNu08tE6kgbxeqsl8TfGYhTRRlQhSJ2hG3tjgbYt5k6OUUXH2sPmvOpH79D2VZhoElfx57RGzIn6ti75ug_cKux8HaeMNRHyaXNpBv7qcIdWeaP4TLTAOh1CFRyRFjlmVzzZqEpZywm8ItE11Cu_ppfnKAq5u-kHNayBcmW4nlmb4f95RUPdnssleII"/>
+</div>
+<div class="w-full md:w-1/2 p-12 flex flex-col justify-center">
+<button class="self-end -mt-6 -mr-6 p-2 text-white/40 hover:text-white transition-colors">
+<span class="material-symbols-outlined">close</span>
+</button>
+<span class="text-primary font-bold uppercase tracking-widest text-xs mb-2">Mythic Artifact</span>
+<h3 class="text-4xl font-black mb-4">Lore Aspect X-1</h3>
+<p class="text-white/60 leading-relaxed mb-8">
+                    Forged in the depths of the grammar nebula, this artifact allows the user to perceive the deep structure of any text, instantly identifying root origins and rhetorical devices.
+                </p>
+<div class="grid grid-cols-2 gap-4 mb-8">
+<div class="bg-white/5 p-4 rounded-xl border border-white/10">
+<p class="text-[10px] text-white/40 uppercase font-bold mb-1">Rarity</p>
+<p class="font-bold text-accent-cyan">Mythic</p>
+</div>
+<div class="bg-white/5 p-4 rounded-xl border border-white/10">
+<p class="text-[10px] text-white/40 uppercase font-bold mb-1">Date Crafted</p>
+<p class="font-bold">May 12, 2024</p>
+</div>
+</div>
+<button class="w-full py-4 bg-primary text-white font-bold rounded-xl glow-purple hover:bg-primary/90 transition-all">
+                    Equip to Avatar
+                </button>
+</div>
+</div>
+</div>
+</body></html>
