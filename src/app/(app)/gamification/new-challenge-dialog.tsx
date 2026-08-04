@@ -229,37 +229,32 @@ export function NewChallengeDialog() {
 
       {/* Result Dialog */}
       <Dialog open={isResultOpen} onOpenChange={setIsResultOpen}>
-        <DialogContent className="max-w-4xl h-[80vh] flex flex-col">
+        <DialogContent className="max-w-4xl sm:max-w-4xl h-[80vh] flex flex-col">
           <DialogHeader>
             <DialogTitle>Game Generated!</DialogTitle>
             <DialogDescription>
-              Your {result?.quiz ? 'interactive ' : ''}game is ready.
+              Your {result?.quiz && result.quiz.length > 0 ? 'interactive ' : ''}game is ready.
             </DialogDescription>
           </DialogHeader>
 
-          <div className="flex-1 overflow-hidden flex flex-col gap-4">
-             {result && (
-                <ScrollArea className="flex-1 p-4 border rounded-md bg-muted/50">
-                    <div className="prose prose-sm max-w-none dark:prose-invert">
-                        <pre className="whitespace-pre-wrap font-sans">{result.assessmentContent}</pre>
-                    </div>
-                </ScrollArea>
-             )}
+          <div className="flex-1 min-h-0 overflow-hidden">
+            {result && (
+              <ScrollArea className="h-full p-4 border rounded-md bg-muted/50">
+                <div className="prose prose-sm max-w-none dark:prose-invert">
+                  <pre className="whitespace-pre-wrap font-sans">{result.assessmentContent}</pre>
+                </div>
+              </ScrollArea>
+            )}
+          </div>
 
-             {result?.quiz && result.quiz.length > 0 && (
-                  <div className="flex justify-end gap-2">
-                     <Button onClick={() => setIsResultOpen(false)} variant="outline">Close</Button>
-                     <GameLauncher 
-                         topic={form.getValues('topic')}
-                         questions={result.quiz}
-                     />
-                  </div>
-              )}
-             {(!result?.quiz || result.quiz.length === 0) && (
-                 <div className="flex justify-end">
-                    <Button onClick={() => setIsResultOpen(false)}>Close</Button>
-                 </div>
-             )}
+          <div className="shrink-0 flex flex-wrap items-center justify-end gap-2 pt-4 border-t">
+            <Button onClick={() => setIsResultOpen(false)} variant="outline">Close</Button>
+            {result?.quiz && result.quiz.length > 0 && (
+              <GameLauncher
+                topic={form.getValues('topic')}
+                questions={result.quiz}
+              />
+            )}
           </div>
         </DialogContent>
       </Dialog>
