@@ -1,9 +1,15 @@
 import {genkit} from 'genkit';
-import {googleAI} from '@genkit-ai/googleai';
+import {openAICompatible} from '@genkit-ai/compat-oai';
 
-const apiKey = process.env.GOOGLE_GENAI_API_KEY || process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY;
+const apiKey = process.env.OPENROUTER_API_KEY;
 
 export const ai = genkit({
-  plugins: [googleAI({ apiKey: apiKey || undefined })],
-  model: 'googleai/gemini-2.5-flash',
+  plugins: [
+    openAICompatible({
+      name: 'openrouter',
+      apiKey: apiKey || undefined,
+      baseURL: 'https://openrouter.ai/api/v1',
+    }),
+  ],
+  model: 'openrouter/google/gemma-4-31b-it:free',
 });

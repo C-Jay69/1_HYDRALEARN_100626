@@ -26,9 +26,9 @@ export async function POST(req: NextRequest) {
     }
 
     // Diagnostic check for API key (do not log the key itself!)
-    const apiKey = process.env.GEMINI_API_KEY || process.env.GOOGLE_GENAI_API_KEY;
+    const apiKey = process.env.OPENROUTER_API_KEY;
     if (!apiKey) {
-      console.error('CRITICAL: GEMINI_API_KEY or GOOGLE_GENAI_API_KEY is missing from environment');
+      console.error('CRITICAL: OPENROUTER_API_KEY is missing from environment');
       return NextResponse.json(
         { error: 'AI service configuration error: API key missing' },
         { status: 500 }

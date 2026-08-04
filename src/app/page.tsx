@@ -68,6 +68,9 @@ export default function Home() {
             <Link href="/user-guide" className="transition-colors hover:text-foreground">
               Resources
             </Link>
+            <Link href="/pricing" className="transition-colors hover:text-foreground">
+              Pricing
+            </Link>
           </div>
           <Link
             href="/dashboard"
