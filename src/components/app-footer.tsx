@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { Github, Twitter, BookOpen } from 'lucide-react';
 
@@ -7,9 +8,18 @@ export function AppFooter() {
       <div className="container mx-auto px-4 sm:px-6">
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div className="flex flex-col gap-1">
-            <p className="text-sm font-semibold">
-              HydraLearn by LifeJacket AI
-            </p>
+            <div className="flex items-center gap-2">
+              <Image
+                src="/logo.svg"
+                alt="HydraLearn Logo"
+                width={24}
+                height={24}
+                className="size-6 object-contain"
+              />
+              <p className="text-sm font-semibold">
+                Hydra<span className="gradient-text">Learn</span> by LifeJacket AI
+              </p>
+            </div>
             <p className="text-sm text-muted-foreground">
               Many heads. One goal: smarter, safer learning.
             </p>

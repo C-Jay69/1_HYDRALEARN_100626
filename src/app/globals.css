@@ -128,4 +128,16 @@
   .gradient-bg {
     @apply bg-gradient-to-r from-purple-500 to-cyan-500 text-white;
   }
+  .grid-bg {
+    background-image: radial-gradient(circle at 1px 1px, rgb(255 255 255 / 0.06) 1px, transparent 0);
+    background-size: 36px 36px;
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+.animate-float {
+  animation: float 6s ease-in-out infinite;
 }
