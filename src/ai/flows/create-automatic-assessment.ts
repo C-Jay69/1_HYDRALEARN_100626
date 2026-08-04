@@ -130,6 +130,32 @@ INSTRUCTIONS:
 Generate the assessment content and AI-generated feedback based on these instructions.`,
 });
 
+const quizExtractionPrompt = ai.definePrompt({
+  name: 'extractQuizQuestionsPrompt',
+  input: { schema: z.object({
+    topic: z.string(),
+    assessmentType: z.string(),
+    content: z.string(),
+  }) },
+  prompt: `You are extracting playable questions from an educational game so it can run in an interactive quiz player.
+
+Topic: {{{topic}}}
+Game type: {{{assessmentType}}}
+
+Here is the generated game content:
+{{{content}}}
+
+Extract EVERY playable question from the content, in order, and return them as a JSON array. Each element MUST be an object with exactly these fields:
+- "type": "MCQ", "FILL_BLANK", "MATCHING", "TRUE_FALSE", or "SHORT_ANSWER"
+- "question": the question text
+- "options": for MCQ, an array of exactly 4 answer option strings; otherwise an empty array
+- "answer": the correct answer text (or the correct option)
+- "explanation": a brief explanation of the correct answer
+- "memeQuery": a short, funny search phrase related to the topic
+
+Output ONLY the raw JSON array. Do NOT wrap it in markdown code fences. Do NOT include any commentary, explanations, or leading/trailing text. The response must start with '[' and end with ']'.`,
+});
+
 const createAutomaticAssessmentFlow = ai.defineFlow(
   {
     name: 'createAutomaticAssessmentFlow',
@@ -155,15 +181,54 @@ const createAutomaticAssessmentFlow = ai.defineFlow(
 
     // Prefer the structured quiz array. Fall back to extracting questions from the
     // ```json block embedded in assessmentContent (resilient to free models that
-    // skip structured tool-call output).
+    // skip structured tool-call output). As a last resort, ask the model to
+    // output ONLY the quiz questions as raw JSON.
     let quiz = normalizeQuiz(output.quiz);
     if (quiz.length === 0) {
       quiz = extractQuizFromContent(output.assessmentContent);
+    }
+    if (quiz.length === 0) {
+      try {
+        const extraction = await quizExtractionPrompt({
+          topic: input.topic,
+          assessmentType: input.assessmentType,
+          content: output.assessmentContent,
+        });
+        quiz = parseJsonArray(extraction.text);
+      } catch (e) {
+        console.warn('createAutomaticAssessment: quiz extraction fallback failed', e);
+      }
     }
 
     return { ...output, quiz };
   }
 );
+
+/** Parse a JSON array from raw model text (fence-tolerant), then validate each item. */
+function parseJsonArray(text: string): GameQuestion[] {
+  if (!text) return [];
+  const candidates: string[] = [];
+
+  const fenceMatch = text.match(/```(?:json)?\s*([\s\S]*?)```/i);
+  if (fenceMatch && fenceMatch[1]) candidates.push(fenceMatch[1].trim());
+
+  const firstBracket = text.indexOf('[');
+  const lastBracket = text.lastIndexOf(']');
+  if (firstBracket !== -1 && lastBracket > firstBracket) {
+    candidates.push(text.slice(firstBracket, lastBracket + 1));
+  }
+  candidates.push(text.trim());
+
+  for (const candidate of candidates) {
+    try {
+      const quiz = normalizeQuiz(JSON.parse(candidate));
+      if (quiz.length > 0) return quiz;
+    } catch {
+      // try the next candidate
+    }
+  }
+  return [];
+}
 
 function normalizeQuiz(raw: unknown): GameQuestion[] {
   if (!Array.isArray(raw)) return [];
@@ -175,18 +240,32 @@ function normalizeQuiz(raw: unknown): GameQuestion[] {
   return quiz;
 }
 
-/** Extract the ```json code block from assessmentContent and parse it into valid questions. */
+/** Extract a JSON quiz array from assessmentContent. Tries the ```json fence first, then any JSON array present in the text. */
 function extractQuizFromContent(content: string): GameQuestion[] {
   if (!content) return [];
+
+  const candidates: string[] = [];
+
   const fenceMatch = content.match(/```json\s*([\s\S]*?)```/i);
-  if (!fenceMatch || !fenceMatch[1]) return [];
-  try {
-    const raw = JSON.parse(fenceMatch[1].trim());
-    return normalizeQuiz(raw);
-  } catch (e) {
-    console.warn('createAutomaticAssessment: failed to parse embedded JSON quiz', e);
-    return [];
+  if (fenceMatch && fenceMatch[1]) candidates.push(fenceMatch[1].trim());
+
+  const firstBracket = content.indexOf('[');
+  const lastBracket = content.lastIndexOf(']');
+  if (firstBracket !== -1 && lastBracket > firstBracket) {
+    candidates.push(content.slice(firstBracket, lastBracket + 1));
   }
+
+  for (const candidate of candidates) {
+    try {
+      const quiz = normalizeQuiz(JSON.parse(candidate));
+      if (quiz.length > 0) return quiz;
+    } catch {
+      // try the next candidate
+    }
+  }
+
+  console.warn('createAutomaticAssessment: no parseable JSON quiz found in content');
+  return [];
 }
 
 /** Coerce a possibly-messy question object into the shape expected by GameQuestionSchema. */
