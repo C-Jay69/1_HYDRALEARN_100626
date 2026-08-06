@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
 import { moderateContent } from '@/ai/flows/forum-moderator';
+import { ensurePlaceholderUser, PLACEHOLDER_USER_ID } from '@/lib/placeholder-user';
 
 export async function GET() {
   try {
@@ -35,7 +36,8 @@ export async function POST(request: NextRequest) {
     }
 
     // For now, use a placeholder user ID (auth not yet integrated)
-    const userId = 'placeholder-user';
+    await ensurePlaceholderUser();
+    const userId = PLACEHOLDER_USER_ID;
 
     // Run AI moderation before saving
     const moderation = await moderateContent(content);

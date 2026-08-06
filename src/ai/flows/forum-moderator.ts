@@ -14,8 +14,8 @@ import { z } from 'genkit';
  */
 const ModerationResultSchema = z.object({
   isSafe: z.boolean().describe('Whether the content is safe to be published.'),
-  flagReason: z.string().optional().describe('The reason why the content was flagged (e.g., "Bullying", "Hate Speech", "Self-Harm").'),
-  severity: z.enum(['LOW', 'MEDIUM', 'HIGH']).optional().describe('The severity of the violation.'),
+  flagReason: z.string().nullish().describe('The reason why the content was flagged (e.g., "Bullying", "Hate Speech", "Self-Harm").'),
+  severity: z.enum(['LOW', 'MEDIUM', 'HIGH']).nullish().describe('The severity of the violation.'),
   suggestedAction: z.enum(['ALLOW', 'FLAG_FOR_REVIEW', 'BLOCK']).describe('The recommended action to take.'),
 });
 

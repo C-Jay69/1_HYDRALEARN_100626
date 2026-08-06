@@ -51,7 +51,10 @@ export function HydraEarChat() {
       });
 
       if (!response.ok) {
-        throw new Error('Failed to get response');
+        const errorBody = await response.json().catch(() => null);
+        throw new Error(
+          errorBody?.details || errorBody?.error || 'Failed to get response'
+        );
       }
 
       const data: HydraEarResponse = await response.json();
@@ -78,7 +81,10 @@ export function HydraEarChat() {
       toast({
         variant: 'destructive',
         title: 'Error',
-        description: 'Failed to get a response. Please try again.',
+        description:
+          error instanceof Error && error.message !== 'Failed to get response'
+            ? error.message
+            : 'Failed to get a response. Please try again.',
       });
     } finally {
       setIsLoading(false);

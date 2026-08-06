@@ -20,10 +20,15 @@ const CounselorInputSchema = z.object({
   })).optional().describe('The conversation history to maintain context.'),
 });
 
+const CounselorPromptInputSchema = z.object({
+  message: z.string().describe('The student\'s message.'),
+  historyText: z.string().optional().describe('The formatted conversation history to maintain context.'),
+});
+
 const CounselorOutputSchema = z.object({
   response: z.string().describe('The empathetic response from HydraEar.'),
-  sentiment: z.enum(['POSITIVE', 'NEUTRAL', 'NEGATIVE', 'DISTRESSED']).describe('The detected emotional state of the student.'),
-  crisisAlert: z.boolean().describe('True if the student is showing signs of immediate crisis/self-harm.'),
+  sentiment: z.enum(['POSITIVE', 'NEUTRAL', 'NEGATIVE', 'DISTRESSED']).nullish().describe('The detected emotional state of the student.'),
+  crisisAlert: z.boolean().nullish().describe('True if the student is showing signs of immediate crisis/self-harm.'),
 });
 
 export type CounselorInput = z.infer<typeof CounselorInputSchema>;
@@ -35,7 +40,7 @@ export type CounselorOutput = z.infer<typeof CounselorOutputSchema>;
  */
 const counselorPrompt = ai.definePrompt({
   name: 'hydraEarPrompt',
-  input: { schema: CounselorInputSchema },
+  input: { schema: CounselorPromptInputSchema },
   output: { schema: CounselorOutputSchema },
   prompt: `You are HydraEar, an anonymous AI counselor for students.
 Your goal is not to "fix" the student's problems, but to provide a safe, non-judgmental space where they feel heard and understood.
@@ -48,7 +53,7 @@ GUIDELINES:
 5. **Safety First:** If you detect any signs of self-harm, violence, or immediate crisis, you MUST set crisisAlert to true and provide a gentle but firm reminder that there are professional humans who can help (e.g., crisis hotlines).
 
 Current Conversation:
-{{{history}}}
+{{{historyText}}}
 Student: "{{{message}}}"
 
 Response as HydraEar:`,
@@ -64,8 +69,33 @@ export const hydraEarFlow = ai.defineFlow(
     outputSchema: CounselorOutputSchema,
   },
   async (input) => {
-    const { output } = await counselorPrompt(input);
-    return output!;
+    const historyText = (input.history ?? [])
+      .map((m) => `${m.role}: "${m.content}"`)
+      .join('\n');
+
+    let lastError: unknown;
+    for (let attempt = 0; attempt < 3; attempt++) {
+      try {
+        const { output } = await counselorPrompt({
+          message: input.message,
+          historyText,
+        });
+        if (!output) {
+          throw new Error('HydraEar returned no output');
+        }
+        return {
+          response: output.response,
+          sentiment: output.sentiment ?? 'NEUTRAL',
+          crisisAlert: output.crisisAlert ?? false,
+        };
+      } catch (error) {
+        lastError = error;
+        if (attempt < 2) {
+          await new Promise((resolve) => setTimeout(resolve, 800 * (attempt + 1)));
+        }
+      }
+    }
+    throw lastError;
   }
 );
 

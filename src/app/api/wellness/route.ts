@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { submitWellnessCheckin, getStudentWellnessHistory } from '@/lib/wellness';
+import { ensurePlaceholderUser, PLACEHOLDER_USER_ID } from '@/lib/placeholder-user';
 
 export async function POST(request: NextRequest) {
   try {
@@ -14,7 +15,8 @@ export async function POST(request: NextRequest) {
     }
 
     // For now, use a placeholder student ID (auth not yet integrated)
-    const studentId = 'placeholder-user';
+    await ensurePlaceholderUser();
+    const studentId = PLACEHOLDER_USER_ID;
 
     const result = await submitWellnessCheckin({
       studentId,
@@ -35,7 +37,8 @@ export async function POST(request: NextRequest) {
 export async function GET(request: NextRequest) {
   try {
     // For now, use a placeholder student ID (auth not yet integrated)
-    const studentId = 'placeholder-user';
+    await ensurePlaceholderUser();
+    const studentId = PLACEHOLDER_USER_ID;
 
     const history = await getStudentWellnessHistory(studentId);
     return NextResponse.json(history);
