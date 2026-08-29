@@ -30,12 +30,6 @@ export function AppFooter() {
               >
                 User Guide
               </Link>
-              <Link
-                href="/deployment-guide"
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-              >
-                Deployment
-              </Link>
             </div>
 
             <div className="flex gap-4">

@@ -103,8 +103,8 @@
     "prisma": true,
     "sharp": true,
     "unrs-resolver": true,
-    "@firebase/util@1.15.1": true,
-    "protobufjs@7.6.3": true
+    "@firebase/util@1.15.3": true,
+    "protobufjs@7.6.6": true
   },
   "trustedDependencies": [
     "@firebase/util",
