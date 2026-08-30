@@ -156,6 +156,39 @@ Extract EVERY playable question from the content, in order, and return them as a
 Output ONLY the raw JSON array. Do NOT wrap it in markdown code fences. Do NOT include any commentary, explanations, or leading/trailing text. The response must start with '[' and end with ']'.`,
 });
 
+/**
+ * Retry a Genkit prompt call on transient ERR_STREAM_PREMATURE_CLOSE errors.
+ *
+ * OpenRouter free-tier models frequently close the streamed connection before
+ * the full response is delivered (especially for large structured outputs like
+ * jeopardy boards). A single retry with a short backoff resolves the vast
+ * majority of these cases.
+ */
+async function callPromptWithRetry<T extends (...args: any[]) => any>(
+  fn: T,
+  payload: Parameters<T>[0],
+): Promise<Awaited<ReturnType<T>>> {
+  for (let attempt = 0; attempt < 3; attempt++) {
+    try {
+      return await fn(payload);
+    } catch (err) {
+      const code =
+        (err as { code?: string })?.code ??
+        (err as { cause?: { code?: string } })?.cause?.code;
+      const text = (err as Error)?.message ?? '';
+      const isPrematureClose =
+        code === 'ERR_STREAM_PREMATURE_CLOSE' ||
+        /premature close/i.test(text);
+      if (!isPrematureClose || attempt === 2) {
+        throw err;
+      }
+      // backoff: 1s, 2s
+      await new Promise((r) => setTimeout(r, (attempt + 1) * 1000));
+    }
+  }
+  throw new Error('unreachable');
+}
+
 const createAutomaticAssessmentFlow = ai.defineFlow(
   {
     name: 'createAutomaticAssessmentFlow',
@@ -170,7 +203,7 @@ const createAutomaticAssessmentFlow = ai.defineFlow(
       tone: input.tone,
     });
 
-    const {output} = await prompt({
+    const {output} = await callPromptWithRetry(prompt, {
       input: input,
       strategy: strategy,
     });
@@ -189,7 +222,7 @@ const createAutomaticAssessmentFlow = ai.defineFlow(
     }
     if (quiz.length === 0) {
       try {
-        const extraction = await quizExtractionPrompt({
+        const extraction = await callPromptWithRetry(quizExtractionPrompt, {
           topic: input.topic,
           assessmentType: input.assessmentType,
           content: output.assessmentContent,

@@ -11,5 +11,5 @@ export const ai = genkit({
       baseURL: 'https://openrouter.ai/api/v1',
     }),
   ],
-  model: 'openrouter/google/gemma-4-31b-it:free',
+  model: 'openrouter/minimax/minimax-m3:free',
 });
