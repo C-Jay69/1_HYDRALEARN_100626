@@ -24,4 +24,8 @@ export const QuizQuestionSchema = z.object({
   explanation: z.string().optional().describe('A pedagogical explanation of why this is the correct answer, helpful for student review.'),
 
   memeQuery: z.string().optional().describe('A search query for a relevant meme or image to make this question more engaging.'),
+
+  // Millionaire / ladder-game metadata. Optional — existing quiz content omits these.
+  tier: z.number().int().min(0).optional().describe('Question tier/index in the money ladder (0-based).'),
+  value: z.number().int().nonnegative().optional().describe('Dollar value of this question for ladder games (e.g. Who Wants To Be A Millionaire).'),
 });

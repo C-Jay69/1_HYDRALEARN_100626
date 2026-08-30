@@ -49,6 +49,19 @@ const GameQuestionSchema = z.object({
     .string()
     .optional()
     .describe('A search query for a relevant meme or image to make this question more engaging.'),
+  // Millionaire / ladder-game metadata — optional, ignored by generic quizzes.
+  tier: z
+    .number()
+    .int()
+    .min(0)
+    .optional()
+    .describe('Question tier/index in the money ladder (0-based).'),
+  value: z
+    .number()
+    .int()
+    .nonnegative()
+    .optional()
+    .describe('Dollar value of this question for ladder games (e.g. Who Wants To Be A Millionaire).'),
 });
 
 const CreateAutomaticAssessmentOutputSchema = z.object({
@@ -120,7 +133,7 @@ INSTRUCTIONS:
 
 **Specific Instructions for Game Types (populate 'quiz' accordingly, AND write the full game into 'assessmentContent'):**
 - **Jeopardy**: Organize questions into 5 categories with 5 questions each, increasing in difficulty (e.g., 100 to 500 points). Format the 'assessmentContent' as a grid/list of clues, and put all 25 questions into the 'quiz' array as MCQ questions.
-- **Who Wants To Be A Millionaire**: Create 15 multiple-choice questions with increasing difficulty. Each question must have 4 options (A, B, C, D). Indicate "Lifelines" (50:50, Phone a Friend, Ask the Audience) usage opportunities.
+- **Who Wants To Be A Millionaire**: Create exactly 15 multiple-choice questions with increasing difficulty. Each question must have 4 options (A, B, C, D). Assign each question a "tier" (0–14) and a "value" (dollar amount matching the official money ladder: $100, $200, $300, $500, $1,000, $2,000, $4,000, $8,000, $16,000, $32,000, $64,000, $125,000, $250,000, $500,000, $1,000,000). Indicate "Lifelines" (50:50, Phone a Friend, Ask the Audience) usage opportunities.
 - **Family Feud**: Create 5 "survey" questions. For each question, list the top 5-8 answers with associated "points" (survey percentages).
 - **CountDown**: Create a set of "letters rounds" (scrambled letters to form the longest word) and "numbers rounds" (target number to reach using 6 given numbers and basic operations). Provide solutions.
 - **The Weakest Link**: Create a rapid-fire sequence of 20 general knowledge questions related to the topic. Include a "Bank" instruction after every few questions.
