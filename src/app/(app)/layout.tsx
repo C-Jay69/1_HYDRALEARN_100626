@@ -1,5 +1,6 @@
 import { AppLogo } from '@/components/app-logo';
 import { MainNav } from '@/components/main-nav';
+import { PageBackground } from '@/components/page-background';
 import { UserNav } from '@/components/user-nav';
 import { AppFooter } from '@/components/app-footer';
 import {
@@ -37,7 +38,10 @@ export default function AppLayout({
             <UserNav />
           </div>
         </header>
-        <main className="flex-1 p-4 sm:px-6 sm:pb-6">{children}</main>
+        <main className="relative isolate flex-1 p-4 sm:px-6 sm:pb-6">
+          <PageBackground />
+          <div className="relative z-10">{children}</div>
+        </main>
         <AppFooter />
       </SidebarInset>
     </SidebarProvider>
