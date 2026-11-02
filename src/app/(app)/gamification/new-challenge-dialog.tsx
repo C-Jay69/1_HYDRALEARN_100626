@@ -39,12 +39,13 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { Loader2, Swords, Wand2, Play } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { InteractiveQuiz } from './interactive-quiz';
+import type { GameShowType, QuizQuestion } from '@/lib/game-lifelines';
 
 const formSchema = z.object({
   subject: z.string().min(2, 'Subject is required.'),
   topic: z.string().min(2, 'Topic is required.'),
   gradeLevel: z.string().min(1, 'Grade level is required.'),
-  assessmentType: z.enum(['quiz', 'game', 'jeopardy', 'millionaire', 'family-feud', 'countdown', 'weakest-link', 'puzzles', 'escape-room']),
+  assessmentType: z.enum(['game', 'jeopardy', 'millionaire', 'weakest-link']),
   learningObjectives: z.string().min(10, 'Please provide detailed learning objectives.'),
   curriculum: z.string().min(2, 'Curriculum is required.'),
 });
@@ -56,6 +57,8 @@ export function NewChallengeDialog() {
   const [isLoading, setIsLoading] = useState(false);
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [isResultOpen, setIsResultOpen] = useState(false);
+  // Captured at submit time — form.reset() clears the values before the result dialog renders.
+  const [launchConfig, setLaunchConfig] = useState<{ topic: string; gameType: GameShowType } | null>(null);
   const { toast } = useToast();
 
   const form = useForm<FormData>({
@@ -84,6 +87,7 @@ export function NewChallengeDialog() {
         return;
       }
       setResult(response);
+      setLaunchConfig({ topic: data.topic, gameType: data.assessmentType });
       setIsFormOpen(false); // Close form dialog
       setIsResultOpen(true); // Open result dialog
       form.reset();
@@ -172,11 +176,7 @@ export function NewChallengeDialog() {
                         <SelectItem value="game">Standard Quiz Game</SelectItem>
                         <SelectItem value="jeopardy">Jeopardy Gameshow</SelectItem>
                         <SelectItem value="millionaire">Who Wants To Be A Millionaire</SelectItem>
-                        <SelectItem value="family-feud">Family Feud</SelectItem>
-                        <SelectItem value="countdown">CountDown</SelectItem>
                         <SelectItem value="weakest-link">The Weakest Link</SelectItem>
-                        <SelectItem value="puzzles">Puzzles</SelectItem>
-                        <SelectItem value="escape-room">Escape Room</SelectItem>
                       </SelectContent>
                     </Select>
                     <FormMessage />
@@ -249,9 +249,10 @@ export function NewChallengeDialog() {
 
           <div className="shrink-0 flex flex-wrap items-center justify-end gap-2 pt-4 border-t">
             <Button onClick={() => setIsResultOpen(false)} variant="outline">Close</Button>
-            {result?.quiz && result.quiz.length > 0 && (
+            {result?.quiz && result.quiz.length > 0 && launchConfig && (
               <GameLauncher
-                topic={form.getValues('topic')}
+                topic={launchConfig.topic}
+                gameType={launchConfig.gameType}
                 questions={result.quiz}
               />
             )}
@@ -262,19 +263,35 @@ export function NewChallengeDialog() {
   );
 }
 
-function GameLauncher({ topic, questions }: { topic: string, questions: any[] }) {
+function GameLauncher({
+    topic,
+    gameType,
+    questions,
+}: {
+    topic: string;
+    gameType: GameShowType;
+    questions: QuizQuestion[];
+}) {
     const [isPlaying, setIsPlaying] = useState(false);
+
+    const playLabel = {
+        game: 'Play Interactive Mode',
+        jeopardy: 'Play Jeopardy',
+        millionaire: 'Play Millionaire',
+        'weakest-link': 'Play The Weakest Link',
+    }[gameType];
 
     return (
         <>
             <Button onClick={() => setIsPlaying(true)}>
                 <Play className="mr-2 h-4 w-4" />
-                Play Interactive Mode
+                {playLabel}
             </Button>
-            <InteractiveQuiz 
+            <InteractiveQuiz
                 isOpen={isPlaying}
                 onOpenChange={setIsPlaying}
                 topic={topic}
+                gameType={gameType}
                 questions={questions}
             />
         </>

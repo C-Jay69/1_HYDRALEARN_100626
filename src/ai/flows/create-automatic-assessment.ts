@@ -132,13 +132,11 @@ INSTRUCTIONS:
    This JSON block MUST contain every playable question (all rounds/levels) in order. Do not put anything else between the \`\`\`json fence.
 
 **Specific Instructions for Game Types (populate 'quiz' accordingly, AND write the full game into 'assessmentContent'):**
-- **Jeopardy**: Organize questions into 5 categories with 5 questions each, increasing in difficulty (e.g., 100 to 500 points). Format the 'assessmentContent' as a grid/list of clues, and put all 25 questions into the 'quiz' array as MCQ questions.
-- **Who Wants To Be A Millionaire**: Create exactly 15 multiple-choice questions with increasing difficulty. Each question must have 4 options (A, B, C, D). Assign each question a "tier" (0–14) and a "value" (dollar amount matching the official money ladder: $100, $200, $300, $500, $1,000, $2,000, $4,000, $8,000, $16,000, $32,000, $64,000, $125,000, $250,000, $500,000, $1,000,000). Indicate "Lifelines" (50:50, Phone a Friend, Ask the Audience) usage opportunities.
-- **Family Feud**: Create 5 "survey" questions. For each question, list the top 5-8 answers with associated "points" (survey percentages).
-- **CountDown**: Create a set of "letters rounds" (scrambled letters to form the longest word) and "numbers rounds" (target number to reach using 6 given numbers and basic operations). Provide solutions.
-- **The Weakest Link**: Create a rapid-fire sequence of 20 general knowledge questions related to the topic. Include a "Bank" instruction after every few questions.
-- **Puzzles**: Create 3-5 puzzles related to the topic (e.g., Crossword clues, Word Search word list, Cryptogram, Logic Puzzle).
-- **Escape Room**: Create a narrative-driven scenario where students must solve a series of 5-7 sequential riddles or problems related to the topic to "unlock" the next stage and eventually "escape".
+LIFELINES: Every game show below is played with three lifelines (50:50, Phone a Friend, Ask the Audience) that the player activates in the app. The app can only offer 50:50 and Ask the Audience when a question is multiple choice, so game-show questions MUST be MCQ with exactly 4 options. The 'answer' field must match one of the four options exactly.
+- **Jeopardy**: Organize questions into 5 categories with 5 questions each, increasing in difficulty (e.g., 100 to 500 points). Format the 'assessmentContent' as a grid/list of clues, and put all 25 questions into the 'quiz' array as MCQ questions with 4 options each. Set 'tier' to the row number (0–4) and 'value' to the matching point value.
+- **Who Wants To Be A Millionaire**: Create exactly 15 multiple-choice questions with increasing difficulty. Each question must have 4 options (A, B, C, D). Assign each question a "tier" (0–14) and a "value" (dollar amount matching the official money ladder: $100, $200, $300, $500, $1,000, $2,000, $4,000, $8,000, $16,000, $32,000, $64,000, $125,000, $250,000, $500,000, $1,000,000). The 'explanation' field doubles as the Phone a Friend hint, so write it as clear spoken reasoning a friend could say out loud.
+- **The Weakest Link**: Create a rapid-fire sequence of 20 general knowledge questions related to the topic, each as an MCQ with 4 options. Note in 'assessmentContent' that the chain starts at $100, doubles with each correct answer up to $1,000, and resets when a contestant answers wrong.
+- **Standard Quiz Game**: A mix of question types (MCQ, TRUE_FALSE, FILL_BLANK, SHORT_ANSWER, MATCHING) is encouraged. Prefer MCQ for at least half the questions so the lifelines are usable.
 
 Generate the assessment content and AI-generated feedback based on these instructions.`,
 });
