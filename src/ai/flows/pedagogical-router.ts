@@ -29,8 +29,16 @@ const PedagogicalRouterOutputSchema = z.object({
   primaryTheory: z.string().describe('The main pedagogical theory to apply (e.g., Constructivism, Behaviorism, Humanism).'),
   keyTheorist: z.string().describe('The primary theorist associated with this approach (e.g., Piaget, Skinner, Maslow).'),
   strategyDetails: z.string().describe('Detailed instructions on HOW to apply this theory to the specific topic and age.'),
-  instructionalSteps: z.array(z.string()).describe('A step-by-step sequence for delivering the content.'),
-  suggestedEngagement: z.string().describe('Specific suggestions for keeping the student engaged based on the theory.'),
+  // Free-tier models sometimes omit trailing fields; defaults keep generation
+  // from failing schema validation over a non-critical omission.
+  instructionalSteps: z
+    .array(z.string())
+    .default([])
+    .describe('A step-by-step sequence for delivering the content.'),
+  suggestedEngagement: z
+    .string()
+    .default('')
+    .describe('Specific suggestions for keeping the student engaged based on the theory.'),
 });
 
 export type PedagogicalRouterOutput = z.infer<typeof PedagogicalRouterOutputSchema>;
@@ -79,7 +87,10 @@ export const pedagogicalRouterFlow = ai.defineFlow(
   },
   async (input) => {
     const { output } = await pedagogicalRouterPrompt(input);
-    return output!;
+    if (!output) {
+      throw new Error('Pedagogical router returned an empty strategy.');
+    }
+    return output;
   }
 );
 

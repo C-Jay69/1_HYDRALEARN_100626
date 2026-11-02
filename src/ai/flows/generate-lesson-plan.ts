@@ -5,7 +5,7 @@
  * It now leverages the Pedagogical Router to ensure a theory-driven approach.
  */
 
-import {ai} from '@/ai/genkit';
+import {ai, withAiRetry} from '@/ai/genkit';
 import {z} from 'genkit';
 import { getPedagogicalStrategy, PedagogicalRouterInput } from './pedagogical-router';
 
@@ -88,19 +88,29 @@ const generateLessonPlanFlow = ai.defineFlow(
   },
   async (input) => {
     // STEP 1: Consult the Pedagogical Router
-    const strategy = await getPedagogicalStrategy({
-      subject: input.subject,
-      topic: input.topic,
-      age: input.gradeLevel,
-      tone: input.tone,
-    });
+    // Retry on schema-validation failures: free-tier models occasionally drop
+    // a required field from their JSON output.
+    const strategy = await withAiRetry('pedagogicalRouter', () =>
+      getPedagogicalStrategy({
+        subject: input.subject,
+        topic: input.topic,
+        age: input.gradeLevel,
+        tone: input.tone,
+      })
+    );
 
     // STEP 2: Generate the plan using the strategy
-    const {output} = await generateLessonPlanPrompt({
-      input: input,
-      strategy: strategy,
-    });
+    const {output} = await withAiRetry('generateLessonPlanPrompt', () =>
+      generateLessonPlanPrompt({
+        input: input,
+        strategy: strategy,
+      })
+    );
 
-    return output!;
+    if (!output) {
+      throw new Error('The model returned an empty lesson plan.');
+    }
+
+    return output;
   }
 );

@@ -127,7 +127,7 @@ export default function Home() {
               width={1280}
               height={1280}
               sizes="(max-width: 768px) 100vw, 448px"
-              className="animate-float relative mx-auto h-auto w-full max-w-md rounded-2xl object-contain shadow-2xl"
+              className="animate-float relative mx-auto h-auto w-full max-w-xl rounded-2xl object-contain shadow-2xl"
               priority
             />
           </div>
