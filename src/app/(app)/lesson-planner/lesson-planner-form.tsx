@@ -70,8 +70,9 @@ export function LessonPlannerForm() {
       });
 
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || 'Failed to generate lesson plan');
+        const errorData = await response.json().catch(() => null);
+        const detail = errorData?.details ? `: ${errorData.details}` : '';
+        throw new Error(`${errorData?.error || 'Failed to generate lesson plan'}${detail}`);
       }
 
       const lessonPlanData: GenerateLessonPlanResponse = await response.json();
