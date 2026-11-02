@@ -1,4 +1,6 @@
+import Link from 'next/link';
 import { PageHeader } from '@/components/page-header';
+import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
@@ -18,12 +20,16 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import {
+  ArrowRight,
   Book,
   Calculator,
   Flame,
+  Gamepad2,
   Globe,
   Sparkles,
+  Timer,
   Trophy,
+  Users,
 } from 'lucide-react';
 import { Progress } from '@/components/ui/progress';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
@@ -61,6 +67,56 @@ export default function GamificationPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2 space-y-8">
+          <Card className="overflow-hidden border-primary/30">
+            <CardHeader className="bg-primary/5">
+              <div className="flex flex-wrap items-start justify-between gap-2">
+                <div className="space-y-1">
+                  <CardTitle className="flex items-center gap-2 font-headline">
+                    <Gamepad2 className="h-5 w-5 text-primary" />
+                    Featured Game: Definition Derby
+                  </CardTitle>
+                  <CardDescription>
+                    A classroom gameshow based on Balderdash — invent convincing
+                    definitions, bluff your classmates, and vote for the real
+                    answer.
+                  </CardDescription>
+                </div>
+                <Badge>Classroom gameshow</Badge>
+              </div>
+            </CardHeader>
+            <CardContent className="space-y-3 pt-4">
+              <p className="text-sm text-muted-foreground">
+                Teams write fake definitions for an obscure word, person, law,
+                acronym, or movie title. The host mixes in the real answer, reads
+                them all aloud, and everyone votes for the one they think is
+                real. Points for spotting the truth — and for fooling everyone
+                else.
+              </p>
+              <div className="flex flex-wrap gap-2">
+                <Badge variant="outline" className="gap-1">
+                  <Users className="h-3 w-3" />
+                  3–6 teams
+                </Badge>
+                <Badge variant="outline" className="gap-1">
+                  <Timer className="h-3 w-3" />
+                  45–60s turns
+                </Badge>
+                <Badge variant="outline" className="gap-1">
+                  <Sparkles className="h-3 w-3" />
+                  6 categories
+                </Badge>
+              </div>
+            </CardContent>
+            <CardFooter>
+              <Button asChild>
+                <Link href="/gamification/definition-derby">
+                  Play Definition Derby
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+            </CardFooter>
+          </Card>
+
           <Card>
             <CardHeader>
               <CardTitle>Current Challenges</CardTitle>
