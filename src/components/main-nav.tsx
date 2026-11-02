@@ -11,7 +11,6 @@ import {
   GraduationCap,
   Home,
   LifeBuoy,
-  Rocket,
   Sparkles,
   Users,
   Wand2,
@@ -45,7 +44,6 @@ const links = [
   { href: '/protect/safety-board', label: 'Safety Board', icon: Shield },
   { href: '/protect/wellness', label: 'Wellness Tracker', icon: HeartPulse },
   { href: '/user-guide', label: 'User Guide', icon: LifeBuoy },
-  { href: '/deployment-guide', label: 'Deployment Guide', icon: Rocket },
 ];
 
 export function MainNav({ className }: { className?: string }) {

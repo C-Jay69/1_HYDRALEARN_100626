@@ -200,9 +200,6 @@ export default function Home() {
             <Link href="/dashboard" className="transition-colors hover:text-foreground">
               Dashboard
             </Link>
-            <Link href="/deployment-guide" className="transition-colors hover:text-foreground">
-              Deployment
-            </Link>
           </div>
           <p className="text-xs text-muted-foreground">
             &copy; {new Date().getFullYear()} HydraLearn by LifeJacket AI. All rights reserved.

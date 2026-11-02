@@ -11,7 +11,6 @@ import {
   GraduationCap,
   Home,
   LifeBuoy,
-  Rocket,
   Sparkles,
   Users,
   Wand2,
@@ -36,7 +35,6 @@ const links = [
   { href: '/gamification', label: 'Gamification', icon: Gamepad2 },
   { href: '/schedule', label: 'Schedule', icon: CalendarDays },
   { href: '/user-guide', label: 'User Guide', icon: LifeBuoy },
-  { href: '/deployment-guide', label: 'Deployment Guide', icon: Rocket },
 ];
 
 export function MainNav({ className }: { className?: string }) {
