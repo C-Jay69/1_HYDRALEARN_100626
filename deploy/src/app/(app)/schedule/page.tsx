@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { format } from 'date-fns';
+import { format, parse } from 'date-fns';
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -65,6 +65,26 @@ const eventColors = {
   event: 'bg-green-100 text-green-800 border-green-300',
 };
 
+const DATE_ONLY_FORMAT = 'yyyy-MM-dd';
+
+/**
+ * Schedule dates are stored as date-only values (UTC midnight). Compare and
+ * display their calendar date instead of converting the instant into the
+ * viewer's timezone, which shifts the day in negative UTC offsets.
+ */
+function toDateOnly(value: string): string {
+  return value.slice(0, 10);
+}
+
+function parseDateOnly(value: string): Date {
+  return parse(toDateOnly(value), DATE_ONLY_FORMAT, new Date());
+}
+
+async function readApiError(response: Response, fallback: string): Promise<string> {
+  const data = await response.json().catch(() => null);
+  return typeof data?.error === 'string' && data.error ? data.error : fallback;
+}
+
 export default function SchedulePage() {
   const [events, setEvents] = useState<ScheduleEvent[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -90,16 +110,22 @@ export default function SchedulePage() {
   const fetchEvents = async () => {
     try {
       const response = await fetch('/api/schedule');
-      if (response.ok) {
-        const data = await response.json();
-        setEvents(data);
+      if (!response.ok) {
+        throw new Error(
+          await readApiError(response, 'Failed to load schedule events.')
+        );
       }
+      const data = await response.json();
+      setEvents(data);
     } catch (error) {
       console.error('Error fetching events:', error);
       toast({
         variant: 'destructive',
         title: 'Error',
-        description: 'Failed to load schedule events.',
+        description:
+          error instanceof Error
+            ? error.message
+            : 'Failed to load schedule events.',
       });
     } finally {
       setIsLoading(false);
@@ -116,14 +142,19 @@ export default function SchedulePage() {
           body: JSON.stringify(data),
         });
 
-        if (response.ok) {
-          toast({ title: 'Event updated successfully!' });
-          setEvents(
-            events.map((e) =>
-              e.id === editingEvent.id ? { ...response.json(), ...data } : e
-            )
+        if (!response.ok) {
+          throw new Error(
+            await readApiError(response, 'Failed to update event.')
           );
         }
+
+        const updatedEvent = await response.json();
+        toast({ title: 'Event updated successfully!' });
+        setEvents(
+          events.map((e) =>
+            e.id === editingEvent.id ? { ...e, ...updatedEvent } : e
+          )
+        );
       } else {
         // Create new event
         const response = await fetch('/api/schedule', {
@@ -132,23 +163,28 @@ export default function SchedulePage() {
           body: JSON.stringify(data),
         });
 
-        if (response.ok) {
-          const newEvent = await response.json();
-          setEvents([...events, newEvent]);
-          toast({ title: 'Event created successfully!' });
+        if (!response.ok) {
+          throw new Error(
+            await readApiError(response, 'Failed to create event.')
+          );
         }
+
+        const newEvent = await response.json();
+        setEvents([...events, newEvent]);
+        toast({ title: 'Event created successfully!' });
       }
 
       setIsDialogOpen(false);
       setEditingEvent(null);
       form.reset();
-      fetchEvents();
+      await fetchEvents();
     } catch (error) {
       console.error('Error saving event:', error);
       toast({
         variant: 'destructive',
         title: 'Error',
-        description: 'Failed to save event.',
+        description:
+          error instanceof Error ? error.message : 'Failed to save event.',
       });
     }
   };
@@ -161,16 +197,19 @@ export default function SchedulePage() {
         method: 'DELETE',
       });
 
-      if (response.ok) {
-        setEvents(events.filter((e) => e.id !== id));
-        toast({ title: 'Event deleted successfully!' });
+      if (!response.ok) {
+        throw new Error(await readApiError(response, 'Failed to delete event.'));
       }
+
+      setEvents(events.filter((e) => e.id !== id));
+      toast({ title: 'Event deleted successfully!' });
     } catch (error) {
       console.error('Error deleting event:', error);
       toast({
         variant: 'destructive',
         title: 'Error',
-        description: 'Failed to delete event.',
+        description:
+          error instanceof Error ? error.message : 'Failed to delete event.',
       });
     }
   };
@@ -192,7 +231,7 @@ export default function SchedulePage() {
     form.reset({
       title: event.title,
       description: event.description || '',
-      date: format(new Date(event.date), 'yyyy-MM-dd'),
+      date: toDateOnly(event.date),
       eventType: event.eventType as any,
       color: event.color || '#3399CC',
     });
@@ -200,19 +239,13 @@ export default function SchedulePage() {
   };
 
   const getEventsForDate = (date: Date) => {
-    return events.filter((event) => {
-      const eventDate = new Date(event.date);
-      return (
-        eventDate.getDate() === date.getDate() &&
-        eventDate.getMonth() === date.getMonth() &&
-        eventDate.getFullYear() === date.getFullYear()
-      );
-    });
+    const dateKey = format(date, DATE_ONLY_FORMAT);
+    return events.filter((event) => toDateOnly(event.date) === dateKey);
   };
 
   const selectedDate = form.watch('date');
   const selectedDateEvents = selectedDate
-    ? getEventsForDate(new Date(selectedDate))
+    ? events.filter((event) => toDateOnly(event.date) === selectedDate)
     : [];
 
   return (
@@ -235,7 +268,7 @@ export default function SchedulePage() {
           <CardContent className="p-6">
             <Calendar
               mode="single"
-              selected={selectedDate ? new Date(selectedDate) : undefined}
+              selected={selectedDate ? parseDateOnly(selectedDate) : undefined}
               onSelect={(date) => {
                 if (date) {
                   form.setValue('date', format(date, 'yyyy-MM-dd'));
