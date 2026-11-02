@@ -7,8 +7,8 @@ export function AppLogo({ className }: { className?: string }) {
         <Image
           src="/logo.png"
           alt="HydraLearn"
-          width={1366}
-          height={768}
+          width={128}
+          height={128}
           className="h-8 w-auto object-contain"
         />
       </div>

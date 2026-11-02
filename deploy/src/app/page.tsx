@@ -17,8 +17,8 @@ export default function Home() {
         height: '6rem'
       }}>
         <img
-          src="/logo.svg"
-          alt="Z.ai Logo"
+          src="/logo.png"
+          alt="HydraLearn Logo"
           style={{
             width: '100%',
             height: '100%',

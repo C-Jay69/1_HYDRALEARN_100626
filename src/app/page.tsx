@@ -124,8 +124,9 @@ export default function Home() {
             <Image
               src="/logo.png"
               alt="HydraLearn"
-              width={1366}
-              height={768}
+              width={1280}
+              height={1280}
+              sizes="(max-width: 768px) 100vw, 448px"
               className="animate-float relative mx-auto h-auto w-full max-w-md rounded-2xl object-contain shadow-2xl"
               priority
             />
