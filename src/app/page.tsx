@@ -122,11 +122,11 @@ export default function Home() {
           <div className="relative">
             <div className="absolute inset-0 scale-100 rounded-full bg-gradient-to-r from-purple-500/20 to-cyan-500/20 blur-3xl" />
             <Image
-              src="/logo.png"
-              alt="HydraLearn"
-              width={1280}
-              height={1280}
-              sizes="(max-width: 768px) 100vw, 448px"
+              src="/LANDING_PAGE_IMAGE.png"
+              alt="A student learning with the HydraLearn AI platform"
+              width={1139}
+              height={605}
+              sizes="(max-width: 768px) 100vw, 576px"
               className="animate-float relative mx-auto h-auto w-full max-w-xl rounded-2xl object-contain shadow-2xl"
               priority
             />
