@@ -27,6 +27,9 @@ export const es: Record<MessageKey, string> = {
   'userMenu.logout': 'Cerrar sesión',
   'userMenu.teacher': 'Docente',
   'userMenu.guest': 'Invitado',
+  'userMenu.signInGoogle': 'Continuar con Google',
+  'userMenu.signOut': 'Cerrar sesión',
+  'userMenu.signedInAs': 'Sesión iniciada como',
 
   'footer.tagline': 'Muchas cabezas. Un objetivo: aprendizaje más inteligente y seguro.',
   'footer.userGuide': 'Guía del usuario',

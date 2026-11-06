@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { cookies } from "next/headers";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
+import { AuthSessionProvider } from "@/components/session-provider";
 import { I18nProvider } from "@/components/i18n-provider";
 import { defaultLocale, isLocale, LOCALE_COOKIE } from "@/lib/i18n";
 
@@ -53,7 +54,7 @@ export default async function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground`}
       >
         <I18nProvider initialLocale={locale}>
-          {children}
+          <AuthSessionProvider>{children}</AuthSessionProvider>
           <Toaster />
         </I18nProvider>
       </body>

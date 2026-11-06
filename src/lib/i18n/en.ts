@@ -28,6 +28,9 @@ export const en = {
   'userMenu.logout': 'Log out',
   'userMenu.teacher': 'Teacher',
   'userMenu.guest': 'Guest',
+  'userMenu.signInGoogle': 'Continue with Google',
+  'userMenu.signOut': 'Sign out',
+  'userMenu.signedInAs': 'Signed in as',
 
   'footer.tagline': 'Many heads. One goal: smarter, safer learning.',
   'footer.userGuide': 'User Guide',

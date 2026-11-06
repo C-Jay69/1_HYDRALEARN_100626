@@ -1,5 +1,6 @@
 import { cookies, headers } from 'next/headers';
 
+import { getSessionUserId } from './auth';
 import { db } from './db';
 import {
   anonymousUserId,
@@ -37,18 +38,36 @@ async function ensurePlaceholderUser() {
   return PLACEHOLDER_USER_ID;
 }
 
-/** Resolve (and lazily create) the user that owns generated content. */
+/**
+ * Resolve (and lazily create) the user that owns generated content: the
+ * signed-in Google user when a session exists, otherwise the anonymous
+ * per-browser user.
+ */
 export async function getCurrentUserId(): Promise<string> {
   try {
     const [headerStore, cookieStore] = await Promise.all([headers(), cookies()]);
     const rawUid =
       headerStore.get(USER_ID_HEADER)?.trim() ||
       cookieStore.get(USER_ID_COOKIE)?.value?.trim();
+    const anonId =
+      rawUid && USER_ID_PATTERN.test(rawUid) ? anonymousUserId(rawUid) : null;
 
-    if (rawUid && USER_ID_PATTERN.test(rawUid)) {
-      const id = anonymousUserId(rawUid);
-      await ensureUser(id);
-      return id;
+    const sessionUserId = await getSessionUserId();
+    if (sessionUserId) {
+      if (anonId) {
+        // Idempotent: moves any library items created anonymously in this
+        // browser to the signed-in user (no-op once nothing is left).
+        await db.savedContent.updateMany({
+          where: { userId: anonId },
+          data: { userId: sessionUserId },
+        });
+      }
+      return sessionUserId;
+    }
+
+    if (anonId) {
+      await ensureUser(anonId);
+      return anonId;
     }
   } catch {
     // `headers()`/`cookies()` are unavailable outside a request; fall through.
