@@ -1,8 +1,14 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
 import { Github, Twitter, BookOpen } from 'lucide-react';
 
+import { useI18n } from '@/components/i18n-provider';
+
 export function AppFooter() {
+  const { t } = useI18n();
+
   return (
     <footer className="mt-auto border-t bg-background py-6">
       <div className="container mx-auto px-4 sm:px-6">
@@ -18,7 +24,7 @@ export function AppFooter() {
               />
             </div>
             <p className="text-sm text-muted-foreground pt-1">
-              Many heads. One goal: smarter, safer learning.
+              {t('footer.tagline')}
             </p>
           </div>
 
@@ -28,7 +34,7 @@ export function AppFooter() {
                 href="/user-guide"
                 className="text-sm text-muted-foreground hover:text-foreground transition-colors"
               >
-                User Guide
+                {t('footer.userGuide')}
               </Link>
             </div>
 
@@ -60,7 +66,7 @@ export function AppFooter() {
 
         <div className="mt-4 pt-4 border-t">
           <p className="text-center text-xs text-muted-foreground">
-            © {new Date().getFullYear()} HydraLearn. All rights reserved.
+            {t('footer.rights', { year: new Date().getFullYear() })}
           </p>
         </div>
       </div>

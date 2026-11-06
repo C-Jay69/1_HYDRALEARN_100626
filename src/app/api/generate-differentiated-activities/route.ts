@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { generateDifferentiatedActivities } from '@/ai/flows/generate-differentiated-activities';
+import { saveGeneratedContent } from '@/lib/saved-content';
 
 export async function POST(req: NextRequest) {
     try {
@@ -7,7 +8,8 @@ export async function POST(req: NextRequest) {
         const body = await req.json();
         console.log('Request body:', JSON.stringify(body, null, 2));
 
-        const { topic, gradeLevel, students, subject, tone } = body;
+        const { topic, gradeLevel, students, subject, tone, locale } = body;
+        const outputLocale = locale === 'es' ? 'es' : 'en';
 
         if (!topic || !gradeLevel || !students) {
             console.error('Missing required fields in differentiated activities request');
@@ -23,11 +25,35 @@ export async function POST(req: NextRequest) {
             subject: subject || 'General',
             gradeLevel,
             students,
-            tone: tone || 'Academic',
+            tone:
+                outputLocale === 'es'
+                    ? `${tone || 'Academic'}. Write the entire response in Spanish.`
+                    : tone || 'Academic',
         });
         console.log('Differentiated activities generated successfully');
 
-        return NextResponse.json(result);
+        const content = result.activities
+            .map(
+                (activity) =>
+                    `### ${activity.studentId}\n\n${activity.activityDescription}\n\n**Why this works:** ${activity.justification}`
+            )
+            .join('\n\n---\n\n');
+
+        const saved = await saveGeneratedContent({
+            kind: 'DIFFERENTIATED_ACTIVITIES',
+            title: `Activities: ${topic} — ${gradeLevel}`,
+            content,
+            metadata: {
+                topic,
+                subject: subject || 'General',
+                gradeLevel,
+                students,
+                activities: result.activities,
+                locale: outputLocale,
+            },
+        });
+
+        return NextResponse.json({ ...result, saved });
     } catch (error: any) {
         console.error('Error generating differentiated activities:', error);
         return NextResponse.json(

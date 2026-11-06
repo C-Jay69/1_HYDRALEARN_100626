@@ -1,4 +1,5 @@
 import { PageHeader } from '@/components/page-header';
+import { T } from '@/components/t';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { PersonalizationForm } from './personalization-form';
 
@@ -6,14 +7,14 @@ export default function PersonalizationPage() {
   return (
     <div className="space-y-8">
       <PageHeader
-        title="AI Personalization"
-        description="Train the AI to match your unique teaching and feedback style."
+        titleKey="personalization.title"
+        descriptionKey="personalization.description"
       />
       <Card>
         <CardHeader>
-            <CardTitle>Upload Your Writing Samples</CardTitle>
+            <CardTitle><T k="personalization.cardTitle" /></CardTitle>
             <CardDescription>
-                Provide examples of your past feedback, comments, or emails. The AI will learn your tone, phrasing, and style to provide more personalized assistance. Upload .txt or .md files.
+                <T k="personalization.cardDescription" />
             </CardDescription>
         </CardHeader>
         <CardContent>

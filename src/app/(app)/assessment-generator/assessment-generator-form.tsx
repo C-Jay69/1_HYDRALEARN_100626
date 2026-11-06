@@ -4,16 +4,11 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import {
-  createAutomaticAssessment,
-  CreateAutomaticAssessmentOutput,
-} from '@/ai/flows/create-automatic-assessment';
 
 import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -28,9 +23,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Loader2, Sparkles, Wand2 } from 'lucide-react';
+import { Card, CardContent } from '@/components/ui/card';
+import { Loader2, Wand2 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { useI18n } from '@/components/i18n-provider';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 const formSchema = z.object({
@@ -44,10 +40,23 @@ const formSchema = z.object({
 
 type FormData = z.infer<typeof formSchema>;
 
+interface SaveFeedback {
+  ok: boolean;
+  message?: string;
+}
+
+interface AssessmentResponse {
+  assessmentContent: string;
+  feedback?: string;
+  quiz?: unknown[];
+  saved?: SaveFeedback;
+}
+
 export function AssessmentGeneratorForm() {
-  const [result, setResult] = useState<CreateAutomaticAssessmentOutput | null>(null);
+  const [result, setResult] = useState<AssessmentResponse | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
+  const { t, locale } = useI18n();
 
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
@@ -65,14 +74,35 @@ export function AssessmentGeneratorForm() {
     setIsLoading(true);
     setResult(null);
     try {
-      const response = await createAutomaticAssessment({ ...data, tone: 'Academic' });
-      setResult(response);
+      const response = await fetch('/api/create-assessment', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...data, tone: 'Academic', locale }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => null);
+        throw new Error(errorData?.error || 'Failed to generate assessment');
+      }
+
+      const assessment: AssessmentResponse = await response.json();
+      setResult(assessment);
+
+      if (assessment.saved && !assessment.saved.ok) {
+        toast({
+          variant: 'destructive',
+          title: t('library.quotaTitle'),
+          description: assessment.saved.message ?? t('library.saveFailed'),
+        });
+      } else if (assessment.saved?.ok) {
+        toast({ title: t('common.savedToLibrary') });
+      }
     } catch (error) {
       console.error(error);
       toast({
         variant: 'destructive',
-        title: 'An error occurred.',
-        description: 'Failed to generate assessment. Please try again.',
+        title: t('common.errorTitle'),
+        description: t('assessment.error'),
       });
     } finally {
       setIsLoading(false);
@@ -88,9 +118,9 @@ export function AssessmentGeneratorForm() {
             name="subject"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Subject</FormLabel>
+                <FormLabel>{t('common.subject')}</FormLabel>
                 <FormControl>
-                  <Input placeholder="e.g., Biology, History, Mathematics" {...field} />
+                  <Input placeholder={t('studio.subjectPlaceholder')} {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -102,9 +132,9 @@ export function AssessmentGeneratorForm() {
             name="topic"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Topic</FormLabel>
+                <FormLabel>{t('common.topic')}</FormLabel>
                 <FormControl>
-                  <Input placeholder="e.g., Photosynthesis" {...field} />
+                  <Input placeholder={t('studio.topicPlaceholder')} {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -116,39 +146,39 @@ export function AssessmentGeneratorForm() {
             name="gradeLevel"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Grade Level</FormLabel>
+                <FormLabel>{t('common.gradeLevel')}</FormLabel>
                 <FormControl>
-                  <Input placeholder="e.g., 6th Grade" {...field} />
+                  <Input placeholder={t('studio.gradePlaceholder')} {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
-          
+
           <FormField
             control={form.control}
             name="assessmentType"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Assessment Type</FormLabel>
+                <FormLabel>{t('assessment.type')}</FormLabel>
                 <Select onValueChange={field.onChange} defaultValue={field.value}>
                   <FormControl>
                     <SelectTrigger>
-                      <SelectValue placeholder="Select an assessment type" />
+                      <SelectValue placeholder={t('assessment.typePlaceholder')} />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    <SelectItem value="quiz">Quiz</SelectItem>
-                    <SelectItem value="game">Game</SelectItem>
-                    <SelectItem value="project">Project</SelectItem>
-                    <SelectItem value="essay">Essay</SelectItem>
-                    <SelectItem value="jeopardy">Jeopardy Gameshow</SelectItem>
-                    <SelectItem value="millionaire">Who Wants To Be A Millionaire</SelectItem>
-                    <SelectItem value="family-feud">Family Feud</SelectItem>
-                    <SelectItem value="countdown">CountDown</SelectItem>
-                    <SelectItem value="weakest-link">The Weakest Link</SelectItem>
-                    <SelectItem value="puzzles">Puzzles</SelectItem>
-                    <SelectItem value="escape-room">Escape Room</SelectItem>
+                    <SelectItem value="quiz">{t('assessment.quiz')}</SelectItem>
+                    <SelectItem value="game">{t('assessment.game')}</SelectItem>
+                    <SelectItem value="project">{t('assessment.project')}</SelectItem>
+                    <SelectItem value="essay">{t('assessment.essay')}</SelectItem>
+                    <SelectItem value="jeopardy">{t('assessment.jeopardy')}</SelectItem>
+                    <SelectItem value="millionaire">{t('assessment.millionaire')}</SelectItem>
+                    <SelectItem value="family-feud">{t('assessment.familyFeud')}</SelectItem>
+                    <SelectItem value="countdown">{t('assessment.countdown')}</SelectItem>
+                    <SelectItem value="weakest-link">{t('assessment.weakestLink')}</SelectItem>
+                    <SelectItem value="puzzles">{t('assessment.puzzles')}</SelectItem>
+                    <SelectItem value="escape-room">{t('assessment.escapeRoom')}</SelectItem>
                   </SelectContent>
                 </Select>
                 <FormMessage />
@@ -161,9 +191,9 @@ export function AssessmentGeneratorForm() {
             name="curriculum"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Curriculum</FormLabel>
+                <FormLabel>{t('common.curriculum')}</FormLabel>
                 <FormControl>
-                  <Input placeholder="e.g., IB, UK National Curriculum" {...field} />
+                  <Input placeholder={t('assessment.curriculumPlaceholder')} {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -175,10 +205,10 @@ export function AssessmentGeneratorForm() {
             name="learningObjectives"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Learning Objectives</FormLabel>
+                <FormLabel>{t('assessment.objectives')}</FormLabel>
                 <FormControl>
                   <Textarea
-                    placeholder="What skills or knowledge should this assessment measure?"
+                    placeholder={t('assessment.objectivesPlaceholder')}
                     className="min-h-[100px]"
                     {...field}
                   />
@@ -192,58 +222,58 @@ export function AssessmentGeneratorForm() {
             {isLoading ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Creating...
+                {t('assessment.creating')}
               </>
             ) : (
-                <>
+              <>
                 <Wand2 className="mr-2 h-4 w-4" />
-                Create Assessment
-                </>
+                {t('assessment.create')}
+              </>
             )}
           </Button>
         </form>
       </Form>
-      
+
       <div className="space-y-4">
-        <h3 className="font-headline text-2xl font-bold">Generated Assessment</h3>
+        <h3 className="font-headline text-2xl font-bold">{t('assessment.generated')}</h3>
         <div className="min-h-[400px]">
-            {isLoading && (
-                <Card className="h-full flex items-center justify-center border-dashed">
-                    <div className="flex flex-col items-center gap-2 text-muted-foreground">
-                        <Loader2 className="h-8 w-8 animate-spin" />
-                        <p>AI is building your assessment...</p>
-                    </div>
+          {isLoading && (
+            <Card className="h-full flex items-center justify-center border-dashed">
+              <div className="flex flex-col items-center gap-2 text-muted-foreground">
+                <Loader2 className="h-8 w-8 animate-spin" />
+                <p>{t('assessment.building')}</p>
+              </div>
+            </Card>
+          )}
+          {!isLoading && !result && (
+            <Card className="h-full flex items-center justify-center border-dashed">
+              <div className="text-center text-muted-foreground">
+                <p>{t('assessment.empty')}</p>
+              </div>
+            </Card>
+          )}
+          {result && (
+            <Tabs defaultValue="content" className="w-full">
+              <TabsList>
+                <TabsTrigger value="content">{t('assessment.contentTab')}</TabsTrigger>
+                <TabsTrigger value="feedback">{t('assessment.feedbackTab')}</TabsTrigger>
+              </TabsList>
+              <TabsContent value="content">
+                <Card>
+                  <CardContent className="p-6">
+                    <pre className="whitespace-pre-wrap font-body text-sm">{result.assessmentContent}</pre>
+                  </CardContent>
                 </Card>
-            )}
-            {!isLoading && !result && (
-                <Card className="h-full flex items-center justify-center border-dashed">
-                    <div className="text-center text-muted-foreground">
-                        <p>Your assessment will appear here.</p>
-                    </div>
+              </TabsContent>
+              <TabsContent value="feedback">
+                <Card>
+                  <CardContent className="p-6">
+                    <pre className="whitespace-pre-wrap font-body text-sm">{result.feedback}</pre>
+                  </CardContent>
                 </Card>
-            )}
-            {result && (
-              <Tabs defaultValue="content" className="w-full">
-                <TabsList>
-                  <TabsTrigger value="content">Assessment Content</TabsTrigger>
-                  <TabsTrigger value="feedback">AI Feedback</TabsTrigger>
-                </TabsList>
-                <TabsContent value="content">
-                    <Card>
-                        <CardContent className="p-6">
-                            <pre className="whitespace-pre-wrap font-body text-sm">{result.assessmentContent}</pre>
-                        </CardContent>
-                    </Card>
-                </TabsContent>
-                <TabsContent value="feedback">
-                    <Card>
-                         <CardContent className="p-6">
-                            <pre className="whitespace-pre-wrap font-body text-sm">{result.feedback}</pre>
-                        </CardContent>
-                    </Card>
-                </TabsContent>
-              </Tabs>
-            )}
+              </TabsContent>
+            </Tabs>
+          )}
         </div>
       </div>
     </div>

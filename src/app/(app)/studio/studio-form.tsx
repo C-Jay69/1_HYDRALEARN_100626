@@ -20,11 +20,17 @@ import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent } from '@/components/ui/card';
 import { Loader2, Brush } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { useI18n } from '@/components/i18n-provider';
 import { useSearchParams } from 'next/navigation';
 
-// ✅ Define API response type (matches what API route returns)
+interface SaveFeedback {
+  ok: boolean;
+  message?: string;
+}
+
 interface GenerateLearningMaterialResponse {
   content: string;
+  saved?: SaveFeedback;
 }
 
 const formSchema = z.object({
@@ -38,10 +44,10 @@ const formSchema = z.object({
 type FormData = z.infer<typeof formSchema>;
 
 export function StudioForm() {
-  // ✅ Changed state type to match API response
   const [result, setResult] = useState<GenerateLearningMaterialResponse | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
+  const { t, locale } = useI18n();
   const searchParams = useSearchParams();
 
   const form = useForm<FormData>({
@@ -55,17 +61,16 @@ export function StudioForm() {
     },
   });
 
-    useEffect(() => {
+  useEffect(() => {
     form.reset({
-        materialType: searchParams.get('materialType') || '',
-        subject: searchParams.get('subject') || '',
-        topic: searchParams.get('topic') || '',
-        gradeLevel: searchParams.get('gradeLevel') || '',
-        instructions: searchParams.get('instructions') || '',
-    })
-}, [searchParams, form]);
+      materialType: searchParams.get('materialType') || '',
+      subject: searchParams.get('subject') || '',
+      topic: searchParams.get('topic') || '',
+      gradeLevel: searchParams.get('gradeLevel') || '',
+      instructions: searchParams.get('instructions') || '',
+    });
+  }, [searchParams, form]);
 
-  // ✅ Fixed: Use fetch API to call the route
   async function onSubmit(data: FormData) {
     setIsLoading(true);
     setResult(null);
@@ -75,7 +80,7 @@ export function StudioForm() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ ...data, locale }),
       });
 
       if (!response.ok) {
@@ -85,12 +90,22 @@ export function StudioForm() {
 
       const materialData: GenerateLearningMaterialResponse = await response.json();
       setResult(materialData);
+
+      if (materialData.saved && !materialData.saved.ok) {
+        toast({
+          variant: 'destructive',
+          title: t('library.quotaTitle'),
+          description: materialData.saved.message ?? t('library.saveFailed'),
+        });
+      } else if (materialData.saved?.ok) {
+        toast({ title: t('common.savedToLibrary') });
+      }
     } catch (error) {
       console.error(error);
       toast({
         variant: 'destructive',
-        title: 'An error occurred.',
-        description: 'Failed to generate material. Please try again.',
+        title: t('common.errorTitle'),
+        description: t('studio.error'),
       });
     } finally {
       setIsLoading(false);
@@ -101,47 +116,48 @@ export function StudioForm() {
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            <FormField
+          <FormField
             control={form.control}
             name="materialType"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Type of Material</FormLabel>
+                <FormLabel>{t('studio.materialType')}</FormLabel>
                 <FormControl>
-                  <Input placeholder="e.g., Flashcards, Worksheet, Chart" {...field} />
-                </FormControl>
-                 <FormDescription>
-                   What kind of material do you need?
-                 </FormDescription>
-                 <FormMessage />
-              </FormItem>
-            )}
-          />
-           
-           <FormField
-            control={form.control}
-            name="subject"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Subject</FormLabel>
-                <FormControl>
-                  <Input placeholder="e.g., Biology, History, Mathematics" {...field} />
+                  <Input placeholder={t('studio.materialTypePlaceholder')} {...field} />
                 </FormControl>
                 <FormDescription>
-                  The subject area for this material.
+                  {t('studio.materialTypeHelp')}
                 </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
           />
-           <FormField
+
+          <FormField
+            control={form.control}
+            name="subject"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{t('common.subject')}</FormLabel>
+                <FormControl>
+                  <Input placeholder={t('studio.subjectPlaceholder')} {...field} />
+                </FormControl>
+                <FormDescription>
+                  {t('studio.subjectHelp')}
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
             control={form.control}
             name="topic"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Topic</FormLabel>
+                <FormLabel>{t('common.topic')}</FormLabel>
                 <FormControl>
-                  <Input placeholder="e.g., Photosynthesis" {...field} />
+                  <Input placeholder={t('studio.topicPlaceholder')} {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -153,9 +169,9 @@ export function StudioForm() {
             name="gradeLevel"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Grade Level</FormLabel>
+                <FormLabel>{t('common.gradeLevel')}</FormLabel>
                 <FormControl>
-                  <Input placeholder="e.g., 6th Grade" {...field} />
+                  <Input placeholder={t('studio.gradePlaceholder')} {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -167,10 +183,10 @@ export function StudioForm() {
             name="instructions"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Specific Instructions (Optional)</FormLabel>
+                <FormLabel>{t('studio.instructions')}</FormLabel>
                 <FormControl>
                   <Textarea
-                    placeholder="Any specific details for the AI? e.g., 'Create 5 multiple-choice questions' or 'Make the chart colorful'."
+                    placeholder={t('studio.instructionsPlaceholder')}
                     className="min-h-[100px]"
                     {...field}
                   />
@@ -184,43 +200,43 @@ export function StudioForm() {
             {isLoading ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Creating...
+                {t('studio.creating')}
               </>
             ) : (
-                <>
+              <>
                 <Brush className="mr-2 h-4 w-4" />
-                Generate Material
-                </>
+                {t('studio.generate')}
+              </>
             )}
           </Button>
         </form>
       </Form>
-      
+
       <div className="space-y-4">
-        <h3 className="font-headline text-2xl font-bold">Generated Material</h3>
+        <h3 className="font-headline text-2xl font-bold">{t('studio.generated')}</h3>
         <div className="min-h-[400px]">
-            {isLoading && (
-                <Card className="h-full flex items-center justify-center border-dashed">
-                    <div className="flex flex-col items-center gap-2 text-muted-foreground">
-                        <Loader2 className="h-8 w-8 animate-spin" />
-                        <p>AI is creating your material...</p>
-                    </div>
-                </Card>
-            )}
-            {!isLoading && !result && (
-                <Card className="h-full flex items-center justify-center border-dashed">
-                    <div className="text-center text-muted-foreground">
-                        <p>Your generated material will appear here.</p>
-                    </div>
-                </Card>
-            )}
-            {result && (
-                <Card>
-                    <CardContent className="p-6">
-                        <pre className="whitespace-pre-wrap font-body text-sm">{result.content}</pre>
-                    </CardContent>
-                </Card>
-            )}
+          {isLoading && (
+            <Card className="h-full flex items-center justify-center border-dashed">
+              <div className="flex flex-col items-center gap-2 text-muted-foreground">
+                <Loader2 className="h-8 w-8 animate-spin" />
+                <p>{t('studio.creatingMaterial')}</p>
+              </div>
+            </Card>
+          )}
+          {!isLoading && !result && (
+            <Card className="h-full flex items-center justify-center border-dashed">
+              <div className="text-center text-muted-foreground">
+                <p>{t('studio.empty')}</p>
+              </div>
+            </Card>
+          )}
+          {result && (
+            <Card>
+              <CardContent className="p-6">
+                <pre className="whitespace-pre-wrap font-body text-sm">{result.content}</pre>
+              </CardContent>
+            </Card>
+          )}
         </div>
       </div>
     </div>

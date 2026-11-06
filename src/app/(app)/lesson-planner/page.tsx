@@ -1,4 +1,5 @@
 import { PageHeader } from '@/components/page-header';
+import { T } from '@/components/t';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { LessonPlannerForm } from './lesson-planner-form';
 
@@ -6,13 +7,13 @@ export default function LessonPlannerPage() {
   return (
     <div className="space-y-8">
       <PageHeader
-        title="Personalized Lesson Planner"
-        description="Generate adaptive lesson plans for each student based on their unique needs."
+        titleKey="lessonPlanner.title"
+        descriptionKey="lessonPlanner.description"
       />
       <Card>
         <CardHeader>
-            <CardTitle>Generate a Lesson Plan</CardTitle>
-            <CardDescription>Fill in the details below to get a customized lesson plan from the AI assistant.</CardDescription>
+            <CardTitle><T k="lessonPlanner.cardTitle" /></CardTitle>
+            <CardDescription><T k="lessonPlanner.cardDescription" /></CardDescription>
         </CardHeader>
         <CardContent>
             <LessonPlannerForm />

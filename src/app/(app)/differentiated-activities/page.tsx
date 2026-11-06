@@ -1,4 +1,5 @@
 import { PageHeader } from '@/components/page-header';
+import { T } from '@/components/t';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { DifferentiatedActivitiesForm } from './differentiated-activities-form';
 
@@ -6,13 +7,13 @@ export default function DifferentiatedActivitiesPage() {
   return (
     <div className="space-y-8">
       <PageHeader
-        title="Differentiated Activities Suggester"
-        description="Generate tailored activities for students with diverse learning styles and needs."
+        titleKey="differentiated.title"
+        descriptionKey="differentiated.description"
       />
       <Card>
         <CardHeader>
-            <CardTitle>Get Activity Suggestions</CardTitle>
-            <CardDescription>Add student profiles and a topic to receive AI-powered activity ideas.</CardDescription>
+            <CardTitle><T k="differentiated.cardTitle" /></CardTitle>
+            <CardDescription><T k="differentiated.cardDescription" /></CardDescription>
         </CardHeader>
         <CardContent>
             <DifferentiatedActivitiesForm />

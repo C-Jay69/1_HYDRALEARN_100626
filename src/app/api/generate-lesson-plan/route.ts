@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { generateLessonPlan } from '@/ai/flows/generate-lesson-plan';
+import { saveGeneratedContent } from '@/lib/saved-content';
 
 export async function POST(req: NextRequest) {
   try {
@@ -7,7 +8,8 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     console.log('Request body:', JSON.stringify(body, null, 2));
 
-    const { studentNeeds, curriculum, objectives, gradeLevel, subject, topic, tone } = body;
+    const { studentNeeds, curriculum, objectives, gradeLevel, subject, topic, tone, locale } = body;
+    const outputLocale = locale === 'es' ? 'es' : 'en';
 
     console.log('Validating individual fields...');
     console.log(`- studentNeeds: ${!!studentNeeds} (${studentNeeds?.length || 0} chars)`);
@@ -44,11 +46,30 @@ export async function POST(req: NextRequest) {
       gradeLevel,
       subject,
       topic: topic || subject,
-      tone: tone || 'Academic',
+      tone:
+        outputLocale === 'es'
+          ? `${tone || 'Academic'}. Write the entire lesson plan in Spanish.`
+          : tone || 'Academic',
     });
     console.log('Lesson plan generated successfully');
 
-    return NextResponse.json(result);
+    const saved = await saveGeneratedContent({
+      kind: 'LESSON_PLAN',
+      title: `Lesson plan: ${topic || subject} — ${gradeLevel}`,
+      content: result.lessonPlan,
+      metadata: {
+        subject,
+        gradeLevel,
+        topic,
+        curriculum,
+        objectives,
+        studentNeeds,
+        tone: tone || 'Academic',
+        locale: outputLocale,
+      },
+    });
+
+    return NextResponse.json({ ...result, saved });
   } catch (error: any) {
     console.error('Error generating lesson plan:', error);
     return NextResponse.json(

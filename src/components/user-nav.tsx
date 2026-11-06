@@ -1,3 +1,5 @@
+'use client';
+
 import {
   Avatar,
   AvatarFallback,
@@ -14,20 +16,40 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { ThemeToggle } from './theme-toggle';
-import { Globe } from 'lucide-react';
+import { Check, Globe } from 'lucide-react';
+import { useI18n } from '@/components/i18n-provider';
+import { localeNames, locales } from '@/lib/i18n';
+import { cn } from '@/lib/utils';
 
 function LanguageSwitcher() {
+  const { locale, setLocale, t } = useI18n();
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="icon">
+        <Button variant="ghost" size="icon" aria-label={t('userMenu.changeLanguage')}>
           <Globe className="h-[1.2rem] w-[1.2rem]" />
-          <span className="sr-only">Change language</span>
+          <span className="sr-only">{t('userMenu.changeLanguage')}</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
-        <DropdownMenuItem>English</DropdownMenuItem>
-        <DropdownMenuItem>Español</DropdownMenuItem>
+      <DropdownMenuContent align="end" className="min-w-[10rem]">
+        <DropdownMenuLabel>{t('userMenu.language')}</DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        {locales.map((option) => (
+          <DropdownMenuItem
+            key={option}
+            onSelect={() => setLocale(option)}
+            className="cursor-pointer"
+          >
+            <span className="flex-1">{localeNames[option]}</span>
+            <Check
+              className={cn(
+                'ml-2 h-4 w-4',
+                locale === option ? 'opacity-100' : 'opacity-0'
+              )}
+            />
+          </DropdownMenuItem>
+        ))}
       </DropdownMenuContent>
     </DropdownMenu>
   );
@@ -35,6 +57,8 @@ function LanguageSwitcher() {
 
 
 export function UserNav() {
+  const { t } = useI18n();
+
   return (
     <div className="flex items-center gap-2">
       <LanguageSwitcher />
@@ -51,7 +75,7 @@ export function UserNav() {
         <DropdownMenuContent className="w-56" align="end" forceMount>
           <DropdownMenuLabel className="font-normal">
             <div className="flex flex-col space-y-1">
-              <p className="text-sm font-medium leading-none">Teacher</p>
+              <p className="text-sm font-medium leading-none">{t('userMenu.teacher')}</p>
               <p className="text-xs leading-none text-muted-foreground">
                 teacher@school.edu
               </p>
@@ -60,15 +84,15 @@ export function UserNav() {
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
             <DropdownMenuItem>
-              Profile
+              {t('userMenu.profile')}
             </DropdownMenuItem>
             <DropdownMenuItem>
-              Settings
+              {t('userMenu.settings')}
             </DropdownMenuItem>
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
           <DropdownMenuItem>
-            Log out
+            {t('userMenu.logout')}
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

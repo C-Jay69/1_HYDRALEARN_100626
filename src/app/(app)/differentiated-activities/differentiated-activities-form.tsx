@@ -4,10 +4,6 @@ import { useState } from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import {
-  generateDifferentiatedActivities,
-  GenerateDifferentiatedActivitiesOutput,
-} from '@/ai/flows/generate-differentiated-activities';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -20,10 +16,11 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Loader2, PlusCircle, Sparkles, Trash2, User } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { useI18n } from '@/components/i18n-provider';
 import { Separator } from '@/components/ui/separator';
 
 const studentProfileSchema = z.object({
@@ -42,10 +39,27 @@ const formSchema = z.object({
 
 type FormData = z.infer<typeof formSchema>;
 
+interface SuggestedActivity {
+  studentId: string;
+  activityDescription: string;
+  justification: string;
+}
+
+interface SaveFeedback {
+  ok: boolean;
+  message?: string;
+}
+
+interface ActivitiesResponse {
+  activities: SuggestedActivity[];
+  saved?: SaveFeedback;
+}
+
 export function DifferentiatedActivitiesForm() {
-  const [result, setResult] = useState<GenerateDifferentiatedActivitiesOutput | null>(null);
+  const [result, setResult] = useState<ActivitiesResponse | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
+  const { t, locale } = useI18n();
 
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
@@ -69,14 +83,35 @@ export function DifferentiatedActivitiesForm() {
     setIsLoading(true);
     setResult(null);
     try {
-      const response = await generateDifferentiatedActivities({ ...data, tone: 'Academic' });
-      setResult(response);
+      const response = await fetch('/api/generate-differentiated-activities', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...data, tone: 'Academic', locale }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => null);
+        throw new Error(errorData?.error || 'Failed to generate activities');
+      }
+
+      const activities: ActivitiesResponse = await response.json();
+      setResult(activities);
+
+      if (activities.saved && !activities.saved.ok) {
+        toast({
+          variant: 'destructive',
+          title: t('library.quotaTitle'),
+          description: activities.saved.message ?? t('library.saveFailed'),
+        });
+      } else if (activities.saved?.ok) {
+        toast({ title: t('common.savedToLibrary') });
+      }
     } catch (error) {
       console.error(error);
       toast({
         variant: 'destructive',
-        title: 'An error occurred.',
-        description: 'Failed to generate activities. Please try again.',
+        title: t('common.errorTitle'),
+        description: t('differentiated.error'),
       });
     } finally {
       setIsLoading(false);
@@ -93,9 +128,9 @@ export function DifferentiatedActivitiesForm() {
               name="subject"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Subject</FormLabel>
+                  <FormLabel>{t('common.subject')}</FormLabel>
                   <FormControl>
-                    <Input placeholder="e.g., Biology, History" {...field} />
+                    <Input placeholder={t('differentiated.subjectPlaceholder')} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -106,9 +141,9 @@ export function DifferentiatedActivitiesForm() {
               name="topic"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Topic</FormLabel>
+                  <FormLabel>{t('common.topic')}</FormLabel>
                   <FormControl>
-                    <Input placeholder="e.g., The Water Cycle" {...field} />
+                    <Input placeholder={t('differentiated.topicPlaceholder')} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -119,9 +154,9 @@ export function DifferentiatedActivitiesForm() {
               name="gradeLevel"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Grade Level</FormLabel>
+                  <FormLabel>{t('common.gradeLevel')}</FormLabel>
                   <FormControl>
-                    <Input placeholder="e.g., 2nd Grade" {...field} />
+                    <Input placeholder={t('differentiated.gradePlaceholder')} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -130,10 +165,10 @@ export function DifferentiatedActivitiesForm() {
           </div>
 
           <Separator />
-          
+
           <div>
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-medium">Student Profiles</h3>
+              <h3 className="text-lg font-medium">{t('differentiated.studentProfiles')}</h3>
               <Button
                 type="button"
                 variant="outline"
@@ -141,14 +176,16 @@ export function DifferentiatedActivitiesForm() {
                 onClick={() => append({ studentId: `Student ${fields.length + 1}`, learningStyle: '', needs: '', currentLevel: '' })}
               >
                 <PlusCircle className="mr-2 h-4 w-4" />
-                Add Student
+                {t('differentiated.addStudent')}
               </Button>
             </div>
             <div className="space-y-4">
               {fields.map((field, index) => (
                 <Card key={field.id}>
                   <CardHeader className="flex flex-row items-center justify-between p-4">
-                    <CardTitle className="text-base">Student {index + 1}</CardTitle>
+                    <CardTitle className="text-base">
+                      {t('differentiated.student', { number: index + 1 })}
+                    </CardTitle>
                     <Button type="button" variant="ghost" size="icon" onClick={() => remove(index)}>
                       <Trash2 className="h-4 w-4" />
                     </Button>
@@ -159,7 +196,7 @@ export function DifferentiatedActivitiesForm() {
                       name={`students.${index}.studentId`}
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Student Name/ID</FormLabel>
+                          <FormLabel>{t('differentiated.studentName')}</FormLabel>
                           <FormControl>
                             <Input {...field} />
                           </FormControl>
@@ -172,9 +209,9 @@ export function DifferentiatedActivitiesForm() {
                       name={`students.${index}.learningStyle`}
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Learning Style</FormLabel>
+                          <FormLabel>{t('differentiated.learningStyle')}</FormLabel>
                           <FormControl>
-                            <Input placeholder="Visual, Auditory, Kinesthetic" {...field} />
+                            <Input placeholder={t('differentiated.learningStylePlaceholder')} {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -185,7 +222,7 @@ export function DifferentiatedActivitiesForm() {
                       name={`students.${index}.needs`}
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Specific Needs</FormLabel>
+                          <FormLabel>{t('differentiated.needs')}</FormLabel>
                           <FormControl>
                             <Textarea {...field} />
                           </FormControl>
@@ -198,9 +235,9 @@ export function DifferentiatedActivitiesForm() {
                       name={`students.${index}.currentLevel`}
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Current Level</FormLabel>
+                          <FormLabel>{t('differentiated.currentLevel')}</FormLabel>
                           <FormControl>
-                            <Input placeholder="Beginner, On track, Advanced" {...field} />
+                            <Input placeholder={t('differentiated.currentLevelPlaceholder')} {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -214,68 +251,67 @@ export function DifferentiatedActivitiesForm() {
               <p className="text-sm font-medium text-destructive mt-2">{form.formState.errors.students.message}</p>
             )}
           </div>
-          
 
           <Button type="submit" disabled={isLoading} className="w-full">
             {isLoading ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Suggesting Activities...
+                {t('differentiated.suggesting')}
               </>
             ) : (
-                <>
+              <>
                 <Sparkles className="mr-2 h-4 w-4" />
-                Get Suggestions
-                </>
+                {t('differentiated.getSuggestions')}
+              </>
             )}
           </Button>
         </form>
       </Form>
-      
+
       <div className="space-y-4">
-        <h3 className="font-headline text-2xl font-bold">Suggested Activities</h3>
+        <h3 className="font-headline text-2xl font-bold">{t('differentiated.suggested')}</h3>
         <div className="min-h-[400px]">
-            {isLoading && (
-                <Card className="h-full flex items-center justify-center border-dashed">
-                    <div className="flex flex-col items-center gap-2 text-muted-foreground">
-                        <Loader2 className="h-8 w-8 animate-spin" />
-                        <p>Finding the best activities...</p>
+          {isLoading && (
+            <Card className="h-full flex items-center justify-center border-dashed">
+              <div className="flex flex-col items-center gap-2 text-muted-foreground">
+                <Loader2 className="h-8 w-8 animate-spin" />
+                <p>{t('differentiated.finding')}</p>
+              </div>
+            </Card>
+          )}
+          {!isLoading && !result && (
+            <Card className="h-full flex items-center justify-center border-dashed">
+              <div className="text-center text-muted-foreground">
+                <p>{t('differentiated.empty')}</p>
+              </div>
+            </Card>
+          )}
+          {result && (
+            <Accordion type="multiple" className="w-full space-y-4">
+              {result.activities.map((activity, index) => (
+                <AccordionItem value={`item-${index}`} key={index} className="bg-card border rounded-lg">
+                  <AccordionTrigger className="px-6 text-base hover:no-underline">
+                    <div className="flex items-center gap-2">
+                      <User className="h-5 w-5 text-primary" />
+                      {t('differentiated.activityFor', { name: activity.studentId })}
                     </div>
-                </Card>
-            )}
-            {!isLoading && !result && (
-                <Card className="h-full flex items-center justify-center border-dashed">
-                    <div className="text-center text-muted-foreground">
-                        <p>Activity suggestions will appear here.</p>
+                  </AccordionTrigger>
+                  <AccordionContent className="px-6">
+                    <div className="space-y-4">
+                      <div>
+                        <h4 className="font-semibold mb-1">{t('differentiated.descriptionLabel')}</h4>
+                        <p className="text-sm text-muted-foreground">{activity.activityDescription}</p>
+                      </div>
+                      <div>
+                        <h4 className="font-semibold mb-1">{t('differentiated.justification')}</h4>
+                        <p className="text-sm text-muted-foreground">{activity.justification}</p>
+                      </div>
                     </div>
-                </Card>
-            )}
-            {result && (
-              <Accordion type="multiple" className="w-full space-y-4">
-                {result.activities.map((activity, index) => (
-                  <AccordionItem value={`item-${index}`} key={index} className="bg-card border rounded-lg">
-                    <AccordionTrigger className="px-6 text-base hover:no-underline">
-                      <div className="flex items-center gap-2">
-                        <User className="h-5 w-5 text-primary" />
-                        Activity for {activity.studentId}
-                      </div>
-                    </AccordionTrigger>
-                    <AccordionContent className="px-6">
-                      <div className="space-y-4">
-                        <div>
-                          <h4 className="font-semibold mb-1">Description</h4>
-                          <p className="text-sm text-muted-foreground">{activity.activityDescription}</p>
-                        </div>
-                        <div>
-                          <h4 className="font-semibold mb-1">Justification</h4>
-                          <p className="text-sm text-muted-foreground">{activity.justification}</p>
-                        </div>
-                      </div>
-                    </AccordionContent>
-                  </AccordionItem>
-                ))}
-              </Accordion>
-            )}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          )}
         </div>
       </div>
     </div>

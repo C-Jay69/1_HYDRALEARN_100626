@@ -1,5 +1,6 @@
 import { Suspense } from 'react';
 import { PageHeader } from '@/components/page-header';
+import { T } from '@/components/t';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { StudioForm } from './studio-form';
 
@@ -7,16 +8,16 @@ export default function StudioPage() {
   return (
     <div className="space-y-8">
       <PageHeader
-        title="Creative Studio"
-        description="Your AI assistant for creating any kind of learning material."
+        titleKey="studio.title"
+        descriptionKey="studio.description"
       />
       <Card>
         <CardHeader>
-          <CardTitle>Generate Learning Materials</CardTitle>
-          <CardDescription>Describe what you need, from flashcards to worksheets, and the AI will create it for you.</CardDescription>
+          <CardTitle><T k="studio.cardTitle" /></CardTitle>
+          <CardDescription><T k="studio.cardDescription" /></CardDescription>
         </CardHeader>
         <CardContent>
-          <Suspense fallback={<div>Loading studio...</div>}>
+          <Suspense fallback={<T k="studio.loading" />}>
             <StudioForm />
           </Suspense>
         </CardContent>

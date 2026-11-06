@@ -1,4 +1,5 @@
 import { PageHeader } from '@/components/page-header';
+import { T } from '@/components/t';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { EssayGraderForm } from './essay-grader-form';
 
@@ -6,13 +7,13 @@ export default function EssayGraderPage() {
   return (
     <div className="space-y-8">
       <PageHeader
-        title="AI-Powered Essay Grader"
-        description="Get instant, rubric-based feedback and grades for student essays."
+        titleKey="essay.title"
+        descriptionKey="essay.description"
       />
       <Card>
         <CardHeader>
-            <CardTitle>Grade an Essay</CardTitle>
-            <CardDescription>Paste the essay and rubric below. The AI will provide a grade, feedback, and its reasoning.</CardDescription>
+            <CardTitle><T k="essay.cardTitle" /></CardTitle>
+            <CardDescription><T k="essay.cardDescription" /></CardDescription>
         </CardHeader>
         <CardContent>
             <EssayGraderForm />

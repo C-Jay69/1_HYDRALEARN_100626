@@ -42,6 +42,7 @@ model User {
   forumPosts     ForumPost[]
   marketplaceItems MarketplaceItem[]
   badges         UserBadge[]
+  savedContent   SavedContent[]
 }
 
 model School {
@@ -190,6 +191,28 @@ model ScheduleEvent {
   color       String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+}
+
+// Everything the AI generates for a user (lesson plans, assessments, materials,
+// activities, essay feedback, ...) is persisted here so it can be revisited
+// from the Library. `sizeBytes` lets the app enforce a storage budget that fits
+// inside Supabase's free tier.
+model SavedContent {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  kind      String   // LESSON_PLAN, ASSESSMENT, LEARNING_MATERIAL, ...
+  title     String
+  preview   String   @default("") // Short excerpt so the Library can list items cheaply
+  content   String   // Main human-readable output (Markdown/plain text)
+  metadata  Json?    // Generation inputs + structured extras (quiz, CSV, ...)
+  sizeBytes Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId, createdAt])
+  @@index([userId, kind])
+  @@index([createdAt])
 }
 
 model Badge {

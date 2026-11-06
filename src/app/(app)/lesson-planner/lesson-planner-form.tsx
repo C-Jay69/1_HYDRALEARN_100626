@@ -17,9 +17,10 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Loader2, Sparkles, Brush } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { useI18n } from '@/components/i18n-provider';
 import Link from 'next/link';
 
 const formSchema = z.object({
@@ -33,16 +34,21 @@ const formSchema = z.object({
 
 type FormData = z.infer<typeof formSchema>;
 
-// ✅ Correct API response type
+interface SaveFeedback {
+  ok: boolean;
+  message?: string;
+}
+
 interface GenerateLessonPlanResponse {
   lessonPlan: string;
+  saved?: SaveFeedback;
 }
 
 export function LessonPlannerForm() {
-  // ✅ Changed state type from GenerateLessonPlanOutput to string
   const [result, setResult] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
+  const { t, locale } = useI18n();
 
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
@@ -56,7 +62,6 @@ export function LessonPlannerForm() {
     },
   });
 
-  // ✅ Only ONE onSubmit function
   async function onSubmit(data: FormData) {
     setIsLoading(true);
     setResult(null);
@@ -66,7 +71,7 @@ export function LessonPlannerForm() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ ...data, locale }),
       });
 
       if (!response.ok) {
@@ -77,19 +82,29 @@ export function LessonPlannerForm() {
 
       const lessonPlanData: GenerateLessonPlanResponse = await response.json();
       setResult(lessonPlanData.lessonPlan);
+
+      if (lessonPlanData.saved && !lessonPlanData.saved.ok) {
+        toast({
+          variant: 'destructive',
+          title: t('library.quotaTitle'),
+          description: lessonPlanData.saved.message ?? t('library.saveFailed'),
+        });
+      } else if (lessonPlanData.saved?.ok) {
+        toast({ title: t('common.savedToLibrary') });
+      }
     } catch (error) {
       console.error('Error generating lesson plan:', error);
       toast({
-        variant: "destructive",
-        title: "An error occurred.",
-        description: error instanceof Error ? error.message : "Failed to generate lesson plan. Please try again.",
+        variant: 'destructive',
+        title: t('common.errorTitle'),
+        description:
+          error instanceof Error ? error.message : t('lessonPlanner.error'),
       });
     } finally {
       setIsLoading(false);
     }
   }
 
-  // ✅ Changed result.lessonPlan to just result
   const createStudioLink = () => {
     if (!result) return '';
     const { subject, gradeLevel, topic } = form.getValues();
@@ -100,20 +115,20 @@ export function LessonPlannerForm() {
       instructions: `Based on the following lesson plan, generate the necessary materials (e.g., flashcards, worksheets):\n\n${result}`,
     });
     return `/studio?${params.toString()}`;
-  }
+  };
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            <FormField
+          <FormField
             control={form.control}
             name="subject"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Subject</FormLabel>
+                <FormLabel>{t('common.subject')}</FormLabel>
                 <FormControl>
-                  <Input placeholder="e.g., American History" {...field} />
+                  <Input placeholder={t('lessonPlanner.placeholder.subject')} {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -125,12 +140,12 @@ export function LessonPlannerForm() {
             name="topic"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Topic (Optional)</FormLabel>
+                <FormLabel>{t('lessonPlanner.topicOptional')}</FormLabel>
                 <FormControl>
-                  <Input placeholder="e.g., The French Revolution" {...field} />
+                  <Input placeholder={t('lessonPlanner.placeholder.topic')} {...field} />
                 </FormControl>
                 <FormDescription>
-                  The specific topic or subtopic within the subject (e.g., "Fractions" for Mathematics).
+                  {t('lessonPlanner.topicHelp')}
                 </FormDescription>
                 <FormMessage />
               </FormItem>
@@ -142,9 +157,9 @@ export function LessonPlannerForm() {
             name="gradeLevel"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Grade Level</FormLabel>
+                <FormLabel>{t('common.gradeLevel')}</FormLabel>
                 <FormControl>
-                  <Input placeholder="e.g., 10th Grade" {...field} />
+                  <Input placeholder={t('lessonPlanner.placeholder.grade')} {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -156,12 +171,12 @@ export function LessonPlannerForm() {
             name="curriculum"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Curriculum</FormLabel>
+                <FormLabel>{t('common.curriculum')}</FormLabel>
                 <FormControl>
-                  <Input placeholder="e.g., Common Core, IB" {...field} />
+                  <Input placeholder={t('lessonPlanner.placeholder.curriculum')} {...field} />
                 </FormControl>
                 <FormDescription>
-                  The official curriculum to use as a reference.
+                  {t('lessonPlanner.curriculumHelp')}
                 </FormDescription>
                 <FormMessage />
               </FormItem>
@@ -173,10 +188,10 @@ export function LessonPlannerForm() {
             name="studentNeeds"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Student Needs & Gaps</FormLabel>
+                <FormLabel>{t('lessonPlanner.studentNeeds')}</FormLabel>
                 <FormControl>
                   <Textarea
-                    placeholder="Describe the student's learning needs, strengths, and areas for improvement."
+                    placeholder={t('lessonPlanner.studentNeedsPlaceholder')}
                     className="min-h-[100px]"
                     {...field}
                   />
@@ -191,10 +206,10 @@ export function LessonPlannerForm() {
             name="objectives"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Lesson Objectives</FormLabel>
+                <FormLabel>{t('lessonPlanner.objectives')}</FormLabel>
                 <FormControl>
                   <Textarea
-                    placeholder="What should the student be able to do after this lesson?"
+                    placeholder={t('lessonPlanner.objectivesPlaceholder')}
                     className="min-h-[100px]"
                     {...field}
                   />
@@ -208,52 +223,51 @@ export function LessonPlannerForm() {
             {isLoading ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Generating...
+                {t('lessonPlanner.generating')}
               </>
             ) : (
-                <>
+              <>
                 <Sparkles className="mr-2 h-4 w-4" />
-                Generate Plan
-                </>
+                {t('lessonPlanner.generatePlan')}
+              </>
             )}
           </Button>
         </form>
       </Form>
-      
+
       <div className="space-y-4">
-        <h3 className="font-headline text-2xl font-bold">Generated Plan</h3>
+        <h3 className="font-headline text-2xl font-bold">{t('lessonPlanner.generatedPlan')}</h3>
         <Card className="min-h-[400px]">
-            {isLoading && (
-                <div className="flex items-center justify-center h-full border-dashed rounded-lg">
-                    <div className="flex flex-col items-center gap-2 text-muted-foreground">
-                        <Loader2 className="h-8 w-8 animate-spin" />
-                        <p>AI is thinking...</p>
-                    </div>
-                </div>
-            )}
-            {!isLoading && !result && (
-                <div className="flex items-center justify-center h-full border-dashed rounded-lg">
-                    <div className="text-center text-muted-foreground">
-                        <p>Your lesson plan will appear here.</p>
-                    </div>
-                </div>
-            )}
-            {result && (
-                <>
-                    <CardContent className="p-6 max-h-[60vh] overflow-y-auto">
-                        {/* ✅ Changed from result.lessonPlan to just result */}
-                        <pre className="whitespace-pre-wrap font-body text-sm">{result}</pre>
-                    </CardContent>
-                    <CardFooter>
-                        <Button asChild>
-                            <Link href={createStudioLink()}>
-                                <Brush className="mr-2 h-4 w-4" />
-                                Generate Materials
-                            </Link>
-                        </Button>
-                    </CardFooter>
-                </>
-            )}
+          {isLoading && (
+            <div className="flex items-center justify-center h-full border-dashed rounded-lg">
+              <div className="flex flex-col items-center gap-2 text-muted-foreground">
+                <Loader2 className="h-8 w-8 animate-spin" />
+                <p>{t('lessonPlanner.thinking')}</p>
+              </div>
+            </div>
+          )}
+          {!isLoading && !result && (
+            <div className="flex items-center justify-center h-full border-dashed rounded-lg">
+              <div className="text-center text-muted-foreground">
+                <p>{t('lessonPlanner.empty')}</p>
+              </div>
+            </div>
+          )}
+          {result && (
+            <>
+              <CardContent className="p-6 max-h-[60vh] overflow-y-auto">
+                <pre className="whitespace-pre-wrap font-body text-sm">{result}</pre>
+              </CardContent>
+              <CardFooter>
+                <Button asChild>
+                  <Link href={createStudioLink()}>
+                    <Brush className="mr-2 h-4 w-4" />
+                    {t('lessonPlanner.generateMaterials')}
+                  </Link>
+                </Button>
+              </CardFooter>
+            </>
+          )}
         </Card>
       </div>
     </div>

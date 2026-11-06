@@ -4,10 +4,6 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import {
-  aiGradeEssays,
-  AiGradeEssaysOutput,
-} from '@/ai/flows/ai-grade-essays';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -20,9 +16,10 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Textarea } from '@/components/ui/textarea';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Loader2, Sparkles } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { useI18n } from '@/components/i18n-provider';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { Input } from '@/components/ui/input';
@@ -36,10 +33,23 @@ const formSchema = z.object({
 
 type FormData = z.infer<typeof formSchema>;
 
+interface SaveFeedback {
+  ok: boolean;
+  message?: string;
+}
+
+interface EssayGradeResponse {
+  grade: string;
+  feedback: string;
+  reasoning: string;
+  saved?: SaveFeedback;
+}
+
 export function EssayGraderForm() {
-  const [result, setResult] = useState<AiGradeEssaysOutput | null>(null);
+  const [result, setResult] = useState<EssayGradeResponse | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
+  const { t, locale } = useI18n();
 
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
@@ -58,14 +68,35 @@ export function EssayGraderForm() {
       // Fetch the style guide from localStorage
       const styleGuide = localStorage.getItem('teacherStyleGuide');
 
-      const response = await aiGradeEssays({ ...data, styleGuide: styleGuide ?? undefined });
-      setResult(response);
+      const response = await fetch('/api/grade-essay', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...data, styleGuide: styleGuide ?? undefined, locale }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => null);
+        throw new Error(errorData?.error || 'Failed to grade essay');
+      }
+
+      const grade: EssayGradeResponse = await response.json();
+      setResult(grade);
+
+      if (grade.saved && !grade.saved.ok) {
+        toast({
+          variant: 'destructive',
+          title: t('library.quotaTitle'),
+          description: grade.saved.message ?? t('library.saveFailed'),
+        });
+      } else if (grade.saved?.ok) {
+        toast({ title: t('common.savedToLibrary') });
+      }
     } catch (error) {
       console.error(error);
       toast({
         variant: 'destructive',
-        title: 'An error occurred.',
-        description: 'Failed to grade essay. Please try again.',
+        title: t('common.errorTitle'),
+        description: t('essay.error'),
       });
     } finally {
       setIsLoading(false);
@@ -81,10 +112,10 @@ export function EssayGraderForm() {
             name="essay"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Student Essay</FormLabel>
+                <FormLabel>{t('essay.studentEssay')}</FormLabel>
                 <FormControl>
                   <Textarea
-                    placeholder="Paste the full text of the student's essay here."
+                    placeholder={t('essay.essayPlaceholder')}
                     className="min-h-[200px] font-mono text-xs"
                     {...field}
                   />
@@ -93,18 +124,18 @@ export function EssayGraderForm() {
               </FormItem>
             )}
           />
-          
+
           <FormField
             control={form.control}
             name="gradeLevel"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Grade Level</FormLabel>
+                <FormLabel>{t('common.gradeLevel')}</FormLabel>
                 <FormControl>
-                  <Input placeholder="e.g., 8th Grade" {...field} />
+                  <Input placeholder={t('studio.gradePlaceholder')} {...field} />
                 </FormControl>
                 <FormDescription>
-                  This helps the AI adapt the grading to the student's level.
+                  {t('essay.gradeHelp')}
                 </FormDescription>
                 <FormMessage />
               </FormItem>
@@ -116,10 +147,10 @@ export function EssayGraderForm() {
             name="rubric"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Grading Rubric</FormLabel>
+                <FormLabel>{t('essay.rubric')}</FormLabel>
                 <FormControl>
                   <Textarea
-                    placeholder="Provide the grading rubric. Be as detailed as possible."
+                    placeholder={t('essay.rubricPlaceholder')}
                     className="min-h-[100px]"
                     {...field}
                   />
@@ -134,15 +165,15 @@ export function EssayGraderForm() {
             name="teacherNotes"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Teacher Notes (Optional)</FormLabel>
+                <FormLabel>{t('essay.teacherNotes')}</FormLabel>
                 <FormControl>
                   <Textarea
-                    placeholder="Add any specific instructions or points to focus on."
+                    placeholder={t('essay.teacherNotesPlaceholder')}
                     {...field}
                   />
                 </FormControl>
                 <FormDescription>
-                  This will guide the AI and override its default grading where necessary.
+                  {t('essay.teacherNotesHelp')}
                 </FormDescription>
                 <FormMessage />
               </FormItem>
@@ -153,57 +184,59 @@ export function EssayGraderForm() {
             {isLoading ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Grading...
+                {t('essay.grading')}
               </>
             ) : (
-                <>
+              <>
                 <Sparkles className="mr-2 h-4 w-4" />
-                Grade Essay
-                </>
+                {t('essay.grade')}
+              </>
             )}
           </Button>
         </form>
       </Form>
-      
+
       <div className="space-y-4">
-        <h3 className="font-headline text-2xl font-bold">AI Grading Results</h3>
+        <h3 className="font-headline text-2xl font-bold">{t('essay.results')}</h3>
         <div className="min-h-[400px]">
-            {isLoading && (
-                <Card className="h-full flex items-center justify-center border-dashed">
-                    <div className="flex flex-col items-center gap-2 text-muted-foreground">
-                        <Loader2 className="h-8 w-8 animate-spin" />
-                        <p>AI is reading and grading...</p>
-                    </div>
-                </Card>
-            )}
-            {!isLoading && !result && (
-                <Card className="h-full flex items-center justify-center border-dashed">
-                    <div className="text-center text-muted-foreground">
-                        <p>Grading results will appear here.</p>
-                    </div>
-                </Card>
-            )}
-            {result && (
-                <Card>
-                    <CardHeader>
-                        <div className="flex items-start justify-between">
-                            <CardTitle>Results</CardTitle>
-                            <Badge variant="secondary" className="text-lg">Grade: {result.grade}</Badge>
-                        </div>
-                    </CardHeader>
-                    <CardContent className="space-y-6">
-                        <div>
-                            <h4 className="font-semibold text-base mb-2">Feedback for Student</h4>
-                            <p className="text-sm text-muted-foreground">{result.feedback}</p>
-                        </div>
-                        <Separator />
-                        <div>
-                            <h4 className="font-semibold text-base mb-2">AI Reasoning (for teacher)</h4>
-                            <p className="text-sm text-muted-foreground">{result.reasoning}</p>
-                        </div>
-                    </CardContent>
-                </Card>
-            )}
+          {isLoading && (
+            <Card className="h-full flex items-center justify-center border-dashed">
+              <div className="flex flex-col items-center gap-2 text-muted-foreground">
+                <Loader2 className="h-8 w-8 animate-spin" />
+                <p>{t('essay.reading')}</p>
+              </div>
+            </Card>
+          )}
+          {!isLoading && !result && (
+            <Card className="h-full flex items-center justify-center border-dashed">
+              <div className="text-center text-muted-foreground">
+                <p>{t('essay.empty')}</p>
+              </div>
+            </Card>
+          )}
+          {result && (
+            <Card>
+              <CardHeader>
+                <div className="flex items-start justify-between">
+                  <CardTitle>{t('essay.resultTitle')}</CardTitle>
+                  <Badge variant="secondary" className="text-lg">
+                    {t('essay.gradeLabel', { grade: result.grade })}
+                  </Badge>
+                </div>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div>
+                  <h4 className="font-semibold text-base mb-2">{t('essay.studentFeedback')}</h4>
+                  <p className="text-sm text-muted-foreground">{result.feedback}</p>
+                </div>
+                <Separator />
+                <div>
+                  <h4 className="font-semibold text-base mb-2">{t('essay.reasoning')}</h4>
+                  <p className="text-sm text-muted-foreground">{result.reasoning}</p>
+                </div>
+              </CardContent>
+            </Card>
+          )}
         </div>
       </div>
     </div>
