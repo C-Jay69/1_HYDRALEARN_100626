@@ -46,13 +46,15 @@ export const LIFELINES: LifelineMeta[] = [
   },
 ];
 
-/** Which game shows get the lifeline bar. */
-export const LIFELINE_GAME_TYPES: GameShowType[] = [
-  'game',
-  'jeopardy',
-  'millionaire',
-  'weakest-link',
-];
+/**
+ * Which game shows get the lifeline bar.
+ *
+ * Lifelines are a Millionaire signature, so this is deliberately limited to
+ * 'millionaire'. Standard Quiz Game, Jeopardy and The Weakest Link run without
+ * them — add a type here only if that game is meant to offer 50:50, Phone a
+ * Friend and Ask the Audience.
+ */
+export const LIFELINE_GAME_TYPES: GameShowType[] = ['millionaire'];
 
 export function supportsLifelines(gameType: GameShowType): boolean {
   return LIFELINE_GAME_TYPES.includes(gameType);
