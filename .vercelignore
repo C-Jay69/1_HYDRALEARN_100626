@@ -6,5 +6,6 @@ node_modules/
 .env*.local
 .next/
 out/
-public/
+# DO NOT ignore public/ - it holds logo.png, LANDING_PAGE_IMAGE.png and the
+# hero images. Excluding it makes every static asset 404 on the deployed site.
 # Add any other files you see causing the "extra file" warning
